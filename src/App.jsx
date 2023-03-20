@@ -1,9 +1,9 @@
-import Home from './pages/Login';
+import Login from './pages/Login/Index';
 import './App.scss';
 function App() {
 	return (
 		<div className='app'>
-			<Home />
+			<Login />
 		</div>
 	);
 }
