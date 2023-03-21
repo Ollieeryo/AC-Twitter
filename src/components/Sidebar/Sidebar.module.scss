@@ -1,0 +1,74 @@
+$font-size: 18px;
+$font-weight: 700;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #FFFFFF;
+  height: 100vh;
+
+  .navigationBar {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(225, 173, 110);
+
+    .logo {
+      margin-top: 10px;
+    }
+
+    .home {
+      height: 58px;
+      display: flex;
+      align-items: center;
+      font-size: $font-size;
+      font-weight: $font-weight ;
+
+      img {
+        margin: 0 17px;
+      }
+    }
+
+    .userProfile {
+      height: 58px;
+      display: flex;
+      align-items: center;
+      font-size: $font-size;
+      font-weight: $font-weight ;
+
+      img {
+        margin: 0 17px;
+      }
+    }
+
+    .setting {
+      height: 58px;
+      display: flex;
+      align-items: center;
+      font-size: $font-size;
+      font-weight: $font-weight ;
+
+      img {
+        margin: 0 17px;
+      }
+    }
+
+    .toTweet {
+      height: 46px;
+      background-color: #FF6600;
+      border-radius: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 400;
+      font-size: 20px;
+      color: #FFFFFF;
+    }
+  }
+
+  .logout {
+    margin-bottom: 16px;
+    font-size: $font-size;
+    font-weight: $font-weight ;
+  }
+}
