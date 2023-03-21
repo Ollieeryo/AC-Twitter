@@ -1,5 +1,6 @@
 import styles from './Index.module.scss';
 import Sidebar from '../../components/Sidebar/Sidebar';
+import PopularList from '../../components/PopularList/PopularList';
 
 function Main() {
 	return (
@@ -8,7 +9,9 @@ function Main() {
 				<Sidebar />
 			</div>
 			<div className={styles.mainSection}>Main</div>
-			<div className={styles.popularListSection}>PopularList</div>
+			<div className={styles.popularListSection}>
+				<PopularList />
+			</div>
 		</div>
 	);
 }
