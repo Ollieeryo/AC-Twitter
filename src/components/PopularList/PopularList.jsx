@@ -1,5 +1,8 @@
 import styles from './PopularList.module.scss';
 
+// 暫時用 fakeAvatar 作為頭像
+import fakeAvatar from '../../assets/fake-avatar.svg';
+
 function PopularList() {
 	return (
 		<div className={styles.container}>
@@ -17,12 +20,12 @@ function PopularList() {
 	);
 }
 
-function OtherCard(img, onClick) {
+function OtherCard() {
 	return (
 		<>
 			<div className={styles.otherCard}>
-				<a className={styles.image} href='pizzahut'>
-					<img src={img} />
+				<a className={styles.avatar} href='pizzahut'>
+					<img src={fakeAvatar} />
 				</a>
 				<div className={styles.other}>
 					<a className={styles.nickname} href='pizzahut'>
@@ -32,9 +35,7 @@ function OtherCard(img, onClick) {
 						@Pizzahut
 					</a>
 				</div>
-				<button className={styles.btnFollow} onClick={onClick}>
-					正在跟隨
-				</button>
+				<button className={styles.btnFollow}>正在跟隨</button>
 			</div>
 		</>
 	);
