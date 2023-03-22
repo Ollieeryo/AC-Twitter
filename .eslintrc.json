@@ -15,6 +15,7 @@
     // suppress errors for missing 'import React' in files
     "react/react-in-jsx-scope": "off",
     // 這個設置可以讓ESLint使用Prettier的換行符號設置來處理換行符號的問題，並且自動識別換行符號的類型。
-    "prettier/prettier": ["error", {"endOfLine": "auto"}]
+    "prettier/prettier": ["error", {"endOfLine": "auto"}],
+    "react/prop-types": 0
   }
 }
