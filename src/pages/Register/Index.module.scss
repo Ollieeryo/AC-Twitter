@@ -1,0 +1,28 @@
+.loginCon {
+  display: flex;
+  justify-content: center;
+  
+  .loginWrap {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding-top: 64px;
+    width: 356px;
+    
+  }
+
+  .pageButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 36px;
+  }
+
+  .button {
+    background-color: white;
+    color: #0062FF;
+    border: none;
+    cursor: pointer;
+    text-decoration-line: underline;
+  }
+}
