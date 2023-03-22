@@ -6,7 +6,11 @@ function PopularList() {
 			<div className={styles.topic}>
 				<p>推薦跟隨</p>
 			</div>
-			<div className={styles.otherCard}>
+			<div className={styles.others}>
+				<OtherCard />
+				<OtherCard />
+				<OtherCard />
+				<OtherCard />
 				<OtherCard />
 			</div>
 		</div>
