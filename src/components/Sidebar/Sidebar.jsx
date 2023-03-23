@@ -25,7 +25,7 @@ function Sidebar() {
 					<img src={setting} />
 					設定
 				</a>
-				<a className={styles.toTweet} href='tweet'>
+				<a className={styles.toTweet} href='TweetModal'>
 					推文
 				</a>
 			</div>
