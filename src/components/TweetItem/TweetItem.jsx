@@ -21,7 +21,7 @@ function TweetItem() {
 						Voluptate exercitation incididunt aliquip deserunt reprehenderit elit laborum.
 					</div>
 					<div className={styles.ReplyAndLike}>
-						<a className={styles.counter} href='toReply'>
+						<a className={styles.counter} href='replyModal'>
 							<img src={reply} />
 							13
 						</a>
