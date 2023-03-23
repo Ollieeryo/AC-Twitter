@@ -19,7 +19,7 @@
   align-items: center;
   height: 82px;
 
-  .image {
+  .avatar {
     margin-left: 16px;
     width: 50px;
     height: 50px;
@@ -39,12 +39,14 @@
       font-size: 16px;
       color: #171725;
       line-height: 26px;
+  text-decoration: none;
     }
 
     .accountName {
       font-size: 14px;
       color: #92929d;
       line-height: 22px;
+  text-decoration: none;
     }
   }
 

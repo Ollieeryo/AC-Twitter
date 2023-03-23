@@ -1,0 +1,42 @@
+.selfTweetSection {
+	display: flex;
+	flex-direction: column;
+	border-bottom: #e6ecf0 10px solid;
+
+	.section {
+		display: flex;
+		margin: 16px 27px 14px 27.5px;
+
+		img {
+			height: 50px;
+			border-radius: 50%;
+		}
+
+		.toTweetModal {
+			width: 100%;
+			margin: 12px 2px 12px 8px;
+			font-weight: 700;
+			font-size: 18px;
+			line-height: 26px;
+			color: #6c757d;
+			text-decoration: none;
+			cursor: text;
+		}
+	}
+
+	.tweetButton {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin: auto 25.7px 16px auto;
+		width: 64px;
+		height: 40px;
+		background: #ff6600;
+		border-radius: 50px;
+		border: 0;
+		font-weight: 400;
+		font-size: 16px;
+		color: #ffffff;
+		text-decoration: none;
+	}
+}
