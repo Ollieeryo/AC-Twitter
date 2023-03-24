@@ -4,21 +4,28 @@ import './App.scss';
 import Register from './pages/Register/Index';
 import Admin from './pages/Admin';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-// import TweetModal from './components/TweetModal/TweetModal';
+import AdminMain from './pages/AdminMain/Index';
+import { AuthProvider } from './contexts/AuthContext';
+import { AuthSignUpProvider } from './contexts/AuthSignUpContext';
 
 function App() {
 	return (
-		<div className='app'>
-			<BrowserRouter>
-				<Routes>
-					<Route path='admin' element={<Admin />} />
-					<Route path='login' element={<Login />} />
-					<Route path='register' element={<Register />} />
-					<Route path='*' element={<Main />} />
-					{/* <Route path='TweetModal' element={<TweetModal />} /> */}
-				</Routes>
-			</BrowserRouter>
-		</div>
+		<AuthProvider>
+			<AuthSignUpProvider>
+				<div className='app'>
+					<BrowserRouter>
+						<Routes>
+							<Route path='admin' element={<Admin />} />
+							<Route path='login' element={<Login />} />
+							<Route path='register' element={<Register />} />
+							<Route path='*' element={<Main />} />
+							<Route path='admin/main' element={<AdminMain />} />
+							{/* <Route path='TweetModal' element={<TweetModal />} /> */}
+						</Routes>
+					</BrowserRouter>
+				</div>
+			</AuthSignUpProvider>
+		</AuthProvider>
 	);
 }
 

@@ -1,0 +1,62 @@
+.ul {
+  list-style-type:none;
+  padding: 0;
+  margin: 0;
+}
+
+.tweetCon {
+  height: 100hv; 
+  overflow: auto;
+  width: 100%;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.tweetsWrap  {
+  display: flex;
+  width: 100%;
+  border-top: 1px solid #E6ECF0;
+
+  .logoWrap {
+    margin-right: 5px;
+  }
+
+  .userWrap {
+
+    .userInfo {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      align-items: center;
+
+      .userInfoCon {
+        display: grid;
+        align-items: center;
+        grid-auto-flow: column;
+        grid-gap: 6px;
+        line-height: 26px;
+        .userName {
+          font-weight: 700;
+        }
+
+        .userTime {
+          font-weight: 400;
+          font-size: 14px;
+          color: #6C757D;
+        }
+      }
+    }
+
+    .button {
+      border: 0;
+      background: white;
+      cursor: pointer;
+    }
+
+    .tweetWrap {
+      width: 90%;
+    }
+  }
+}

@@ -1,44 +1,87 @@
-import { useState } from 'react';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import { checkPermission, login } from '../../api/auth';
+import { useAuthLogin } from '../../contexts/AuthContext';
 import Input from '../Input/Input';
 import MainButton from '../MainButton/MainButton';
 import styled from './LoginInput.module.scss';
 
 function LoginInput() {
-	const [accountLength, setAccountLength] = useState(0);
-	// const [account, setAccount] = useState(0);
-	const [password, setPassword] = useState(0);
+	// useContext
+	const { account, accountLength, password, handleAccountChange, handlePasswordChange } =
+		useAuthLogin();
 
-	const handleAccountChange = (e) => {
+	const navigate = useNavigate();
+
+	// 登入 event
+	const handleLoginSubmit = async (e) => {
 		e.preventDefault();
-		const inputValue = e.target.value;
-		// 使用正規表達式去除空格
-		const inputWithoutSpaces = inputValue.replace(/\s+/g, '');
-		const inputLength = inputWithoutSpaces.length;
-		setAccountLength(inputLength);
-	};
-
-	const handlePasswordChange = (e) => {
-		e.preventDefault();
-		const inputValue = e.target.value;
-		// 使用正規表達式去除空格
-		const inputWithoutSpaces = inputValue.trim();
-		setPassword(inputWithoutSpaces);
-	};
-
-	const handleFormSubmit = (e) => {
-		if (accountLength === 0) {
-			e.preventDefault();
+		if (account === '') {
 			alert('帳號欄位不能為空');
 		}
-		if (password.length === 0) {
+		if (accountLength > 50) {
+			alert('帳號字數超過上限!');
+		}
+		if (password === '') {
 			alert('密碼欄位不能為空');
 		}
+
+		const { success, authToken } = await login({
+			account,
+			password,
+		});
+
+		if (success) {
+			localStorage.setItem('authToken', authToken);
+
+			// 登入成功訊息
+			Swal.fire({
+				position: 'top',
+				title: '登入成功！',
+				timer: 1000,
+				icon: 'success',
+				showConfirmButton: false,
+			});
+			return;
+		}
+
+		// 登入失敗訊息
+		Swal.fire({
+			position: 'top',
+			title: '登入失敗！',
+			timer: 1000,
+			icon: 'error',
+			showConfirmButton: false,
+		});
 	};
+
+	// check permission
+	useEffect(() => {
+		const checkTokenIsValid = async () => {
+			const authToken = localStorage.getItem('authToken');
+			if (!authToken) {
+				return;
+			}
+			const result = await checkPermission(authToken);
+			if (result) {
+				navigate('/main');
+			}
+		};
+
+		checkTokenIsValid();
+	}, [navigate]);
 
 	return (
 		<div className={styled.inputCon}>
 			<div className={styled.inputWrap}>
-				<Input inputTitle='帳號' placeholder='請輸入帳號' onChange={handleAccountChange} />
+				<Input
+					inputTitle='帳號'
+					type='account'
+					value={account}
+					placeholder='請輸入帳號'
+					onChange={handleAccountChange}
+				/>
 
 				<div className={styled.countWrap}>
 					{/* 帳號不存在的 span 判斷式 */}
@@ -49,12 +92,17 @@ function LoginInput() {
 				</div>
 			</div>
 
-			{/* 密碼顯示米號 */}
 			<div className={styled.inputWrap}>
-				<Input inputTitle='密碼' placeholder='請輸入密碼' onChange={handlePasswordChange} />
+				<Input
+					inputTitle='密碼'
+					type='password'
+					value={password}
+					placeholder='請輸入密碼'
+					onChange={handlePasswordChange}
+				/>
 			</div>
 
-			<MainButton buttonTitle='登入' onClick={handleFormSubmit} />
+			<MainButton buttonTitle='登入' onClick={handleLoginSubmit} />
 		</div>
 	);
 }
