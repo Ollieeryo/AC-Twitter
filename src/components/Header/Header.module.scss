@@ -1,12 +1,15 @@
 .container {
 	display: flex;
-	height: 51px;
-	margin-top: 24px;
+	height: 74px;
 	padding-left: 24px;
 	font-weight: 700;
 	font-size: 24px;
 	line-height: 26px;
 	border-bottom: #e6ecf0 1px solid;
+	position: sticky;
+	top: 0;
+	align-items: center;
+	background-color: rgb(255, 255, 255);
 
 	.content {
 		text-decoration: none;
@@ -14,6 +17,6 @@
 	}
 
 	.leftArrow {
-		margin: 2px 19px 0 0;
+		margin: 5px 16px 0 8px;
 	}
 }

@@ -1,0 +1,95 @@
+.container {
+	display: flex;
+	justify-content: center;
+	height: 100vh;
+	overflow: hidden;
+
+	.cover {
+		background-color: #373743;
+		opacity: 40%;
+		z-index: 2;
+		position: absolute;
+		width: 100%;
+		height: 100%;
+	}
+
+	.tweetModalContainer {
+		position: fixed;
+		z-index: 3;
+		margin-right: 749px;
+
+		.tweetModal {
+			position: absolute;
+
+			display: flex;
+			flex-direction: column;
+			top: 56px;
+			width: 634px;
+			min-height: 300px;
+			background: #ffffff;
+			border-radius: 14px;
+			border: 1px solid #e6ecf0;
+
+			.modalHead {
+				display: flex;
+				align-items: center;
+				margin-left: 14px;
+				height: 55px;
+				border-bottom: 1px solid #e6ecf0;
+			}
+
+			.section {
+				display: flex;
+				margin: 15px 15px auto 15px;
+
+				img {
+					height: 50px;
+					border-radius: 50%;
+				}
+
+				.inputTweet {
+					width: 100%;
+					height: auto;
+					margin-left: 10px;
+					margin-top: 12px;
+					font-weight: 500;
+					font-size: 18px;
+					line-height: 26px;
+					color: #1C1C1C;
+					text-decoration: none;
+					overflow: hidden;
+					border: none;
+					resize: none;
+					outline: 0;
+				}
+			}
+
+			.tweetButton {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				margin: 10px 25.7px 16px auto;
+				width: 64px;
+				height: 40px;
+				background: #ff6600;
+				border-radius: 50px;
+				border: 0;
+				font-weight: 400;
+				font-size: 16px;
+				color: #ffffff;
+				text-decoration: none;
+			}
+		}
+	}
+	@media screen and (min-width: 992px) and (max-width: 1199px) {
+		.container {
+			width: 960px;
+		}
+	}
+
+	@media screen and (min-width: 1200px) {
+		.container {
+			width: 1140px;
+		}
+	}
+}
