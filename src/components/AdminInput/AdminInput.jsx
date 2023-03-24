@@ -1,28 +1,108 @@
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import { adminLogin, checkPermission } from '../../api/auth';
 import Input from '../Input/Input';
 import MainButton from '../MainButton/MainButton';
 import styled from './AdminInput.module.scss';
 
 function AdminInput() {
+	const [account, setAccount] = useState('');
+	const [password, setPassword] = useState('');
+	const navigate = useNavigate();
+	const handleAccountChange = (e) => {
+		const inputValue = e.target.value;
+		// 使用正規表達式去除空格
+		const inputWithoutSpaces = inputValue.trim();
+		setAccount(inputWithoutSpaces);
+	};
+
+	const handlePasswordChange = (e) => {
+		const inputValue = e.target.value;
+		// 使用 trim 刪除 string 前後空白
+		const inputWithoutSpaces = inputValue.trim();
+		setPassword(inputWithoutSpaces);
+	};
+
+	// 登入 event
+	const handleLoginSubmit = async (e) => {
+		e.preventDefault();
+		if (account === '') {
+			alert('帳號欄位不能為空');
+		}
+		if (password === '') {
+			alert('密碼欄位不能為空');
+		}
+
+		const { success, authToken } = await adminLogin({
+			account,
+			password,
+		});
+
+		if (success) {
+			localStorage.setItem('authToken', authToken);
+
+			// 登入成功訊息
+			Swal.fire({
+				position: 'top',
+				title: '登入成功！',
+				timer: 1000,
+				icon: 'success',
+				showConfirmButton: false,
+			});
+			return;
+		}
+
+		// 登入失敗訊息
+		Swal.fire({
+			position: 'top',
+			title: '登入失敗！',
+			timer: 1000,
+			icon: 'error',
+			showConfirmButton: false,
+		});
+	};
+
+	// check permission
+	useEffect(() => {
+		const checkTokenIsValid = async () => {
+			const authToken = localStorage.getItem('authToken');
+			if (!authToken) {
+				return;
+			}
+			const result = await checkPermission(authToken);
+			if (result) {
+				navigate('/admin/main');
+			}
+		};
+
+		checkTokenIsValid();
+	}, [navigate]);
+
 	return (
 		<div className={styled.inputCon}>
 			<div className={styled.inputWrap}>
-				<Input inputTitle='帳號' placeholder='請輸入帳號' />
-
-				{/* <div className={styled.countWrap}> */}
-				{/* 帳號不存在的 span 判斷式 */}
-				{/* <span className={styled.countTitle}>{accountLength > 50 ? '字數超出上限' : ''}</span>
-					<span className={styled.countNumber}>
-						{accountLength <= 0 ? '' : `字數: ${accountLength} / 50`}
-					</span> */}
-				{/* </div> */}
+				<Input
+					inputTitle='帳號'
+					type='account'
+					value={account}
+					placeholder='請輸入帳號'
+					onChange={handleAccountChange}
+				/>
 			</div>
 
 			{/* 密碼顯示米號 */}
 			<div className={styled.inputWrap}>
-				<Input inputTitle='密碼' placeholder='請輸入密碼' />
+				<Input
+					inputTitle='密碼'
+					type='password'
+					value={password}
+					placeholder='請輸入密碼'
+					onChange={handlePasswordChange}
+				/>
 			</div>
 
-			<MainButton buttonTitle='登入' />
+			<MainButton buttonTitle='登入' onClick={handleLoginSubmit} />
 		</div>
 	);
 }

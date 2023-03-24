@@ -2,7 +2,7 @@ import styled from './MainButton.module.scss';
 
 function MainButton({ buttonTitle, onClick }) {
 	return (
-		<button className={styled.button} onClick={onClick}>
+		<button className={styled.button} type='submit' onClick={onClick}>
 			{buttonTitle}
 		</button>
 	);
