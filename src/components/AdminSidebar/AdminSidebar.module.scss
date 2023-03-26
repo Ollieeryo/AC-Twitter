@@ -1,0 +1,55 @@
+%button-style {
+  outline: none;
+  border: 0;
+  background: white;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 18px;
+
+  &:hover {
+    color: #FF6600;
+  }
+}
+
+.buttonCon {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+
+  .buttonWrap {
+    display: flex;
+    align-items: center;
+    margin-top: 2rem;
+
+    .item {
+      width: 40px;
+      text-align: center;
+
+      .homeLogo path {
+        fill: white;
+        stroke: #44444F;
+        stroke-width: 1.5px;
+      }
+    
+      .activeHomeLogo path {
+        fill: #FF6600;
+      }
+    
+      .userLogo path {
+        fill: white;
+        stroke: #44444F;
+        stroke-width: 1.5px;
+      }
+    }
+
+    .button {
+      @extend %button-style;
+    }
+  
+    .activeButton {
+      @extend %button-style;
+      color: #FF6600;
+    }
+  }
+}
