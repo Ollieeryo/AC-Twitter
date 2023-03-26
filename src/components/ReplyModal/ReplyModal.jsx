@@ -32,7 +32,7 @@ function Modal({ accountName }) {
 			<div className={styles.tweetSection}>
 				<div className={styles.avatar} href='apple'>
 					<img src={fakeAvatar} />
-					<div></div>
+					<div className={styles.line}></div>
 				</div>
 				<div className={styles.infoSection}>
 					<div className={styles.nameSection}>

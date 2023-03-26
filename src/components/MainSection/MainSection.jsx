@@ -1,10 +1,10 @@
 import styles from './MainSection.module.scss';
 
 import Header from '../Header/Header';
-// import TweetItem from '../TweetItem/TweetItem';
 // import TweetInput from '../TweetInput/TweetInput';
-import ReplyItem from '../ReplyItem/ReplyItem';
+// import TweetList from '../TweetList/TweetList';
 import ReplyPost from '../ReplyPost/ReplyPost';
+import ReplyList from '../ReplyList/ReplyList';
 
 function MainSection() {
 	return (
@@ -21,11 +21,7 @@ function MainSection() {
 // 	return (
 // 		<>
 // 			<TweetInput />
-// 			<TweetItem />
-// 			<TweetItem />
-// 			<TweetItem />
-// 			<TweetItem />
-// 			<TweetItem />
+// 			<TweetList />
 // 		</>
 // 	);
 // }
@@ -34,11 +30,7 @@ function ReplyPage() {
 	return (
 		<>
 			<ReplyPost />
-			<ReplyItem />
-			<ReplyItem />
-			<ReplyItem />
-			<ReplyItem />
-			<ReplyItem />
+			<ReplyList />
 		</>
 	);
 }
