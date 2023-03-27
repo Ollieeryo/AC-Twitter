@@ -4,6 +4,8 @@ import './App.scss';
 import Register from './pages/Register/Index';
 import Admin from './pages/Admin';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+// import TweetModal from './components/TweetModal/TweetModal';
+// import ReplyModal from './components/ReplyModal/ReplyModal';
 
 function App() {
 	return (
@@ -14,6 +16,8 @@ function App() {
 					<Route path='login' element={<Login />} />
 					<Route path='register' element={<Register />} />
 					<Route path='*' element={<Main />} />
+					{/* <Route path='tweet' element={<TweetModal />} />
+					<Route path='reply' element={<ReplyModal />} /> */}
 				</Routes>
 			</BrowserRouter>
 		</div>

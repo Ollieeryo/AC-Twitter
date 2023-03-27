@@ -3,14 +3,15 @@ import reply from '../../assets/reply.svg';
 import like from '../../assets/like.svg';
 
 import fakeAvatar from '../../assets/fake-avatar.svg';
+import { Link } from 'react-router-dom';
 
-function ReplyPost() {
+function ReplyPost({ onLikeClick }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.avatarAndName}>
-				<a className={styles.avatar} href='apple'>
+				<Link className={styles.avatar} to='apple'>
 					<img src={fakeAvatar} />
-				</a>
+				</Link>
 				<div className={styles.nameSection}>
 					<div className={styles.nickname}> Apple</div>
 					<div className={styles.accountName}>@apple</div>
@@ -23,20 +24,20 @@ function ReplyPost() {
 				</div>
 				<div className={styles.postTime}>上午 10:05・2021年11月10日</div>
 				<div className={styles.ReplyAndLike}>
-					<a href='replyModal'>
+					<Link to='reply'>
 						34 <span>&nbsp;回覆</span>
-					</a>
-					<a href=''>
+					</Link>
+					<Link to=''>
 						808<span>&nbsp;喜歡次數</span>
-					</a>
+					</Link>
 				</div>
 				<div className={styles.Icons}>
-					<a className={styles.icon} href='replyModal'>
+					<Link className={styles.icon} to='reply'>
 						<img src={reply} />
-					</a>
-					<a className={styles.icon} href='toLike'>
+					</Link>
+					<button className={styles.icon} onClick={onLikeClick}>
 						<img src={like} />
-					</a>
+					</button>
 				</div>
 			</div>
 		</div>

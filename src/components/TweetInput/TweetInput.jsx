@@ -1,21 +1,22 @@
 import styles from './TweetInput.module.scss';
 
 import manAvatar from '../../assets/manAvatar.svg';
+import { Link } from 'react-router-dom';
 
 function TweetInput() {
 	return (
 		<div className={styles.selfTweetSection}>
 			<div className={styles.section}>
-				<a className={styles.img} href='self'>
+				<Link className={styles.img} to='self'>
 					<img src={manAvatar} />
-				</a>
-				<a className={styles.toTweetModal} href='TweetModal'>
+				</Link>
+				<Link className={styles.toTweetModal} to='tweet'>
 					有什麼新鮮事？
-				</a>
+				</Link>
 			</div>
-			<a className={styles.tweetButton} href='TweetModal'>
+			<Link className={styles.tweetButton} to='tweet'>
 				推文
-			</a>
+			</Link>
 		</div>
 	);
 }

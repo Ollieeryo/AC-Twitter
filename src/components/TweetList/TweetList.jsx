@@ -5,43 +5,44 @@ import reply from '../../assets/reply.svg';
 import like from '../../assets/like.svg';
 // 暫時用 fakeAvatar 作為頭像
 import fakeAvatar from '../../assets/fake-avatar.svg';
+import { Link } from 'react-router-dom';
 
-function TweetList() {
+function TweetList({ onLikeClick }) {
 	const items = useContext(TweetItemContext);
 	const repliesCount = 13;
 
 	const listItems = items.map((item) => (
 		<div className={styles.itemContainer} key={item.id}>
-			<a className={styles.avatar} href='apple'>
+			<Link className={styles.avatar} to='apple'>
 				<img src={fakeAvatar} />
-			</a>
+			</Link>
 			<div className={styles.infoSection}>
 				<div className={styles.nameSection}>
 					<div className={styles.nickname}>{item.nickname}</div>
 					<div className={styles.accountAndPeriod}>
-						<a href={item.accountName}>{`@${item.accountName}．`}</a>
+						<Link to={item.accountName}>{`@${item.accountName}．`}</Link>
 						{`${item.period}`}
 					</div>
 				</div>
 				<div className={styles.contentSection}>{item.tweetContent}</div>
 				<div className={styles.ReplyAndLike}>
-					<a className={styles.counter} href='replyModal'>
+					<Link className={styles.counter} to='reply'>
 						<img src={reply} />
 						{repliesCount}
-					</a>
-					<a className={styles.counter} href='toLike'>
+					</Link>
+					<button className={styles.counter} onClick={onLikeClick}>
 						<img src={like} />
 						{item.likes}
-					</a>
+					</button>
 				</div>
 			</div>
 		</div>
 	));
 
 	return (
-		<a className={styles.hrefContainer} href='thisTweet'>
+		<Link className={styles.hrefContainer} to='thisTweet'>
 			{listItems}
-		</a>
+		</Link>
 	);
 }
 
