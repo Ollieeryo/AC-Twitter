@@ -17,19 +17,17 @@ function Sidebar() {
 					<img src={home} />
 					首頁
 				</a>
-				<a className={styles.userProfile} href='userProfile'>
+				<a className={styles.userProfile}>
 					<img src={userProfile} />
 					個人資料
 				</a>
-				<a className={styles.setting} href='setting'>
+				<a className={styles.setting}>
 					<img src={setting} />
 					設定
 				</a>
-				<a className={styles.toTweet} href='TweetModal'>
-					推文
-				</a>
+				<a className={styles.toTweet}>推文</a>
 			</div>
-			<a className={styles.logout} href='login'>
+			<a className={styles.logout}>
 				<img src={logout} />
 				登出
 			</a>

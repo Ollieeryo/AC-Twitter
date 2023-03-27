@@ -1,0 +1,161 @@
+.container {
+	display: flex;
+	justify-content: center;
+	height: 100vh;
+	overflow: hidden;
+
+	.cover {
+		background-color: #373743;
+		opacity: 40%;
+		z-index: 2;
+		position: absolute;
+		width: 100%;
+		height: 100%;
+	}
+
+	.replyModalContainer {
+		position: fixed;
+		z-index: 3;
+		margin-right: 114px;
+
+		display: flex;
+		flex-direction: column;
+		top: 56px;
+		width: 634px;
+		min-height: 300px;
+		background: #ffffff;
+		border-radius: 14px;
+		border: 1px solid #e6ecf0;
+
+		.modalHead {
+			display: flex;
+			align-items: center;
+			height: 55px;
+			border-bottom: 1px solid #e6ecf0;
+			a {
+				margin-left: 14px;
+			}
+		}
+
+		.tweetSection {
+			display: flex;
+			margin: 16px 0;
+
+			.avatar {
+				display: flex;
+				flex-direction: column;
+				margin-left: 24px;
+				border-radius: 50%;
+
+				img {
+					width: 50px;
+					height: 50px;
+				}
+				.line {
+					margin-top: 16px;
+					margin-left: 49%;
+					height: 100%;
+					border-left: #b5b5be 2px solid;
+				}
+			}
+
+			.infoSection {
+				width: 528px;
+				margin-left: 8px;
+
+				.nameSection {
+					display: flex;
+					height: 26px;
+					align-items: center;
+
+					.nickname {
+						font-weight: 700;
+						font-size: 16px;
+						color: #171725;
+					}
+
+					.accountAndPeriod {
+						margin-left: 8px;
+						font-weight: 400;
+						font-size: 14px;
+						color: #6c757d;
+					}
+				}
+
+				.contentSection {
+					margin: 8px 0;
+					font-weight: 400;
+					font-size: 16px;
+					line-height: 26px;
+					color: #171725;
+				}
+
+				.replyTo {
+					display: flex;
+					height: 22px;
+					font-weight: 400;
+					font-size: 14px;
+					margin-bottom: 7px;
+					color: #6c757d;
+					span {
+						color: #ff6600;
+					}
+				}
+			}
+		}
+
+		.replySection {
+			display: flex;
+			margin: 0px 24px;
+			min-height: 130px;
+			img {
+				height: 50px;
+				border-radius: 50%;
+			}
+
+			.inputTweet {
+				width: 100%;
+				margin-left: 10px;
+				margin-top: 12px;
+				font-weight: 500;
+				font-size: 18px;
+				line-height: 26px;
+				color: #1c1c1c;
+				text-decoration: none;
+				overflow: hidden;
+				border: none;
+				resize: none;
+				outline: 0;
+				rows: 6;
+			}
+		}
+
+		.tweetButton {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			margin: 50px 16px 16px auto;
+			width: 64px;
+			height: 40px;
+			background: #ff6600;
+			border-radius: 50px;
+			border: 0;
+			font-weight: 400;
+			font-size: 16px;
+			color: #ffffff;
+			text-decoration: none;
+		}
+	}
+
+	@media screen and (min-width: 992px) and (max-width: 1199px) {
+		.container {
+			width: 960px;
+		}
+	}
+
+	@media screen and (min-width: 1200px) {
+		.container {
+			width: 1140px;
+		}
+	}
+}

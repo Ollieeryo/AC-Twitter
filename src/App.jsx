@@ -4,6 +4,7 @@ import './App.scss';
 import Register from './pages/Register/Index';
 import Admin from './pages/Admin';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+
 import AdminMain from './pages/AdminMain/Index';
 import { AuthProvider } from './contexts/AuthContext';
 import { AuthSignUpProvider } from './contexts/AuthSignUpContext';

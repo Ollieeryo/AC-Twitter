@@ -15,7 +15,7 @@ function TweetModal() {
 	);
 }
 
-function Cover() {
+export function Cover() {
 	return <div className={styles.cover}></div>;
 }
 
