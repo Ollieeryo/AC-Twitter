@@ -3,14 +3,15 @@ import reply from '../../assets/reply.svg';
 import like from '../../assets/like.svg';
 // 暫時用 fakeAvatar 作為頭像
 import fakeAvatar from '../../assets/fake-avatar.svg';
+import { Link } from 'react-router-dom';
 
 function TweetItem() {
 	return (
-		<a className={styles.hrefContainer} href='appleTweet'>
+		<Link className={styles.hrefContainer} to='appleTweet'>
 			<div className={styles.container}>
-				<a className={styles.avatar} href='apple'>
+				<Link className={styles.avatar} to='apple'>
 					<img src={fakeAvatar} />
-				</a>
+				</Link>
 				<div className={styles.infoSection}>
 					<div className={styles.nameSection}>
 						<div className={styles.nickname}> Apple</div>
@@ -21,18 +22,18 @@ function TweetItem() {
 						Voluptate exercitation incididunt aliquip deserunt reprehenderit elit laborum.
 					</div>
 					<div className={styles.ReplyAndLike}>
-						<a className={styles.counter} href='replyModal'>
+						<Link className={styles.counter} to='replyModal'>
 							<img src={reply} />
 							13
-						</a>
-						<a className={styles.counter} href='toLike'>
+						</Link>
+						<Link className={styles.counter} to='toLike'>
 							<img src={like} />
 							76
-						</a>
+						</Link>
 					</div>
 				</div>
 			</div>
-		</a>
+		</Link>
 	);
 }
 

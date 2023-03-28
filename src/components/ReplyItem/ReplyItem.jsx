@@ -2,13 +2,14 @@ import styles from './ReplyItem.module.scss';
 
 // 暫時用 fakeAvatar 作為頭像
 import fakeAvatar from '../../assets/fake-avatar.svg';
+import { Link } from 'react-router-dom';
 
 function ReplyItem() {
 	return (
 		<div className={styles.container}>
-			<a className={styles.avatar} href='apple'>
+			<Link className={styles.avatar} to='apple'>
 				<img src={fakeAvatar} />
-			</a>
+			</Link>
 			<div className={styles.infoSection}>
 				<div className={styles.nameSection}>
 					<div className={styles.nickname}>Devon Lane</div>

@@ -2,6 +2,7 @@ import styles from './PopularList.module.scss';
 
 // 暫時用 fakeAvatar 作為頭像
 import fakeAvatar from '../../assets/fake-avatar.svg';
+import { Link } from 'react-router-dom';
 
 function PopularList() {
 	return (
@@ -24,16 +25,16 @@ function OtherCard() {
 	return (
 		<>
 			<div className={styles.otherCard}>
-				<a className={styles.avatar} href='pizzahut'>
+				<Link className={styles.avatar} to='pizzahut'>
 					<img src={fakeAvatar} />
-				</a>
+				</Link>
 				<div className={styles.other}>
-					<a className={styles.nickname} href='pizzahut'>
+					<Link className={styles.nickname} to='pizzahut'>
 						Pizza Hut
-					</a>
-					<a className={styles.accountName} href='pizzahut'>
+					</Link>
+					<Link className={styles.accountName} to='pizzahut'>
 						@Pizzahut
-					</a>
+					</Link>
 				</div>
 				<button className={styles.btnFollow}>正在跟隨</button>
 			</div>

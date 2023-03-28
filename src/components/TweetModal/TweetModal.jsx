@@ -9,6 +9,8 @@ import manAvatar from '../../assets/manAvatar.svg';
 
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { postTweet } from '../../api/tweets';
+// import { useEffect } from 'react';
 
 function TweetModal() {
 	return (
@@ -27,6 +29,7 @@ export function Cover() {
 function Modal() {
 	const [text, setText] = useState('');
 	const [prompt, setPrompt] = useState('');
+	const [tweets, setTweets] = useState([]);
 
 	const handleTextChange = (e) => {
 		const text = e.target.value;
@@ -38,6 +41,32 @@ function Modal() {
 		}
 	};
 
+	// 新增推文資料
+	const handleAddTweet = async () => {
+		try {
+			const data = await postTweet({
+				description: text,
+			});
+
+			setTweets((prevTweets) => {
+				return [
+					...prevTweets,
+					{
+						id: data.id,
+						UserId: data.UserId,
+						description: data.description,
+						updatedAt: data.updatedAt,
+						createdAt: data.createdAt,
+					},
+				];
+			});
+			console.log(tweets);
+			setText('');
+		} catch (error) {
+			console.error(error);
+		}
+	};
+
 	function handleTweetClick() {
 		if (text.length === 0) {
 			setPrompt('內容不可空白');
@@ -45,11 +74,32 @@ function Modal() {
 			setPrompt('字數不可超過 140 字');
 		} else {
 			setPrompt('');
+			handleAddTweet;
+			// SweetAlert推文發送成功訊息
 			Swal.fire('推文發送成功', '', 'success').then(() => {
 				window.location.href = '/home';
 			});
 		}
 	}
+	// 還沒寫
+	// useEffect(() => {
+	// 	const getTodosAsync = async () => {
+	// 		try {
+	// 			const todos = await getTodos();
+
+	// 			setTodos(todos.map((todo) => ({ ...todo, isEdit: false })));
+	// 		} catch (error) {
+	// 			console.error(error);
+	// 		}
+	// 	};
+	// 	getTodosAsync();
+	// }, []);
+
+	// useEffect(() => {
+	// 	if (!isAuthenticated) {
+	// 		navigate('/login');
+	// 	}
+	// }, [navigate, isAuthenticated]);
 
 	return (
 		<div className={styles.tweetModalContainer}>
