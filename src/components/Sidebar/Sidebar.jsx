@@ -5,32 +5,35 @@ import home from '../../assets/home.svg';
 import userProfile from '../../assets/user-profile.svg';
 import setting from '../../assets/setting.svg';
 import logout from '../../assets/logout.svg';
+import { Link } from 'react-router-dom';
 
 function Sidebar() {
 	return (
 		<div className={styles.container}>
 			<div className={styles.navigationBar}>
-				<a className={styles.logo} href='home'>
+				<Link className={styles.logo} to='home'>
 					<img src={alphacampLogo} />
-				</a>
-				<a className={styles.home} href='home'>
+				</Link>
+				<Link className={styles.home} to='home'>
 					<img src={home} />
 					首頁
-				</a>
-				<a className={styles.userProfile}>
+				</Link>
+				<Link className={styles.userProfile}>
 					<img src={userProfile} />
 					個人資料
-				</a>
-				<a className={styles.setting}>
+				</Link>
+				<Link className={styles.setting}>
 					<img src={setting} />
 					設定
-				</a>
-				<a className={styles.toTweet}>推文</a>
+				</Link>
+				<Link className={styles.toTweet} to='tweet'>
+					推文
+				</Link>
 			</div>
-			<a className={styles.logout}>
+			<Link className={styles.logout} to='login'>
 				<img src={logout} />
 				登出
-			</a>
+			</Link>
 		</div>
 	);
 }

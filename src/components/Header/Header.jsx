@@ -1,15 +1,16 @@
+import { Link } from 'react-router-dom';
 import styles from './Header.module.scss';
 // import leftArrow from '../../assets/left-arrow.svg';
 
 function Header({ leftArrow, content }) {
 	return (
 		<div className={styles.container}>
-			<a className={styles.arrow} href='home'>
+			<Link className={styles.arrow} to='home'>
 				{leftArrow}
-			</a>
-			<a className={styles.content} href=''>
+			</Link>
+			<Link className={styles.content} to=''>
 				{content}
-			</a>
+			</Link>
 		</div>
 	);
 }

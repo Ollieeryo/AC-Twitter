@@ -5,6 +5,7 @@ import TextareaAutosize from 'react-textarea-autosize';
 import IconX from '../../assets/X-icon.svg';
 import manAvatar from '../../assets/manAvatar.svg';
 import fakeAvatar from '../../assets/fake-avatar.svg';
+import { Link } from 'react-router-dom';
 
 function ReplyModal() {
 	return (
@@ -25,9 +26,9 @@ function Modal({ accountName }) {
 	return (
 		<div className={styles.replyModalContainer}>
 			<div className={styles.modalHead}>
-				<a className={styles.iconX} href='home'>
+				<Link className={styles.iconX} to='home'>
 					<img src={IconX} />
-				</a>
+				</Link>
 			</div>
 			<div className={styles.tweetSection}>
 				<div className={styles.avatar} href='apple'>
@@ -54,9 +55,9 @@ function Modal({ accountName }) {
 				</div>
 				<TextareaAutosize className={styles.inputTweet} placeholder='推你的回覆' autoFocus />
 			</div>
-			<a className={styles.tweetButton} href=''>
+			<Link className={styles.tweetButton} to=''>
 				回覆
-			</a>
+			</Link>
 		</div>
 	);
 }
