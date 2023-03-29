@@ -26,7 +26,7 @@ function Modal({ accountName }) {
 	return (
 		<div className={styles.replyModalContainer}>
 			<div className={styles.modalHead}>
-				<Link className={styles.iconX} to='home'>
+				<Link className={styles.iconX} to='/'>
 					<img src={IconX} />
 				</Link>
 			</div>
