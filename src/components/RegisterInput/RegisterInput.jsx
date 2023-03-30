@@ -1,7 +1,6 @@
-import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import { checkPermission, register } from '../../api/auth';
+import { register } from '../../api/auth';
 import { useAuthSignUp } from '../../contexts/AuthSignUpContext';
 import Input from '../Input/Input';
 import MainButton from '../MainButton/MainButton';
@@ -30,21 +29,28 @@ function RegisterInput() {
 		e.preventDefault();
 		if (account.length === 0) {
 			alert('帳號欄位不能為空');
+			return;
 		} else if (accountLength > 50) {
 			alert('帳號字數超過上限!');
+			return;
 		} else if (name.length === 0) {
 			alert('名稱欄位不能為空');
+			return;
 		} else if (email.length === 0) {
 			alert('Email 欄位不能為空');
+			return;
 		} else if (password.length === 0) {
 			alert('密碼欄位不能為空');
+			return;
 		} else if (checkPassword.length === 0) {
 			alert('密碼確認欄位不能為空');
+			return;
 		} else if (password !== checkPassword) {
 			alert('密碼與密碼確認輸入值不同');
+			return;
 		}
 
-		const { success, authToken } = await register({
+		const { registered, success } = await register({
 			account,
 			name,
 			email,
@@ -53,42 +59,37 @@ function RegisterInput() {
 		});
 
 		if (success) {
-			localStorage.setItem('authToken', authToken);
 			Swal.fire({
 				position: 'top',
-				title: '註冊成功！',
-				timer: 1000,
+				title: '建立帳號成功！',
+				timer: 1500,
 				icon: 'success',
 				showConfirmButton: false,
 			});
+
+			// 跳轉登入頁
+			navigate('/login');
+
 			return;
+		}
+
+		if (registered === 'Error: account already exists!') {
+			alert('帳號已被註冊');
+		}
+
+		if (registered === 'Error: email already exists!') {
+			alert('Email 已被註冊');
 		}
 
 		// 註冊失敗
 		Swal.fire({
 			position: 'top',
-			title: '註冊失敗！',
-			timer: 1000,
+			title: '建立帳號失敗！',
+			timer: 1500,
 			icon: 'error',
 			showConfirmButton: false,
 		});
 	};
-
-	// check permission
-	useEffect(() => {
-		const checkTokenIsValid = async () => {
-			const authToken = localStorage.getItem('authToken');
-			if (!authToken) {
-				return;
-			}
-			const result = await checkPermission(authToken);
-			if (result) {
-				navigate('/main');
-			}
-		};
-
-		checkTokenIsValid();
-	}, [navigate]);
 
 	return (
 		<div className={styled.inputCon}>

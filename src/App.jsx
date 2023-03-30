@@ -18,7 +18,7 @@ function App() {
 							<Route path='admin' element={<Admin />} />
 							<Route path='login' element={<Login />} />
 							<Route path='register' element={<Register />} />
-							<Route path='*' element={<Main />} />
+							<Route path='main' element={<Main />} />
 							<Route path='admin/main' element={<AdminMain />} />
 							{/* <Route path='TweetModal' element={<TweetModal />} /> */}
 						</Routes>
