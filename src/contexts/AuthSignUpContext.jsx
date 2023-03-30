@@ -12,6 +12,7 @@ export const AuthSignUpProvider = ({ children }) => {
 	const [checkPassword, setCheckPassword] = useState('');
 
 	const handleAccountChange = (e) => {
+		e.preventDefault();
 		const inputValue = e.target.value;
 		// 使用正規表達式去除空格
 		const inputWithoutSpaces = inputValue.replace(/\s+/g, '');
@@ -21,6 +22,7 @@ export const AuthSignUpProvider = ({ children }) => {
 	};
 
 	const handleUserNameChange = (e) => {
+		e.preventDefault();
 		const inputValue = e.target.value;
 		// 使用 trim 刪除 string 前後空白
 		const inputWithoutSpaces = inputValue.trim();
@@ -28,6 +30,7 @@ export const AuthSignUpProvider = ({ children }) => {
 	};
 
 	const handleEmailChange = (e) => {
+		e.preventDefault();
 		const inputValue = e.target.value;
 		// 使用 trim 刪除 string 前後空白
 		const inputWithoutSpaces = inputValue.trim();
@@ -35,6 +38,7 @@ export const AuthSignUpProvider = ({ children }) => {
 	};
 
 	const handlePasswordChange = (e) => {
+		e.preventDefault();
 		const inputValue = e.target.value;
 		// 使用 trim 刪除 string 前後空白
 		const inputWithoutSpaces = inputValue.trim();
@@ -42,6 +46,7 @@ export const AuthSignUpProvider = ({ children }) => {
 	};
 
 	const handleCheckPasswordChange = (e) => {
+		e.preventDefault();
 		const inputValue = e.target.value;
 		// 使用 trim 刪除 string 前後空白
 		const inputWithoutSpaces = inputValue.trim();

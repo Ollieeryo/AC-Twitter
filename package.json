@@ -1,59 +1,61 @@
 {
-	"name": "ac_twitter_frontend",
-	"version": "0.1.0",
-	"private": true,
-	"dependencies": {
-		"@testing-library/jest-dom": "^5.16.5",
-		"@testing-library/react": "^13.4.0",
-		"@testing-library/user-event": "^13.5.0",
-		"axios": "^0.27.2",
-		"eslint-config-prettier": "^8.7.0",
-		"json-server": "^0.17.0",
-		"path": "^0.12.7",
-		"prettier": "^2.8.4",
-		"react": "^18.2.0",
-		"react-dom": "^18.2.0",
-		"react-router-dom": "^6.9.0",
-		"react-scripts": "5.0.1",
-		"react-textarea-autosize": "^8.4.1",
-		"sweetalert-react": "^0.4.11",
-		"sweetalert2": "^11.6.4",
-		"web-vitals": "^2.1.4"
-	},
-	"scripts": {
-		"start": "react-scripts start",
-		"build": "react-scripts build",
-		"test": "react-scripts test",
-		"eject": "react-scripts eject",
-		"lint:check": "eslint --ext=js,jsx src/",
-		"lint": "eslint --fix --ext=js,jsx src/",
-		"format:check": "prettier . --check --ignore-unknown",
-		"format": "prettier . --write --ignore-unknown",
-		"scss": "sass -watch scss -o css"
-	},
-	"eslintConfig": {
-		"extends": [
-			"react-app",
-			"react-app/jest"
-		]
-	},
-	"browserslist": {
-		"production": [
-			">0.2%",
-			"not dead",
-			"not op_mini all"
-		],
-		"development": [
-			"last 1 chrome version",
-			"last 1 firefox version",
-			"last 1 safari version"
-		]
-	},
-	"devDependencies": {
-		"eslint": "^8.36.0",
-		"eslint-plugin-jest": "^27.2.1",
-		"eslint-plugin-prettier": "^4.2.1",
-		"eslint-plugin-react": "^7.32.2",
-		"sass": "^1.59.3"
-	}
+  "name": "ac_twitter_frontend",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.3.0",
+    "@fortawesome/free-solid-svg-icons": "^6.3.0",
+    "@fortawesome/react-fontawesome": "^0.2.0",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "axios": "^0.27.2",
+    "eslint-config-prettier": "^8.7.0",
+    "path": "^0.12.7",
+    "prettier": "^2.8.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-modal": "^3.16.1",
+    "react-router-dom": "^6.9.0",
+    "react-scripts": "5.0.1",
+    "react-textarea-autosize": "^8.4.1",
+    "sweetalert2": "^11.6.4",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "lint:check": "eslint --ext=js,jsx src/",
+    "lint": "eslint --fix --ext=js,jsx src/",
+    "format:check": "prettier . --check --ignore-unknown",
+    "format": "prettier . --write --ignore-unknown",
+    "scss": "sass -watch scss -o css"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "eslint": "^8.36.0",
+    "eslint-plugin-jest": "^27.2.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.32.2",
+    "sass": "^1.59.3"
+  }
 }

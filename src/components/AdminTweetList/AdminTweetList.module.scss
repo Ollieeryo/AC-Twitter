@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
 .ul {
   list-style-type:none;
   padding: 0;
@@ -18,25 +20,39 @@
   display: flex;
   width: 100%;
   border-top: 1px solid #E6ECF0;
+  position: relative;
 
   .logoWrap {
-    margin-right: 5px;
+    position: absolute;
+    top: 1rem;
+    left: 1.5rem;
+
+    .logo {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+    }
   }
 
   .userWrap {
-
+    position: relative;
+    padding: 1rem 1rem 1rem 5rem;
+    display: grid;
+    grid-gap: 5px;
+    width: 100%;
+    
     .userInfo {
       display: flex;
-      justify-content: space-between;
-      width: 100%;
       align-items: center;
-
+      position: relative;
+      width: 100%;
       .userInfoCon {
         display: grid;
         align-items: center;
         grid-auto-flow: column;
         grid-gap: 6px;
         line-height: 26px;
+
         .userName {
           font-weight: 700;
         }
@@ -47,16 +63,58 @@
           color: #6C757D;
         }
       }
+
+      .button {
+        border: 0;
+        background: white;
+        cursor: pointer;
+        position: absolute;
+        right: -1rem;
+        top: 0;
+      }
     }
 
-    .button {
-      border: 0;
-      background: white;
-      cursor: pointer;
+    .replyAccWrap {
+      display: grid;
+      align-items: center;
+      grid-auto-flow: column;
+      width: 85px;
+      
+      .text {
+        font-weight: 400;
+        font-size: 14px;
+        color: #6C757D;
+      }
+
+      .account {
+        font-weight: 400;
+        font-size: 14px;
+        color: #FF6600;
+      }
     }
 
     .tweetWrap {
-      width: 90%;
+      line-height: 26px;
+    }
+  }
+
+  .replyLikeWrap {
+    display: grid;
+    grid-auto-flow: column;
+    width: 0;
+    grid-gap: 4.5rem;
+    
+    .replyWrap {
+      font-family: 'Montserrat', sans-serif;
+      display: grid;
+      grid-auto-flow: column;
+      align-items: center;
+      width: 0;
+      grid-gap: 9px;
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 14px;
+      color: #6C757D; 
     }
   }
 }

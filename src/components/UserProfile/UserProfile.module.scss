@@ -1,0 +1,366 @@
+%status-button {
+  outline: none;
+  background: white;
+  cursor: pointer;
+  border: none;
+  margin: 0;
+  padding: 2.5rem;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.wrap {
+  
+  .imgWrap {
+    position: relative;
+    
+    .cover {
+      width: 100%;
+      height: 200px;
+      object-fit: fill;
+    }
+
+    .avatarCon {
+      position: absolute;
+      top: 100%;
+      left: 10%;
+      transform: translate(-50%, -50%);
+      
+      
+      .avatar {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 4px solid #FFFFFF;
+      }
+    }
+  
+  }
+
+
+  .userInfoWrap {
+    display: grid;
+    padding: 1rem;
+    position: relative;
+    margin-top: 5px;
+
+    .edit {
+      display: flex;
+      justify-content: flex-end;
+  
+      .editButton {
+        outline: none;
+        background: white;
+        cursor: pointer;
+        font-weight: 400;
+        font-size: 16px;
+        border: 1px solid #FF6600;
+        border-radius: 50px;
+        color: #FF6600;
+        width: 128px;
+        height: 40px;
+
+        &:hover {
+          background: #FF6600;
+          color: white;
+        }
+      }
+    }
+
+    .userInfo {
+      display: grid;
+      grid-gap: 10px;
+
+      .title {
+        font-weight: 700;
+        font-size: 18px;
+      }
+
+      .account {
+        color: #6C757D;
+        font-size: 14px;
+      }
+    
+    }
+
+    .buttonWrap {
+      margin-top: 1rem;
+      display: grid;
+      grid-auto-flow: column;
+      width: 30%;
+
+      .followButton {
+        outline: none;
+        background: white;
+        cursor: pointer;
+        border: 0;
+        padding: 0;
+        font-weight: 400;
+        font-size: 14px;
+        
+        .followTitle {
+          color: #6C757D;
+        }
+      }
+    } 
+  }
+
+  .statusButtonWrap {
+    display: flex;
+    border-bottom: 1px solid #E6ECF0;
+    height: 100px;
+
+    .buttonWrap {
+      &::after {
+        content: '';
+        display: block;
+        height: 2px;
+        width: 100%;
+        background: #FF6600;
+        border-radius: 100px;
+      }
+    }
+
+    .button {
+      @extend %status-button;
+      color: #657786;
+
+      &:hover {
+        color: #FF6600;
+      }
+    }
+
+    .activeButton {
+      @extend %status-button;
+      color: #FF6600;
+    }
+
+  }
+}
+
+// modal 設定
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(108, 117, 125, 0.7);
+}
+
+.modal {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  right: auto;
+  bottom: auto;
+  transform: translate(-50%, -50%);
+  background: #FFFFFF;
+  border-radius: 14px;
+  width: 634px;
+  height: 610px;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    align-items: center;
+
+    .xButtonWrap {
+      display: grid;
+      grid-auto-flow: column;
+      grid-gap: 1rem;
+  
+      .xButton {
+        outline: none;
+        background: white;
+        cursor: pointer;
+        border: none;
+  
+        .xLogo path {
+          fill: #FF6600;;
+        }
+      }
+      
+      .headerTitle {
+        font-weight: 700;
+        font-size: 18px;
+      }
+
+    }
+
+    .saveButton {
+      outline: none;
+      background: white;
+      cursor: pointer;
+      border: none;
+      width: 64px;
+      height: 40px;
+      background: #FF6600;
+      border-radius: 50px;
+      color: white;
+    }
+  }
+  
+  .backImgWrap {
+    position: relative;
+
+    .backImg {
+      width: 100%;
+      object-fit: cover;
+      opacity: 0.75;
+      background-color: rgba(0, 0, 0, 0.6);
+      filter: brightness(50%);
+      height: 200px;
+    }
+
+    .cameraWrap {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: grid;
+      grid-auto-flow: column;
+      grid-gap: 2rem;
+
+      .button {
+        outline: none;
+        background: none;
+        cursor: pointer;
+        border: none;
+
+        .xLogo path{
+          fill: white;
+        }
+      }
+    }
+  }
+
+ 
+  .avatarWrap {
+    position: relative;
+    width: 140px;
+    
+    .avatarImg {
+      filter: brightness(60%);
+      position: absolute;
+      left: 1rem;
+      top: -3.5rem;
+      width: 95px;
+      height: 95px;
+      border: 4px solid #FFFFFF;
+      border-radius: 50%;
+    }
+
+    .cameraButtonWrap {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+
+      .cameraButton {
+        outline: none;
+        background: none;
+        cursor: pointer;
+        border: none;
+      }
+    }
+  }
+
+  .inputWrap {
+    padding: 1rem;
+    margin-top: 3rem;
+    display: grid;
+    grid-gap: 2rem;
+
+    .form {
+      background: #F5F8FA;
+      border-radius: 2px;
+      display: grid;
+      grid-gap: 0.5rem;
+      border-bottom: 2px solid #657786;
+      border-radius: 0px 0px 4px 4px;
+      padding: 0.5rem 1rem;
+      color: #696974;
+      font-size: 14px;
+      position: relative;
+
+      .input {
+        border: 0;
+        margin: 0;
+        padding: 0;
+        background-color: #F5F8FA;
+        outline: none;
+        align-self: flex-end;
+      }
+
+
+    }
+
+    .form2 {
+      background: #F5F8FA;
+      border-radius: 2px;
+      display: grid;
+      // grid-gap: 0.5rem;
+      border-bottom: 2px solid #657786;
+      border-radius: 0px 0px 4px 4px;
+      padding: 0.5rem 1rem;
+      color: #696974;
+      font-size: 14px;
+      height: 140px;
+      position: relative;
+
+
+      .intro {
+        color: black;
+        position: absolute;
+        left: 1rem;
+        top: 2rem;
+      }
+
+      .input2 {
+        border: 0;
+        margin: 0;
+        padding: 0;
+        background-color: #F5F8FA;
+        outline: none;
+        align-self: flex-end;
+      }
+
+    }
+  }
+}
+
+// 字數上限 style
+.countWrap {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  line-height: 20px;
+  position: absolute;
+  top: 100%;
+  width: 100%;
+
+  .countTitle {
+    color: #FC5A5A;
+    font-weight: 500;
+  }
+
+  .countNumber {
+    color: #696974;
+    font-weight: 500;
+  }
+}
+
+.ul {
+  list-style-type:none;
+  padding: 0;
+  margin: 0;
+}
+
+// .cameraButton2 {
+//   opacity: 0;
+//   position: absolute;
+//   left: -9999px;
+// }
