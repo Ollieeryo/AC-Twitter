@@ -13,18 +13,80 @@ import { getAllReply } from '../../api/reply';
 import { getIdTweets } from '../../api/tweets';
 
 function MainSection({ activeSection, setActiveSection }) {
+	const [tweetId, setTweetId] = useState();
+
+	function handleArrowClick() {
+		window.location.href = '/home';
+	}
+
+	const handleTweetLink = (tweetID) => {
+		console.log(`Tweet ID: ${tweetID}`);
+		setTweetId(tweetID);
+		setActiveSection('reply');
+	};
+
+	function HomePage() {
+		return (
+			<>
+				<TweetInput />
+				<TweetList onTweetClick={handleTweetLink} />
+			</>
+		);
+	}
+
+	function ReplyPage() {
+		const [replies, setReplies] = useState([]);
+		const [getTweet, setGetTweet] = useState([]);
+
+		useEffect(() => {
+			const getTweetAsync = async () => {
+				try {
+					const authToken = localStorage.getItem('authToken');
+					const aTweet = await getIdTweets(authToken, tweetId);
+					console.log(aTweet);
+					setGetTweet(aTweet);
+				} catch (error) {
+					console.error(error);
+				}
+			};
+			getTweetAsync();
+		}, []);
+
+		useEffect(() => {
+			const getRepliesAsync = async () => {
+				try {
+					const authToken = localStorage.getItem('authToken');
+					const reply = await getAllReply(authToken, tweetId);
+
+					setReplies(reply.map((reply) => ({ ...reply })));
+				} catch (error) {
+					console.error(error);
+				}
+			};
+			getRepliesAsync();
+		}, []);
+
+		return (
+			<>
+				<ReplyPost tweet={getTweet} />
+				<ReplyList replies={replies} />
+			</>
+		);
+	}
 	return (
 		<div className={styles.container}>
-			<Header activeSection={activeSection} />
+			<Header
+				activeSection={activeSection}
+				onArrowClick={() => {
+					handleArrowClick();
+				}}
+			/>
 
 			{/* Main */}
-			{activeSection === 'main' && (
-				<>
-					<HomePage />
-					{/* <Header content='推文' />
-					<ReplyPage /> */}
-				</>
-			)}
+			{activeSection === 'main' && <HomePage />}
+
+			{/* ReplyPage */}
+			{activeSection === 'reply' && <ReplyPage />}
 
 			{/* UserProfile */}
 			{activeSection === 'userProfile' && (
@@ -39,11 +101,6 @@ function MainSection({ activeSection, setActiveSection }) {
 				<FollowList activeSection={activeSection} setActiveSection={setActiveSection} />
 			)}
 		</div>
-	);
-}
-
-	return (
-		<div className={styles.container}>{currentPage === 'home' ? <HomePage /> : <ReplyPage />}</div>
 	);
 }
 

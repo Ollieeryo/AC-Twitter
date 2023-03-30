@@ -50,9 +50,9 @@ function Sidebar({ setActiveSection }) {
 					<img src={setting} />
 					設定
 				</a>
-				<Link className={styles.toTweet} to='tweet'>
+				<a className={styles.toTweet} href='tweet'>
 					推文
-				</Link>
+				</a>
 			</div>
 			<a className={styles.logout} href='login' onClick={handleLogout}>
 				<img src={logout} />

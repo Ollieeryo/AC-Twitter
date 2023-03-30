@@ -23,28 +23,29 @@ function ReplyPost({ tweet }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.avatarAndName}>
-				<Link className={styles.avatar} to={`/${tweet.User.account}`}>
-					<img src={tweet.User.avatar} />
+				<Link className={styles.avatar} to={`/${tweet?.User?.account}`}>
+					<img src={tweet?.User?.avatar} />
 				</Link>
 				<div className={styles.nameSection}>
-					<div className={styles.nickname}>{tweet.User.name}</div>
-					<div className={styles.accountName}>@{tweet.User.account}</div>
+					<div className={styles.nickname}>{tweet?.User?.name}</div>
+					<div className={styles.accountName}>@{tweet?.User?.account}</div>
 				</div>
 			</div>
+
 			<div className={styles.infoSection}>
-				<div className={styles.contentSection}>{tweet.description}</div>
-				<div className={styles.postTime}>{tweet.createdAt}</div>
+				<div className={styles.contentSection}>{tweet?.description}</div>
+				<div className={styles.postTime}>{tweet?.createdAt}</div>
 				<div className={styles.ReplyAndLike}>
 					<Link className={styles.counter} to='replymodal'>
-						{tweet.replyCounts} <span>&nbsp;回覆</span>
+						{tweet?.replyCounts} <span>&nbsp;回覆</span>
 					</Link>
 					<div
 						className={styles.counter}
 						onClick={() => {
-							handleLikeClick(tweet.id);
+							handleLikeClick(tweet?.id);
 						}}
 					>
-						{tweet.likeCounts}
+						{tweet?.likeCounts}
 						<span>&nbsp;喜歡次數</span>
 					</div>
 				</div>

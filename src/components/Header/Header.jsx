@@ -3,12 +3,14 @@ import styles from './Header.module.scss';
 import leftArrow from '../../assets/left-arrow.svg';
 import { useAuthLogin } from '../../contexts/AuthContext';
 
-function Header({ activeSection }) {
+function Header({ activeSection, onArrowClick }) {
 	let headerContent = '';
 	if (activeSection === 'main') {
 		headerContent = '首頁';
 	} else if (activeSection === 'setting') {
 		headerContent = '帳戶設定';
+	} else if (activeSection === 'reply') {
+		headerContent = '推文';
 	}
 
 	const { userData, userTweets } = useAuthLogin();
@@ -18,38 +20,45 @@ function Header({ activeSection }) {
 			{/* 箭頭 */}
 			{activeSection === 'userProfile' ||
 			activeSection === 'follower' ||
-			activeSection === 'following' ? (
-				<a className={styles.arrow} href=''>
+			activeSection === 'following' ||
+			activeSection === 'reply' ? (
+				<div className={styles.arrow} onClick={onArrowClick}>
 					<img src={leftArrow} alt='' />
-				</a>
+				</div>
 			) : (
 				''
 			)}
 
 			{/* header 文字變動 */}
 			{activeSection === 'main' && (
-				<a className={styles.content} href=''>
+				<Link className={styles.content} to=''>
 					{headerContent}
-				</a>
+				</Link>
+			)}
+
+			{activeSection === 'reply' && (
+				<Link className={styles.content} to=''>
+					{headerContent}
+				</Link>
 			)}
 
 			{activeSection === 'userProfile' ||
 			activeSection === 'follower' ||
 			activeSection === 'following' ? (
-				<a className={styles.content} href=''>
+				<Link className={styles.content} to=''>
 					<div className={styles.userTitleWrap}>
 						<span>{userData.name}</span>
 						<span className={styles.tweetText}>{userTweets.length} 推文</span>
 					</div>
-				</a>
+				</Link>
 			) : (
 				''
 			)}
 
 			{activeSection === 'setting' && (
-				<a className={styles.content} href=''>
+				<Link className={styles.content} to=''>
 					{headerContent}
-				</a>
+				</Link>
 			)}
 		</div>
 	);
