@@ -35,11 +35,10 @@ function Sidebar({ setActiveSection }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.navigationBar}>
-				<a className={styles.logo} href='main'>
+				<a className={styles.logo} href='main' onClick={handleChangeMain}>
 					<img src={alphacampLogo} />
 				</a>
-				
-				<a className={styles.home} href='main' onClick={handleChangeMain}>
+				<a className={styles.home} href='main'>
 					<img src={home} />
 					首頁
 				</a>
@@ -58,7 +57,7 @@ function Sidebar({ setActiveSection }) {
 			<a className={styles.logout} href='login' onClick={handleLogout}>
 				<img src={logout} />
 				登出
-			</Link>
+			</a>
 		</div>
 	);
 }

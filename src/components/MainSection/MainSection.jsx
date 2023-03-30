@@ -18,7 +18,7 @@ function MainSection({ activeSection, setActiveSection }) {
 			{activeSection === 'main' && (
 				<>
 					<HomePage />
-				{/* <Header content='推文' />
+					{/* <Header content='推文' />
 					<ReplyPage /> */}
 				</>
 			)}
