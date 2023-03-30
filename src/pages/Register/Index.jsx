@@ -7,7 +7,7 @@ function Register() {
 	return (
 		<div className={styled.loginCon}>
 			<div className={styled.loginWrap}>
-				<LogoTitle title='登入你的帳號' />
+				<LogoTitle title='建立你的帳號' />
 				<RegisterInput />
 
 				<div className={styled.pageButton}>

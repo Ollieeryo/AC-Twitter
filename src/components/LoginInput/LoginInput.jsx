@@ -1,7 +1,7 @@
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import { checkPermission, login } from '../../api/auth';
+import { login } from '../../api/auth';
 import { useAuthLogin } from '../../contexts/AuthContext';
 import Input from '../Input/Input';
 import MainButton from '../MainButton/MainButton';
@@ -19,21 +19,25 @@ function LoginInput() {
 		e.preventDefault();
 		if (account === '') {
 			alert('帳號欄位不能為空');
+			return;
 		}
 		if (accountLength > 50) {
 			alert('帳號字數超過上限!');
+			return;
 		}
 		if (password === '') {
 			alert('密碼欄位不能為空');
+			return;
 		}
 
-		const { success, authToken } = await login({
+		const { success, authToken, user } = await login({
 			account,
 			password,
 		});
 
 		if (success) {
 			localStorage.setItem('authToken', authToken);
+			localStorage.setItem('userId', user.id);
 
 			// 登入成功訊息
 			Swal.fire({
@@ -43,6 +47,8 @@ function LoginInput() {
 				icon: 'success',
 				showConfirmButton: false,
 			});
+
+			navigate('/main');
 			return;
 		}
 
@@ -57,20 +63,20 @@ function LoginInput() {
 	};
 
 	// check permission
-	useEffect(() => {
-		const checkTokenIsValid = async () => {
-			const authToken = localStorage.getItem('authToken');
-			if (!authToken) {
-				return;
-			}
-			const result = await checkPermission(authToken);
-			if (result) {
-				navigate('/main');
-			}
-		};
+	// useEffect(() => {
+	// 	const checkTokenIsValid = async () => {
+	// 		const authToken = localStorage.getItem('authToken');
+	// 		if (!authToken) {
+	// 			return;
+	// 		}
+	// 		const result = await checkPermission(authToken);
+	// 		if (result) {
+	// 			navigate('/main');
+	// 		}
+	// 	};
 
-		checkTokenIsValid();
-	}, [navigate]);
+	// 	checkTokenIsValid();
+	// }, [navigate]);
 
 	return (
 		<div className={styled.inputCon}>
@@ -84,7 +90,6 @@ function LoginInput() {
 				/>
 
 				<div className={styled.countWrap}>
-					{/* 帳號不存在的 span 判斷式 */}
 					<span className={styled.countTitle}>{accountLength > 50 ? '字數超出上限' : ''}</span>
 					<span className={styled.countNumber}>
 						{accountLength <= 0 ? '' : `字數: ${accountLength} / 50`}
