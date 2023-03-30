@@ -125,7 +125,7 @@ function Modal() {
 					<span>{prompt}</span>
 					<button className={styles.tweetButton} onClick={handleTweetClick}>
 						推文
-					</button>{' '}
+					</button>
 				</div>
 			</div>
 		</div>

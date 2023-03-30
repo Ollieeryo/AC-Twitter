@@ -24,7 +24,7 @@ function App() {
 							<Route path='*' element={<Main />} />
 							<Route path='admin/main' element={<AdminMain />} />
 							<Route path='tweet' element={<TweetModal />} />
-							<Route path='reply' element={<ReplyModal />} />
+							<Route path='replymodal' element={<ReplyModal />} />
 						</Routes>
 					</BrowserRouter>
 				</div>

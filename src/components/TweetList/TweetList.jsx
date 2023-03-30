@@ -7,8 +7,32 @@ import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useState } from 'react';
 
-function TweetList({ onLikeClick }) {
+function TweetList({ onTweetClick }) {
 	const [tweets, setTweets] = useState([]);
+
+	function handleLikeClick(itemID) {
+		setTweets(
+			tweets.map((item) => {
+				if (item.id === itemID) {
+					if (item.isLiked === false) {
+						return {
+							...item,
+							likeCounts: item.likeCounts + 1,
+							isLiked: !item.isLiked,
+						};
+					} else {
+						return {
+							...item,
+							likeCounts: item.likeCounts - 1,
+							isLiked: !item.isLiked,
+						};
+					}
+				} else {
+					return item;
+				}
+			}),
+		);
+	}
 
 	const listItems = tweets.map((item) => (
 		<div className={styles.itemContainer} key={item.id}>
@@ -25,13 +49,25 @@ function TweetList({ onLikeClick }) {
 						{`${item.period}`}
 					</div>
 				</div>
-				<div className={styles.contentSection}>{item.description}</div>
+				<div
+					className={styles.contentSection}
+					onClick={() => {
+						onTweetClick(item.id);
+					}}
+				>
+					{item.description}
+				</div>
 				<div className={styles.ReplyAndLike}>
-					<Link className={styles.counter} to='reply'>
+					<Link className={styles.counter} to='replymodal'>
 						<img src={reply} />
 						{item.replyCounts}
 					</Link>
-					<button className={styles.counter} onClick={onLikeClick}>
+					<button
+						className={styles.counter}
+						onClick={() => {
+							handleLikeClick(item.id);
+						}}
+					>
 						<img src={like} />
 						{item.likeCounts}
 					</button>
@@ -54,11 +90,7 @@ function TweetList({ onLikeClick }) {
 		getTweetsAsync();
 	}, []);
 
-	return (
-		<Link className={styles.hrefContainer} to='replylist'>
-			{listItems}
-		</Link>
-	);
+	return <div className={styles.container}>{listItems}</div>;
 }
 
 export default TweetList;

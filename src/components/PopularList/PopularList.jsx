@@ -1,13 +1,11 @@
 import styles from './PopularList.module.scss';
 
 import { Link } from 'react-router-dom';
-// import { createContext } from 'react';
 import { useEffect, useState } from 'react';
-// import { recommendedFollowList } from '../../api/followship';
+import { recommendedFollowList } from '../../api/followship';
 
 function PopularList() {
 	const [populars, setPopulars] = useState([]);
-	// const populars = useContext(popularsContext);
 
 	function handleFollowToggle(id) {
 		setPopulars((prevPopulars) => {
@@ -16,6 +14,7 @@ function PopularList() {
 					return {
 						...popular,
 						isFollowed: !popular.isFollowed,
+						// 正在跟隨/跟隨 增加api
 					};
 				}
 				return popular;
@@ -24,7 +23,7 @@ function PopularList() {
 		});
 	}
 
-	const listItems = populars.map((popular) => (
+	const listItems = populars.slice(0, 8).map((popular) => (
 		<div className={styles.otherCard} key={popular.id}>
 			<Link className={styles.avatar} to={popular.account}>
 				<img src={popular.avatar} />
@@ -52,8 +51,7 @@ function PopularList() {
 		const getPopularsAsync = async () => {
 			try {
 				const authToken = localStorage.getItem('authToken');
-				// const popular = await recommendedFollowList(authToken);
-				const popular = await data(authToken);
+				const popular = await recommendedFollowList(authToken);
 				console.log(popular);
 
 				setPopulars(popular.map((popular) => ({ ...popular })));
@@ -73,31 +71,5 @@ function PopularList() {
 		</div>
 	);
 }
-
-const topUsers = [
-	{
-		id: 157, // user id
-		account: 'user5',
-		name: 'user5',
-		avatar: 'https://loremflickr.com/320/240/person,mugshot/?random=56.66174558407615',
-		followerCounts: 4, // follower數量
-		isFollowed: true, // 目前登入的使用者是否有follow這個user
-	},
-	{
-		id: 156,
-		account: 'user4',
-		name: 'user4',
-		avatar: 'https://loremflickr.com/320/240/person,mugshot/?random=80.23545321182219',
-		followerCounts: 3,
-		isFollowed: false,
-	},
-	// ...剩下幾位topUsers,
-];
-
-function data() {
-	return topUsers;
-}
-// const arrData = Object.values(backendData);
-// const popularsContext = createContext(topUsers);
 
 export default PopularList;

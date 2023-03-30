@@ -24,7 +24,6 @@ export const deleteFollow = async (authToken, followingId) => {
 				Authorization: 'Bearer ' + authToken,
 			},
 		});
-		console.log(res);
 		return res.data;
 	} catch (error) {
 		console.error('[Delete Follow failed]: ', error.response.data);
@@ -39,8 +38,7 @@ export const recommendedFollowList = async (authToken) => {
 				Authorization: 'Bearer ' + authToken,
 			},
 		});
-		console.log(res);
-		return res.data;
+		return res.data.topUsers;
 	} catch (error) {
 		console.error('[Get Recommended FollowList failed]: ', error.response.data);
 	}
