@@ -32,5 +32,12 @@ export const getChangeAccount = async (
 		return response.data;
 	} catch (error) {
 		console.error(`Error fetching followedList for user ${userId}: ${error}`);
+		if (error.response.data.message === 'Error: account already exists!') {
+			alert('此帳號已存在');
+		}
+
+		if (error.response.data.message === 'Error: email already exists!') {
+			alert('此 Email 已存在');
+		}
 	}
 };

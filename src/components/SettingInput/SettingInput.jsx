@@ -9,6 +9,7 @@ import styled from './SettingInput.module.scss';
 
 function SettingInput() {
 	const [userOriginData, setUserOriginData] = useState(null);
+	console.log(userOriginData);
 	const [accountLength, setAccountLength] = useState(0);
 	const [account, setAccount] = useState('');
 	const [name, setUsername] = useState('');
@@ -92,21 +93,22 @@ function SettingInput() {
 		} else if (password !== checkPassword) {
 			alert('密碼與密碼確認輸入值不同');
 			return;
-		} else if (account === userOriginData.account) {
-			console.log(userOriginData.account);
-			alert('不能輸入相同帳號');
-			return;
-		} else if (name === userOriginData.name) {
-			alert('不能輸入相同名稱');
-			return;
-		} else if (email === userOriginData.email) {
-			console.log(userOriginData.account);
-			alert('不能輸入相同Email');
-			return;
-		} else if (email === userOriginData.password) {
-			alert('不能輸入相同密碼');
-			return;
 		}
+		// else if (account === userOriginData.account) {
+		// 	console.log(userOriginData.account);
+		// 	alert('不能輸入相同帳號');
+		// 	return;
+		// } else if (name === userOriginData.name) {
+		// 	alert('不能輸入相同名稱');
+		// 	return;
+		// } else if (email === userOriginData.email) {
+		// 	console.log(userOriginData.account);
+		// 	alert('不能輸入相同Email');
+		// 	return;
+		// } else if (email === userOriginData.password) {
+		// 	alert('不能輸入相同密碼');
+		// 	return;
+		// }
 
 		const result = await getChangeAccount(
 			userId,

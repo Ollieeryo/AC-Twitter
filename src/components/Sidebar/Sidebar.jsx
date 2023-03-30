@@ -35,9 +35,10 @@ function Sidebar({ setActiveSection }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.navigationBar}>
-				<Link className={styles.logo} to='home'>
+				<a className={styles.logo} href='main'>
 					<img src={alphacampLogo} />
 				</a>
+				
 				<a className={styles.home} href='main' onClick={handleChangeMain}>
 					<img src={home} />
 					首頁
