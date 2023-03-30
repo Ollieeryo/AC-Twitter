@@ -1,0 +1,46 @@
+.inputWrap {
+  display: grid;
+  grid-gap: 2rem;
+  padding: 1rem;
+
+  .accountInput {
+    position: relative;
+  }
+
+  .buttonWrap {
+    display: flex;
+    justify-content: flex-end;
+
+    .saveButton {
+      outline: none;
+      background: white;
+      cursor: pointer;
+      border: none;
+      width: 64px;
+      height: 40px;
+      background: #FF6600;
+      border-radius: 50px;
+      color: white;
+    }
+  }
+
+}
+
+.countWrap {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  line-height: 20px;
+  position: absolute;
+  width: 100%;
+
+  .countTitle {
+    color: #FC5A5A;
+    font-weight: 500;
+  }
+
+  .countNumber {
+    color: #696974;
+    font-weight: 500;
+  }
+}

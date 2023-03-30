@@ -1,0 +1,36 @@
+import axios from 'axios';
+
+const authURL = 'https://morning-hamlet-47874.herokuapp.com/api';
+
+// 更改帳戶資料
+export const getChangeAccount = async (
+	userId,
+	authToken,
+	account,
+	email,
+	name,
+	password,
+	checkPassword,
+) => {
+	try {
+		const response = await axios.put(
+			`${authURL}/users/${userId}/setting`,
+			{
+				account,
+				email,
+				name,
+				password,
+				checkPassword,
+			},
+			{
+				headers: {
+					Authorization: 'Bearer ' + authToken,
+				},
+			},
+		);
+
+		return response.data;
+	} catch (error) {
+		console.error(`Error fetching followedList for user ${userId}: ${error}`);
+	}
+};

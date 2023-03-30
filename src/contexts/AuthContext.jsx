@@ -7,6 +7,10 @@ export const AuthProvider = ({ children }) => {
 	const [accountLength, setAccountLength] = useState(0);
 	const [account, setAccount] = useState('');
 	const [password, setPassword] = useState('');
+	const [userData, setUserData] = useState([]);
+	const [userTweets, setUserTweets] = useState([]);
+	const [userReplyTweets, setUserReplyTweets] = useState([]);
+	const [userLikeTweets, setUserLikeTweets] = useState([]);
 
 	const handleAccountChange = (e) => {
 		const inputValue = e.target.value;
@@ -33,6 +37,14 @@ export const AuthProvider = ({ children }) => {
 		setPassword,
 		handleAccountChange,
 		handlePasswordChange,
+		userData,
+		setUserData,
+		userTweets,
+		setUserTweets,
+		userReplyTweets,
+		setUserReplyTweets,
+		userLikeTweets,
+		setUserLikeTweets,
 	};
 
 	return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

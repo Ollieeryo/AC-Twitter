@@ -1,0 +1,73 @@
+%status-button {
+  outline: none;
+  background: white;
+  cursor: pointer;
+  border: none;
+  margin: 0;
+  padding: 1rem 2.5rem;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.statusButtonWrap {
+  display: flex;
+  border-bottom: 1px solid #E6ECF0;
+
+  .buttonWrap {
+    &::after {
+      content: '';
+      display: block;
+      height: 2px;
+      width: 100%;
+      background: #FF6600;
+      border-radius: 100px;
+    }
+  }
+
+  .button {
+    @extend %status-button;
+    color: #657786;
+
+    &:hover {
+      color: #FF6600;
+    }
+  }
+
+  .activeButton {
+    @extend %status-button;
+    color: #FF6600;
+  }
+}
+
+.ul {
+  list-style-type:none;
+  padding: 0;
+  margin: 0;
+
+  .followButton {
+    border: 0;
+    background: white;
+    cursor: pointer;
+    width: 64px;
+    height: 40px;
+    border: 1px solid #FF6600;
+    border-radius: 50px;
+    color: #FF6600;
+    position: absolute;
+    top: 0;
+    right: 1rem;
+  }
+
+  .followingButton {
+    border: 0;
+    background: #FF6600;
+    border-radius: 50px;
+    width: 96px;
+    height: 40px;
+    color: white;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: 1rem;
+  }
+}

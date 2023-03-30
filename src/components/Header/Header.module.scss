@@ -14,9 +14,23 @@
 	.content {
 		text-decoration: none;
 		color: #171725;
+
+		.userTitleWrap {
+			display: grid;
+			
+			.tweetText {
+				font-weight: 500;
+				font-size: 13px;
+				color: #6C757D;
+			}
+		}
 	}
 
 	.leftArrow {
 		margin: 5px 16px 0 8px;
+	}
+
+	.arrow {
+		margin-right: 1rem;
 	}
 }
