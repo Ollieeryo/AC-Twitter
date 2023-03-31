@@ -29,6 +29,7 @@ function ReactModal({ modalIsOpen, setModalIsOpen, userData }) {
 	const [cover, setCover] = useState(null);
 	const coverInputRef = useRef(null);
 	const avatarInputRef = useRef(null);
+	const { setUserData } = useAuthLogin();
 
 	const handleNameChange = (e) => {
 		e.preventDefault();
@@ -82,13 +83,10 @@ function ReactModal({ modalIsOpen, setModalIsOpen, userData }) {
 			return;
 		}
 
-		// const navigate = useNavigate();
-
 		const authToken = localStorage.getItem('authToken');
 		const userId = localStorage.getItem('userId');
 
 		// 背景圖檔
-
 		const response = await getEditPersonal(userId, authToken, name, avatar, cover, intro);
 
 		if (response) {
@@ -100,9 +98,17 @@ function ReactModal({ modalIsOpen, setModalIsOpen, userData }) {
 				icon: 'success',
 				showConfirmButton: false,
 			});
-			setName('');
-			setIntro('');
 
+			setIntro('');
+			setIntroLength(0);
+			// 個人資料
+			const data = await getUserData(userId, authToken);
+			setUserData(data);
+
+			// 編輯個人資料畫面更新
+			setName(data.name);
+
+			setModalIsOpen(false);
 			return;
 		}
 

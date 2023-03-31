@@ -5,29 +5,48 @@ import { addFollow, cancelFollow, getFollowedList, getFollowingList } from '../.
 import { AdminTweets } from '../AdminTweetList/AdminTweetList';
 import styled from './FollowList.module.scss';
 
-export function FollowButton({ tweetId, followingList }) {
+export function FollowButton({ tweetId, followingList, setFollowingList, setFollowedList }) {
 	const following = followingList.find((item) => item.id === tweetId);
 	const isNotFollow = typeof following === 'undefined' || !following;
 	const [follow, setFollow] = useState(following);
 
 	// 處理新增追隨按鈕
 	const handleFollow = async () => {
-		const authToken = localStorage.getItem('authToken');
-		const userId = tweetId;
+		try {
+			const authToken = localStorage.getItem('authToken');
+			const userId = tweetId;
+			const userId2 = localStorage.getItem('userId');
 
-		// 追隨API
-		if (isNotFollow) {
-			const result = await addFollow(userId, authToken);
-			console.log('追隨這個人', result);
-			setFollow(true);
-			return;
-		}
+			// 追隨API
+			if (isNotFollow) {
+				await addFollow(userId, authToken);
 
-		// 取消追蹤API
-		if (following) {
-			const result = await cancelFollow(userId, authToken);
-			console.log('取消追蹤', result);
-			setFollow(false);
+				setFollow(true);
+
+				// 更新追隨者畫面
+				const followed = await getFollowedList(userId2, authToken);
+				setFollowedList(followed);
+				// 更新正在追隨畫面
+				const following = await getFollowingList(userId2, authToken);
+				setFollowingList(following);
+				return;
+			}
+
+			// 取消追蹤API
+			if (following) {
+				await cancelFollow(userId, authToken);
+
+				setFollow(false);
+
+				// 更新追隨者畫面
+				const followed = await getFollowedList(userId2, authToken);
+				setFollowedList(followed);
+				// 更新正在追隨畫面
+				const following = await getFollowingList(userId2, authToken);
+				setFollowingList(following);
+			}
+		} catch (error) {
+			console.log(error);
 		}
 	};
 
@@ -45,6 +64,8 @@ function FollowList({ activeSection, setActiveSection }) {
 	const navigate = useNavigate();
 	const [followedList, setFollowedList] = useState([]);
 	const [followingList, setFollowingList] = useState([]);
+	const authToken = localStorage.getItem('authToken');
+	const userId = localStorage.getItem('userId');
 
 	const handleFollowerClick = (e) => {
 		e.preventDefault();
@@ -59,8 +80,6 @@ function FollowList({ activeSection, setActiveSection }) {
 	useEffect(() => {
 		const fetchFollowData = async () => {
 			try {
-				const authToken = localStorage.getItem('authToken');
-				const userId = localStorage.getItem('userId');
 				if (!authToken) {
 					navigate('/login');
 					return;
@@ -112,6 +131,8 @@ function FollowList({ activeSection, setActiveSection }) {
 								userTweets={followedList}
 								activeSection={activeSection}
 								followingList={followingList}
+								setFollowingList={setFollowingList}
+								setFollowedList={setFollowedList}
 							/>
 						</ul>
 					</div>
@@ -125,6 +146,8 @@ function FollowList({ activeSection, setActiveSection }) {
 								userTweets={followingList}
 								activeSection={activeSection}
 								followingList={followingList}
+								setFollowingList={setFollowingList}
+								setFollowedList={setFollowedList}
 							/>
 						</ul>
 					</div>

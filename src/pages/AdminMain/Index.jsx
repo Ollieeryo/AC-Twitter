@@ -19,7 +19,7 @@ function AdminMain() {
 				{/* tweet section */}
 				<div className={styled.listContainer}>
 					<AdminHeader activeComponent={activeComponent} />
-					{activeComponent === 'tweets' && <AdminTweetList />}
+					{activeComponent === 'tweets' && <AdminTweetList activeComponent={activeComponent} />}
 					{activeComponent === 'users' && <AdminUserList />}
 				</div>
 			</div>

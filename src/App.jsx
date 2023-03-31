@@ -8,14 +8,29 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import AdminMain from './pages/AdminMain/Index';
 import { AuthProvider } from './contexts/AuthContext';
 import { AuthSignUpProvider } from './contexts/AuthSignUpContext';
+import Home from './pages/Home';
 
 function App() {
+	const handleRefresh = (e) => {
+		e.preventDefault();
+		location.reload();
+	};
+
+	useEffect(() => {
+		window.addEventListener('beforeunload', handleRefresh);
+
+		return () => {
+			window.removeEventListener('beforeunload', handleRefresh);
+		};
+	}, []);
+
 	return (
 		<AuthProvider>
 			<AuthSignUpProvider>
 				<div className='app'>
 					<BrowserRouter>
 						<Routes>
+							<Route path='*' element={<Home />} />
 							<Route path='admin' element={<Admin />} />
 							<Route path='login' element={<Login />} />
 							<Route path='register' element={<Register />} />

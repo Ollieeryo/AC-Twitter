@@ -33,7 +33,7 @@ function AdminSidebar({ setActiveComponent, activeComponent }) {
 	// 登出 event
 	const handleLogout = (e) => {
 		e.preventDefault();
-		localStorage.removeItem('authToken');
+		localStorage.removeItem('adminAuthToken');
 		navigate('/admin');
 	};
 

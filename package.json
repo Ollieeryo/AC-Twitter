@@ -1,6 +1,7 @@
 {
   "name": "ac_twitter_frontend",
   "version": "0.1.0",
+  "homepage": "https://ollieeryo.gitub.io/AC-Twitter",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.3.0",
@@ -11,6 +12,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.27.2",
     "eslint-config-prettier": "^8.7.0",
+    "gh-pages": "^4.0.0",
     "path": "^0.12.7",
     "prettier": "^2.8.4",
     "react": "^18.2.0",
@@ -31,7 +33,9 @@
     "lint": "eslint --fix --ext=js,jsx src/",
     "format:check": "prettier . --check --ignore-unknown",
     "format": "prettier . --write --ignore-unknown",
-    "scss": "sass -watch scss -o css"
+    "scss": "sass -watch scss -o css",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [

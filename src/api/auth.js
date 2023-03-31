@@ -1,5 +1,3 @@
-// import { faCircleXmark } from '@fortawesome/free-solid-svg-icons';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 
 const authURL = 'https://morning-hamlet-47874.herokuapp.com/api';
@@ -9,16 +7,12 @@ export const login = async ({ account, password }) => {
 	try {
 		const { data } = await axios.post(`${authURL}/users/signin`, { account, password });
 
-		// console.log(data.user.id);
-
 		const { authToken, status, user } = data;
-		// console.log(user);
-		// 如果 token 有效
+
 		if (authToken && status === 'success') {
 			return { success: true, user, ...data };
 		}
 
-		// return data;
 		return { success: false };
 	} catch (error) {
 		console.error('[Login Failed]:', error);
@@ -60,7 +54,6 @@ export const register = async ({ account, name, email, password, checkPassword }
 		return data;
 	} catch (error) {
 		console.error('[Register Failed]: ', error);
-		console.log(error.response.data.message);
 		const registered = error.response.data.message;
 
 		return { registered, success: false, ...error.response.data };
@@ -72,8 +65,6 @@ export const adminLogin = async ({ account, password }) => {
 	try {
 		const { data } = await axios.post(`${authURL}/admin/signin`, { account, password });
 
-		console.log(data);
-
 		const { authToken } = data;
 
 		// 如果 token 有效
@@ -84,6 +75,12 @@ export const adminLogin = async ({ account, password }) => {
 		return data;
 	} catch (error) {
 		console.error('[Login Failed]:', error);
+		console.log(error.response.data);
+		// 帳號不存在 考慮是否要改成 modal
+		const wrongAccountPassword = error.response.data;
+		if (wrongAccountPassword === 'Unauthorized') {
+			alert('帳號或密碼錯誤!');
+		}
 	}
 };
 

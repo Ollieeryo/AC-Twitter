@@ -9,8 +9,15 @@ import styled from './LoginInput.module.scss';
 
 function LoginInput() {
 	// useContext
-	const { account, accountLength, password, handleAccountChange, handlePasswordChange } =
-		useAuthLogin();
+	const {
+		account,
+		setAccount,
+		accountLength,
+		password,
+		setPassword,
+		handleAccountChange,
+		handlePasswordChange,
+	} = useAuthLogin();
 
 	const navigate = useNavigate();
 
@@ -38,6 +45,8 @@ function LoginInput() {
 		if (success) {
 			localStorage.setItem('authToken', authToken);
 			localStorage.setItem('userId', user.id);
+			setAccount('');
+			setPassword('');
 
 			// 登入成功訊息
 			Swal.fire({
