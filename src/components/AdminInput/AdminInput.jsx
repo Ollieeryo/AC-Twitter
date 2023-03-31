@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import { adminLogin, checkPermission } from '../../api/auth';
+import { adminLogin } from '../../api/auth';
 import Input from '../Input/Input';
 import MainButton from '../MainButton/MainButton';
 import styled from './AdminInput.module.scss';
@@ -9,7 +9,9 @@ import styled from './AdminInput.module.scss';
 function AdminInput() {
 	const [account, setAccount] = useState('');
 	const [password, setPassword] = useState('');
+
 	const navigate = useNavigate();
+
 	const handleAccountChange = (e) => {
 		const inputValue = e.target.value;
 		// 使用正規表達式去除空格
@@ -27,10 +29,10 @@ function AdminInput() {
 	// 登入 event
 	const handleLoginSubmit = async (e) => {
 		e.preventDefault();
-		if (account === '') {
+		if (account.length === 0) {
 			alert('帳號欄位不能為空');
 		}
-		if (password === '') {
+		if (password.length === 0) {
 			alert('密碼欄位不能為空');
 		}
 
@@ -40,7 +42,7 @@ function AdminInput() {
 		});
 
 		if (success) {
-			localStorage.setItem('authToken', authToken);
+			localStorage.setItem('adminAuthToken', authToken);
 
 			// 登入成功訊息
 			Swal.fire({
@@ -50,6 +52,7 @@ function AdminInput() {
 				icon: 'success',
 				showConfirmButton: false,
 			});
+			navigate('/admin/main');
 			return;
 		}
 
@@ -62,22 +65,6 @@ function AdminInput() {
 			showConfirmButton: false,
 		});
 	};
-
-	// check permission
-	useEffect(() => {
-		const checkTokenIsValid = async () => {
-			const authToken = localStorage.getItem('authToken');
-			if (!authToken) {
-				return;
-			}
-			const result = await checkPermission(authToken);
-			if (result) {
-				navigate('/admin/main');
-			}
-		};
-
-		checkTokenIsValid();
-	}, [navigate]);
 
 	return (
 		<div className={styled.inputCon}>
