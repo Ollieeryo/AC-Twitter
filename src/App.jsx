@@ -10,6 +10,7 @@ import { useEffect } from 'react';
 import AdminMain from './pages/AdminMain/Index';
 import { AuthProvider } from './contexts/AuthContext';
 import { AuthSignUpProvider } from './contexts/AuthSignUpContext';
+import Home from './pages/Home';
 
 function App() {
 	const handleRefresh = (e) => {
@@ -31,6 +32,7 @@ function App() {
 				<div className='app'>
 					<BrowserRouter>
 						<Routes>
+							<Route path='*' element={<Home />} />
 							<Route path='admin' element={<Admin />} />
 							<Route path='login' element={<Login />} />
 							<Route path='register' element={<Register />} />

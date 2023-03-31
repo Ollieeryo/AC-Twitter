@@ -1,6 +1,7 @@
 import styles from './Header.module.scss';
 import leftArrow from '../../assets/left-arrow.svg';
 import { useAuthLogin } from '../../contexts/AuthContext';
+import { Link } from 'react-router-dom';
 
 function Header({ activeSection, onArrowClick }) {
 	let headerContent = '';
