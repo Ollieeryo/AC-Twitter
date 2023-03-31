@@ -5,6 +5,7 @@ import userProfile from '../../assets/user-profile.svg';
 import setting from '../../assets/setting.svg';
 import logout from '../../assets/logout.svg';
 import { useNavigate } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 function Sidebar({ setActiveSection, onToTweetClick }) {
 	const navigate = useNavigate();

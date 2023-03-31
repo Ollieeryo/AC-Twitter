@@ -94,21 +94,6 @@ function SettingInput() {
 			alert('密碼與密碼確認輸入值不同');
 			return;
 		}
-		// else if (account === userOriginData.account) {
-		// 	console.log(userOriginData.account);
-		// 	alert('不能輸入相同帳號');
-		// 	return;
-		// } else if (name === userOriginData.name) {
-		// 	alert('不能輸入相同名稱');
-		// 	return;
-		// } else if (email === userOriginData.email) {
-		// 	console.log(userOriginData.account);
-		// 	alert('不能輸入相同Email');
-		// 	return;
-		// } else if (email === userOriginData.password) {
-		// 	alert('不能輸入相同密碼');
-		// 	return;
-		// }
 
 		const result = await getChangeAccount(
 			userId,
@@ -129,8 +114,15 @@ function SettingInput() {
 				icon: 'success',
 				showConfirmButton: false,
 			});
-			// 可能需要清空 input 欄位或是預設值
+			setPassword('');
+			setCheckPassword('');
 
+			// 更新畫面個人資料
+			const data = await getUserData(userId, authToken);
+			setUserOriginData(data);
+			setAccount(data.account);
+			setUsername(data.name);
+			setEmail(data.email);
 			return;
 		}
 
