@@ -5,6 +5,7 @@ import Register from './pages/Register/Index';
 import Admin from './pages/Admin';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { useEffect } from 'react';
+
 import AdminMain from './pages/AdminMain/Index';
 import { AuthProvider } from './contexts/AuthContext';
 import { AuthSignUpProvider } from './contexts/AuthSignUpContext';
