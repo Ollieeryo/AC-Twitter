@@ -3,12 +3,12 @@ import { getTweets } from '../../api/tweets';
 
 import reply from '../../assets/reply.svg';
 import like from '../../assets/like.svg';
-import { Link } from 'react-router-dom';
-import { useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
-function TweetList({ onTweetClick }) {
+function TweetList({ onTweetClick, onReplyClick }) {
 	const [tweets, setTweets] = useState([]);
+	const navigate = useNavigate();
 
 	function handleLikeClick(itemID) {
 		setTweets(
@@ -58,10 +58,10 @@ function TweetList({ onTweetClick }) {
 					{item.description}
 				</div>
 				<div className={styles.ReplyAndLike}>
-					<Link className={styles.counter} to='replymodal'>
+					<div className={styles.counter} onClick={onReplyClick}>
 						<img src={reply} />
 						{item.replyCounts}
-					</Link>
+					</div>
 					<button
 						className={styles.counter}
 						onClick={() => {
@@ -76,19 +76,20 @@ function TweetList({ onTweetClick }) {
 		</div>
 	));
 
-	useEffect(() => {
-		const getTweetsAsync = async () => {
-			try {
-				const authToken = localStorage.getItem('authToken');
-				const tweet = await getTweets(authToken);
-
-				setTweets(tweet.map((tweet) => ({ ...tweet })));
-			} catch (error) {
-				console.error(error);
+	const getTweetsAsync = async () => {
+		try {
+			const authToken = localStorage.getItem('authToken');
+			const tweet = await getTweets(authToken);
+			if (!authToken) {
+				navigate('/login');
+				return;
 			}
-		};
-		getTweetsAsync();
-	}, []);
+			setTweets(tweet.map((tweet) => ({ ...tweet })));
+		} catch (error) {
+			console.error(error);
+		}
+	};
+	getTweetsAsync();
 
 	return <div className={styles.container}>{listItems}</div>;
 }

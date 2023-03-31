@@ -3,7 +3,7 @@ import axios from 'axios';
 const baseURL = 'https://morning-hamlet-47874.herokuapp.com/api';
 
 // 新增推文
-export const postTweet = async ({ description, authToken }) => {
+export const postTweet = async (description, authToken) => {
 	try {
 		const res = await axios.post(
 			`${baseURL}/tweets`,
