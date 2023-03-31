@@ -30,13 +30,15 @@ function AdminInput() {
 	const handleLoginSubmit = async (e) => {
 		e.preventDefault();
 		if (account.length === 0) {
-			alert('帳號欄位不能為空');
+			alert('請輸入帳號!');
+			return;
 		}
 		if (password.length === 0) {
-			alert('密碼欄位不能為空');
+			alert('請輸入密碼!');
+			return;
 		}
 
-		const { success, authToken } = await adminLogin({
+		const { success, authToken, wrongAccountPassword, wrongAccountPassword2 } = await adminLogin({
 			account,
 			password,
 		});
@@ -53,6 +55,30 @@ function AdminInput() {
 				showConfirmButton: false,
 			});
 			navigate('/admin/main');
+			return;
+		}
+
+		if (wrongAccountPassword === 'Unauthorized') {
+			alert('帳號或密碼錯誤!');
+			Swal.fire({
+				position: 'top',
+				title: '帳號或密碼錯誤!',
+				timer: 1000,
+				icon: 'error',
+				showConfirmButton: false,
+			});
+
+			return;
+		}
+
+		if (wrongAccountPassword2 === 'Error: Account or password is wrong!') {
+			Swal.fire({
+				position: 'top',
+				title: '帳號或密碼錯誤!',
+				timer: 1000,
+				icon: 'error',
+				showConfirmButton: false,
+			});
 			return;
 		}
 

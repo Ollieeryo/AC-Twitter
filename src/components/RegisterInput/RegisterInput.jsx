@@ -28,25 +28,25 @@ function RegisterInput() {
 	const handleSignUpSubmit = async (e) => {
 		e.preventDefault();
 		if (account.length === 0) {
-			alert('帳號欄位不能為空');
+			alert('請輸入帳號');
 			return;
 		} else if (accountLength > 50) {
-			alert('帳號字數超過上限!');
+			alert('帳號字數不可超過 50 字!');
 			return;
 		} else if (name.length === 0) {
-			alert('名稱欄位不能為空');
+			alert('請輸入名稱');
 			return;
 		} else if (email.length === 0) {
-			alert('Email 欄位不能為空');
+			alert('請輸入 Email');
 			return;
 		} else if (password.length === 0) {
-			alert('密碼欄位不能為空');
+			alert('請輸入密碼');
 			return;
 		} else if (checkPassword.length === 0) {
-			alert('密碼確認欄位不能為空');
+			alert('請輸入密碼確認');
 			return;
 		} else if (password !== checkPassword) {
-			alert('密碼與密碼確認輸入值不同');
+			alert('密碼與密碼確認輸入值不相同');
 			return;
 		}
 
@@ -74,11 +74,25 @@ function RegisterInput() {
 		}
 
 		if (registered === 'Error: account already exists!') {
-			alert('帳號已被註冊');
+			Swal.fire({
+				position: 'top',
+				title: '帳號已被註冊！',
+				timer: 1500,
+				icon: 'error',
+				showConfirmButton: false,
+			});
+			return;
 		}
 
 		if (registered === 'Error: email already exists!') {
-			alert('Email 已被註冊');
+			Swal.fire({
+				position: 'top',
+				title: 'Email 已被註冊！',
+				timer: 1500,
+				icon: 'error',
+				showConfirmButton: false,
+			});
+			return;
 		}
 
 		// 註冊失敗

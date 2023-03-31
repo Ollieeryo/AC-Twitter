@@ -26,17 +26,20 @@ function App() {
 		};
 	}, []);
 
+	// eslint-disable-next-line no-undef
+	const basename = process.env.PUBLIC_URL;
+
 	return (
 		<AuthProvider>
 			<AuthSignUpProvider>
 				<div className='app'>
-					<BrowserRouter>
+					<BrowserRouter basename={basename}>
 						<Routes>
 							<Route path='*' element={<Home />} />
 							<Route path='admin' element={<Admin />} />
 							<Route path='login' element={<Login />} />
 							<Route path='register' element={<Register />} />
-							<Route path='*' element={<Main />} />
+							<Route path='main' element={<Main />} />
 							<Route path='admin/main' element={<AdminMain />} />
 							<Route path='tweet' element={<TweetModal />} />
 							<Route path='replymodal' element={<ReplyModal />} />
