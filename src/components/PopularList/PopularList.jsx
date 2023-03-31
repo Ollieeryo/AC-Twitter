@@ -1,29 +1,45 @@
 import styles from './PopularList.module.scss';
 
-import { Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import { recommendedFollowList } from '../../api/followship';
+import { Link, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { deleteFollow, postFollow, recommendedFollowList } from '../../api/followship';
 
 function PopularList() {
 	const [populars, setPopulars] = useState([]);
+	const navigate = useNavigate();
 
-	function handleFollowToggle(id) {
-		setPopulars((prevPopulars) => {
-			const updatedPopulars = prevPopulars.map((popular) => {
-				if (popular.id === id) {
-					return {
-						...popular,
-						isFollowed: !popular.isFollowed,
-						// 正在跟隨/跟隨 增加api
-					};
-				}
-				return popular;
+	async function handleFollowToggle(id) {
+		try {
+			const authToken = localStorage.getItem('authToken');
+
+			if (!authToken) {
+				navigate('/login');
+				return;
+			}
+			if (populars.some((popular) => popular.id === id && popular.isFollowed)) {
+				await deleteFollow(authToken, id);
+			} else {
+				await postFollow(authToken, id);
+			}
+
+			setPopulars((prevPopulars) => {
+				return prevPopulars.map((popular) => {
+					if (popular.id === id) {
+						return {
+							...popular,
+							isFollowed: !popular.isFollowed,
+						};
+					} else {
+						return popular;
+					}
+				});
 			});
-			return updatedPopulars;
-		});
+		} catch (error) {
+			console.error(error);
+		}
 	}
 
-	const listItems = populars.slice(0, 8).map((popular) => (
+	const listItems = populars.map((popular) => (
 		<div className={styles.otherCard} key={popular.id}>
 			<Link className={styles.avatar} to={popular.account}>
 				<img src={popular.avatar} />
@@ -47,20 +63,21 @@ function PopularList() {
 		</div>
 	));
 
-	useEffect(() => {
-		const getPopularsAsync = async () => {
-			try {
-				const authToken = localStorage.getItem('authToken');
-				const popular = await recommendedFollowList(authToken);
-				console.log(popular);
-
-				setPopulars(popular.map((popular) => ({ ...popular })));
-			} catch (error) {
-				console.error(error);
+	const getPopularsAsync = async () => {
+		try {
+			const authToken = localStorage.getItem('authToken');
+			const popular = await recommendedFollowList(authToken);
+			console.log(popular);
+			if (!authToken) {
+				navigate('/login');
+				return;
 			}
-		};
-		getPopularsAsync();
-	}, []);
+			setPopulars(popular.map((popular) => ({ ...popular })));
+		} catch (error) {
+			console.error(error);
+		}
+	};
+	getPopularsAsync();
 
 	return (
 		<div className={styles.container}>

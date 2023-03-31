@@ -1,0 +1,12 @@
+.container {
+	border: solid 1px #e6ecf0;
+	.replyModal {
+		&.showModal {
+			overflow: hidden;
+		}
+
+		&.hideModal {
+			visibility: hidden;
+		}
+	}
+}

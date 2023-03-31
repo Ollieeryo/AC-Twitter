@@ -6,7 +6,7 @@ import setting from '../../assets/setting.svg';
 import logout from '../../assets/logout.svg';
 import { useNavigate } from 'react-router-dom';
 
-function Sidebar({ setActiveSection }) {
+function Sidebar({ setActiveSection, onToTweetClick }) {
 	const navigate = useNavigate();
 
 	const handleChangeMain = (e) => {
@@ -50,9 +50,9 @@ function Sidebar({ setActiveSection }) {
 					<img src={setting} />
 					設定
 				</a>
-				<a className={styles.toTweet} href='tweet'>
+				<div className={styles.toTweet} onClick={onToTweetClick}>
 					推文
-				</a>
+				</div>
 			</div>
 			<a className={styles.logout} href='login' onClick={handleLogout}>
 				<img src={logout} />

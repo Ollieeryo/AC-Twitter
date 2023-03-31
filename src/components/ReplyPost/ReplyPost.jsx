@@ -3,7 +3,7 @@ import reply from '../../assets/reply.svg';
 import like from '../../assets/like.svg';
 import { Link } from 'react-router-dom';
 
-function ReplyPost({ tweet }) {
+function ReplyPost({ tweet, onReplyClick }) {
 	function handleLikeClick() {
 		if (tweet.isLiked === false) {
 			return {
@@ -36,9 +36,9 @@ function ReplyPost({ tweet }) {
 				<div className={styles.contentSection}>{tweet?.description}</div>
 				<div className={styles.postTime}>{tweet?.createdAt}</div>
 				<div className={styles.ReplyAndLike}>
-					<Link className={styles.counter} to='replymodal'>
+					<div className={styles.counter}>
 						{tweet?.replyCounts} <span>&nbsp;回覆</span>
-					</Link>
+					</div>
 					<div
 						className={styles.counter}
 						onClick={() => {
@@ -50,9 +50,9 @@ function ReplyPost({ tweet }) {
 					</div>
 				</div>
 				<div className={styles.Icons}>
-					<Link className={styles.icon} to='replymodal'>
+					<div className={styles.icon} onClick={onReplyClick}>
 						<img src={reply} />
-					</Link>
+					</div>
 					<button className={styles.icon} onClick={handleLikeClick}>
 						<img src={like} />
 					</button>
