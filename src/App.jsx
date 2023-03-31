@@ -6,12 +6,25 @@ import Admin from './pages/Admin';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import TweetModal from './components/TweetModal/TweetModal';
 import ReplyModal from './components/ReplyModal/ReplyModal';
-
+import { useEffect } from 'react';
 import AdminMain from './pages/AdminMain/Index';
 import { AuthProvider } from './contexts/AuthContext';
 import { AuthSignUpProvider } from './contexts/AuthSignUpContext';
 
 function App() {
+	const handleRefresh = (e) => {
+		e.preventDefault();
+		location.reload();
+	};
+
+	useEffect(() => {
+		window.addEventListener('beforeunload', handleRefresh);
+
+		return () => {
+			window.removeEventListener('beforeunload', handleRefresh);
+		};
+	}, []);
+
 	return (
 		<AuthProvider>
 			<AuthSignUpProvider>

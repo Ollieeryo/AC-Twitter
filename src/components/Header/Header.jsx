@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import styles from './Header.module.scss';
 import leftArrow from '../../assets/left-arrow.svg';
 import { useAuthLogin } from '../../contexts/AuthContext';
