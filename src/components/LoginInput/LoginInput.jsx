@@ -25,15 +25,15 @@ function LoginInput() {
 	const handleLoginSubmit = async (e) => {
 		e.preventDefault();
 		if (account === '') {
-			alert('帳號欄位不能為空');
+			alert('請輸入帳號!');
 			return;
 		}
 		if (accountLength > 50) {
-			alert('帳號字數超過上限!');
+			alert('帳號字數不可超過 50 字!');
 			return;
 		}
 		if (password === '') {
-			alert('密碼欄位不能為空');
+			alert('請輸入密碼!');
 			return;
 		}
 
@@ -70,22 +70,6 @@ function LoginInput() {
 			showConfirmButton: false,
 		});
 	};
-
-	// check permission
-	// useEffect(() => {
-	// 	const checkTokenIsValid = async () => {
-	// 		const authToken = localStorage.getItem('authToken');
-	// 		if (!authToken) {
-	// 			return;
-	// 		}
-	// 		const result = await checkPermission(authToken);
-	// 		if (result) {
-	// 			navigate('/main');
-	// 		}
-	// 	};
-
-	// 	checkTokenIsValid();
-	// }, [navigate]);
 
 	return (
 		<div className={styled.inputCon}>

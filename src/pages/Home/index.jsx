@@ -5,14 +5,13 @@ import { useNavigate } from 'react-router-dom';
 const Home = () => {
 	const navigate = useNavigate();
 	const authToken = localStorage.getItem('authToken');
-
 	useEffect(() => {
 		if (authToken) {
 			navigate('/main');
 		} else {
 			navigate('/login');
 		}
-	}, [navigate]);
+	}, []);
 };
 
 export default Home;

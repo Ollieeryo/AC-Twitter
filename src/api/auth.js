@@ -20,12 +20,14 @@ export const login = async ({ account, password }) => {
 		const wrongAdminAccount = error.response.data.message;
 		if (wrongAdminAccount === 'Error: Account or password is wrong!') {
 			alert('帳號或密碼錯誤!');
+			return;
 		}
 
 		// 帳號不存在 考慮是否要改成 modal
 		const wrongAccountPassword = error.response.data;
 		if (wrongAccountPassword === 'Unauthorized') {
 			alert('帳號或密碼錯誤!');
+			return;
 		}
 
 		return { success: false };
@@ -42,8 +44,6 @@ export const register = async ({ account, name, email, password, checkPassword }
 			password,
 			checkPassword,
 		});
-
-		// console.log(data);
 
 		const { status } = data;
 
@@ -65,22 +65,22 @@ export const adminLogin = async ({ account, password }) => {
 	try {
 		const { data } = await axios.post(`${authURL}/admin/signin`, { account, password });
 
-		const { authToken } = data;
+		const { authToken, status } = data;
 
 		// 如果 token 有效
-		if (authToken) {
+		if (authToken && status === 'success') {
 			return { success: true, ...data };
 		}
 
 		return data;
 	} catch (error) {
 		console.error('[Login Failed]:', error);
-		console.log(error.response.data);
-		// 帳號不存在 考慮是否要改成 modal
+
 		const wrongAccountPassword = error.response.data;
-		if (wrongAccountPassword === 'Unauthorized') {
-			alert('帳號或密碼錯誤!');
-		}
+
+		const wrongAccountPassword2 = error.response.data.message;
+
+		return { wrongAccountPassword, wrongAccountPassword2 };
 	}
 };
 
