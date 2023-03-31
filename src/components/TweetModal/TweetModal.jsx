@@ -105,7 +105,7 @@ function Modal() {
 		<div className={styles.tweetModalContainer}>
 			<div className={styles.tweetModal}>
 				<div className={styles.modalHead}>
-					<Link className={styles.iconX} to='/home'>
+					<Link className={styles.iconX} to='/'>
 						<img src={IconX} />
 					</Link>
 				</div>
@@ -125,7 +125,7 @@ function Modal() {
 					<span>{prompt}</span>
 					<button className={styles.tweetButton} onClick={handleTweetClick}>
 						推文
-					</button>{' '}
+					</button>
 				</div>
 			</div>
 		</div>

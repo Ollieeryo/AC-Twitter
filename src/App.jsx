@@ -21,10 +21,10 @@ function App() {
 							<Route path='admin' element={<Admin />} />
 							<Route path='login' element={<Login />} />
 							<Route path='register' element={<Register />} />
-							<Route path='main' element={<Main />} />
+							<Route path='*' element={<Main />} />
 							<Route path='admin/main' element={<AdminMain />} />
 							<Route path='tweet' element={<TweetModal />} />
-							<Route path='reply' element={<ReplyModal />} />
+							<Route path='replymodal' element={<ReplyModal />} />
 						</Routes>
 					</BrowserRouter>
 				</div>

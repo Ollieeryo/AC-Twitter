@@ -1,62 +1,74 @@
-.others {
-  display: flex;
-  flex-direction: column;
-}
-
 .topic {
-  border-bottom: 1px solid #e6ecf0;
-  height: 51px;
+	border-bottom: 1px solid #e6ecf0;
+	height: 51px;
 
-  p {
-    margin-left: 24px;
-    font-weight: 700;
-    font-size: 24px;
-  }
+	p {
+		margin-left: 24px;
+		font-weight: 700;
+		font-size: 24px;
+	}
 }
 
-.otherCard {
-  display: flex;
-  align-items: center;
-  height: 82px;
+.others {
+	display: flex;
+	flex-direction: column;
+	.otherCard {
+		display: flex;
+		align-items: center;
+		height: 82px;
 
-  .avatar {
-    margin-left: 16px;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: rgb(168, 169, 167);
-  }
+		.avatar {
+			margin-left: 16px;
 
-  .other {
-    display: flex;
-    flex-direction: column;
-    margin: 0 13px 0 8px;
-    width: 74px;
-    height: 47px;
+			img {
+				width: 50px;
+				height: 50px;
+				border-radius: 50%;
+			}
+		}
 
-    .nickname {
-      font-weight: 700;
-      font-size: 16px;
-      color: #171725;
-      line-height: 26px;
-  text-decoration: none;
-    }
+		.other {
+			display: flex;
+			flex-direction: column;
+			margin: 0 auto 0 8px;
+			width: 74px;
+			height: 47px;
 
-    .accountName {
-      font-size: 14px;
-      color: #92929d;
-      line-height: 22px;
-  text-decoration: none;
-    }
-  }
+			.nickname {
+				font-weight: 700;
+				font-size: 16px;
+				color: #171725;
+				line-height: 26px;
+				text-decoration: none;
+			}
 
-  .btnFollow {
-    background: #FF6600;
-    width: 96px;
-    height: 40px;
-    border: 0;
-    border-radius: 50px;
-    font-size: 16px;
-    color: #FFFFFF;
-  }
+			.accountName {
+				font-size: 14px;
+				color: #92929d;
+				line-height: 22px;
+				text-decoration: none;
+			}
+		}
+
+		.btnFollow {
+			font-size: 16px;
+			margin-right: 16px;
+			&.following {
+				background: #ff6600;
+				color: #ffffff;
+				width: 96px;
+				height: 40px;
+				border: 0;
+				border-radius: 50px;
+			}
+			&.notFollowing {
+				width: 64px;
+				height: 40px;
+				border-radius: 50px;
+				background: #ffffff;
+				color: #ff6600;
+				border: 1px solid #ff6600;
+			}
+		}
+	}
 }

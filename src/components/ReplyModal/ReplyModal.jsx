@@ -6,27 +6,70 @@ import IconX from '../../assets/X-icon.svg';
 import manAvatar from '../../assets/manAvatar.svg';
 import fakeAvatar from '../../assets/fake-avatar.svg';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import Swal from 'sweetalert2';
+import { postReply } from '../../api/reply';
 
 function ReplyModal() {
+	const [text, setText] = useState('');
+	const [prompt, setPrompt] = useState('');
+	const [reply, setReply] = useState([]);
+
+	// 新增推文資料
+	const handleAddReply = async () => {
+		try {
+			const data = await postReply();
+
+			setReply((prevReplies) => {
+				return [
+					...prevReplies,
+					{
+						id: data.id,
+						UserId: data.UserId,
+						comment: data.text,
+						updatedAt: data.updatedAt,
+						createdAt: data.createdAt,
+					},
+				];
+			});
+			console.log(reply);
+			setText('');
+		} catch (error) {
+			console.error(error);
+		}
+	};
+
+	function handleReplyClick() {
+		if (text.length === 0) {
+			setPrompt('內容不可空白');
+		} else if (text.length > 140) {
+			setPrompt('字數不可超過 140 字');
+		} else {
+			setPrompt('');
+			handleAddReply;
+			Swal.fire('回覆發送成功', '', 'success').then(() => {
+				window.history.back();
+			});
+		}
+	}
 	return (
 		<div className={styles.container}>
 			<Cover />
-			<Modal accountName='@apple' />
+			<Modal accountName='@apple' onClick={handleReplyClick} prompts={prompt} />
 			<Main />
 		</div>
 	);
 }
 
-// 改成引入
 export function Cover() {
 	return <div className={styles.cover}></div>;
 }
 
-function Modal({ accountName }) {
+function Modal({ accountName, handleReplyClick, prompts }) {
 	return (
 		<div className={styles.replyModalContainer}>
 			<div className={styles.modalHead}>
-				<Link className={styles.iconX} to='home'>
+				<Link className={styles.iconX} to='/'>
 					<img src={IconX} />
 				</Link>
 			</div>
@@ -55,9 +98,12 @@ function Modal({ accountName }) {
 				</div>
 				<TextareaAutosize className={styles.inputTweet} placeholder='推你的回覆' autoFocus />
 			</div>
-			<Link className={styles.tweetButton} to=''>
-				回覆
-			</Link>
+			<div className={styles.modalBottom}>
+				<span>{prompts}</span>
+				<button className={styles.tweetButton} onClick={handleReplyClick}>
+					回覆
+				</button>
+			</div>
 		</div>
 	);
 }
