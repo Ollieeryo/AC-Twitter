@@ -3,7 +3,7 @@ import leftArrow from '../../assets/left-arrow.svg';
 import { useAuthLogin } from '../../contexts/AuthContext';
 import { Link } from 'react-router-dom';
 
-function Header({ activeSection, onArrowClick }) {
+function Header({ activeSection }) {
 	let headerContent = '';
 	if (activeSection === 'main') {
 		headerContent = '首頁';
@@ -13,6 +13,9 @@ function Header({ activeSection, onArrowClick }) {
 		headerContent = '推文';
 	}
 
+	function handleArrowClick() {
+		window.location.href = '/home';
+	}
 	const { userData, userTweets } = useAuthLogin();
 
 	return (
@@ -22,7 +25,7 @@ function Header({ activeSection, onArrowClick }) {
 			activeSection === 'follower' ||
 			activeSection === 'following' ||
 			activeSection === 'reply' ? (
-				<div className={styles.arrow} onClick={onArrowClick}>
+				<div className={styles.arrow} onClick={handleArrowClick}>
 					<img src={leftArrow} alt='' />
 				</div>
 			) : (
