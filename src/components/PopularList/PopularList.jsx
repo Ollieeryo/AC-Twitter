@@ -1,13 +1,15 @@
 import styles from './PopularList.module.scss';
 
 import { Link, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import { deleteFollow, postFollow, recommendedFollowList } from '../../api/followship';
+import { useEffect, useState } from 'react';
+import { recommendedFollowList } from '../../api/followship';
+import { addFollow, cancelFollow } from '../../api/userprofile';
 
 function PopularList() {
 	const [populars, setPopulars] = useState([]);
 	const navigate = useNavigate();
 
+	// 追蹤功能
 	async function handleFollowToggle(id) {
 		try {
 			const authToken = localStorage.getItem('authToken');
@@ -16,10 +18,11 @@ function PopularList() {
 				navigate('/login');
 				return;
 			}
+			const userId = id;
 			if (populars.some((popular) => popular.id === id && popular.isFollowed)) {
-				await deleteFollow(authToken, id);
+				await cancelFollow(userId, authToken);
 			} else {
-				await postFollow(authToken, id);
+				await addFollow(userId, authToken);
 			}
 
 			setPopulars((prevPopulars) => {
@@ -63,21 +66,22 @@ function PopularList() {
 		</div>
 	));
 
-	const getPopularsAsync = async () => {
-		try {
-			const authToken = localStorage.getItem('authToken');
-			const popular = await recommendedFollowList(authToken);
-			console.log(popular);
-			if (!authToken) {
-				navigate('/login');
-				return;
+	useEffect(() => {
+		const getPopularsAsync = async () => {
+			try {
+				const authToken = localStorage.getItem('authToken');
+				const popular = await recommendedFollowList(authToken);
+				if (!authToken) {
+					navigate('/login');
+					return;
+				}
+				setPopulars(popular.map((popular) => ({ ...popular })));
+			} catch (error) {
+				console.error(error);
 			}
-			setPopulars(popular.map((popular) => ({ ...popular })));
-		} catch (error) {
-			console.error(error);
-		}
-	};
-	getPopularsAsync();
+		};
+		getPopularsAsync();
+	}, []);
 
 	return (
 		<div className={styles.container}>

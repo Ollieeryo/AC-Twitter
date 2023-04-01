@@ -4,6 +4,8 @@ import like from '../../assets/like.svg';
 import { Link } from 'react-router-dom';
 
 function ReplyPost({ tweet, onReplyClick }) {
+	const account = tweet?.User?.account;
+
 	function handleLikeClick() {
 		if (tweet.isLiked === false) {
 			return {
@@ -23,7 +25,7 @@ function ReplyPost({ tweet, onReplyClick }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.avatarAndName}>
-				<Link className={styles.avatar} to={`/${tweet?.User?.account}`}>
+				<Link className={styles.avatar} to={`/${account}`}>
 					<img src={tweet?.User?.avatar} />
 				</Link>
 				<div className={styles.nameSection}>
@@ -50,7 +52,12 @@ function ReplyPost({ tweet, onReplyClick }) {
 					</div>
 				</div>
 				<div className={styles.Icons}>
-					<div className={styles.icon} onClick={onReplyClick}>
+					<div
+						className={styles.icon}
+						onClick={() => {
+							onReplyClick(tweet?.id);
+						}}
+					>
 						<img src={reply} />
 					</div>
 					<button className={styles.icon} onClick={handleLikeClick}>

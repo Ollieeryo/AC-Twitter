@@ -2,23 +2,25 @@ import styles from './ReplyList.module.scss';
 import { Link } from 'react-router-dom';
 
 function ReplyList({ replies }) {
+	const account = replies?.User?.account;
+
 	const listItems = replies.map((item) => (
 		<div className={styles.itemContainer} key={item.id}>
-			<Link className={styles.avatar} to={item.User.account}>
+			<Link className={styles.avatar} to={`/${account}`}>
 				<img src={item.User.avatar} />
 			</Link>
 			<div className={styles.infoSection}>
 				<div className={styles.nameSection}>
-					<Link className={styles.name} to={item.User.account}>
+					<Link className={styles.name} to={`/${account}`}>
 						{item.User.name}
 					</Link>
 					<div className={styles.accountAndPeriod}>
-						<Link to={item.User.account}>{`@${item.User.account}．`}</Link>
+						<Link to={`/${account}`}>{`@${item.User.account}．`}</Link>
 						{`${item.period}`}
 					</div>
 				</div>
 				<div className={styles.replyTo}>
-					回覆&nbsp;<Link to={item.Tweet.User.account}>{`@${item.Tweet.User.account}`}</Link>
+					回覆&nbsp;<Link to={`/${account}`}>{`@${item.User.account}`}</Link>
 				</div>
 				<div className={styles.contentSection}>{item.comment}</div>
 			</div>

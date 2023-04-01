@@ -10,7 +10,6 @@ export const postFollow = async (authToken) => {
 				Authorization: 'Bearer ' + authToken,
 			},
 		});
-		console.log(res);
 		return res.data;
 	} catch (error) {
 		console.error('[Post Follow failed]: ', error);

@@ -1,7 +1,6 @@
 .container {
 	display: flex;
 	justify-content: center;
-	height: 100vh;
 
 	.cover {
 		background-color: #373743;
@@ -9,14 +8,14 @@
 		z-index: 5;
 		position: absolute;
 		width: 100%;
-		height: 100%;
+		height: 1000vh;
 		left: 0;
 	}
 
 	.tweetModalContainer {
 		position: fixed;
 		z-index: 6;
-		left:25.5%;
+		left:30%;
 
 		.tweetModal {
 			position: absolute;
@@ -47,6 +46,7 @@
 
 				img {
 					height: 50px;
+					width: 50px;
 					border-radius: 50%;
 				}
 

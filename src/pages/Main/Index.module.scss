@@ -30,9 +30,20 @@
 		margin-right: -160px;
 	}
 	.tweetModal {
+		height: 100%;
 		&.showModal {
 			opacity: 100%;
 		}
+		&.hideModal {
+			visibility: hidden;
+		}
+	}
+	.replyModal {
+		height: 100%;
+		&.showModal {
+			overflow: hidden;
+		}
+
 		&.hideModal {
 			visibility: hidden;
 		}
