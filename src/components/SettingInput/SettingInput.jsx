@@ -8,8 +8,9 @@ import Input from '../Input/Input';
 import styled from './SettingInput.module.scss';
 
 function SettingInput() {
-	const [userOriginData, setUserOriginData] = useState(null);
-	console.log(userOriginData);
+	// eslint-disable-next-line no-unused-vars
+	// const [userOriginData, setUserOriginData] = useState(null);
+	// console.log(userOriginData);
 	const [accountLength, setAccountLength] = useState(0);
 	const [account, setAccount] = useState('');
 	const [name, setUsername] = useState('');
@@ -119,7 +120,7 @@ function SettingInput() {
 
 			// 更新畫面個人資料
 			const data = await getUserData(userId, authToken);
-			setUserOriginData(data);
+			// setUserOriginData(data);
 			setAccount(data.account);
 			setUsername(data.name);
 			setEmail(data.email);
@@ -146,7 +147,7 @@ function SettingInput() {
 				}
 				// 個人資料
 				const data = await getUserData(userId, authToken);
-				setUserOriginData(data);
+				// setUserOriginData(data);
 				setAccount(data.account);
 				setUsername(data.name);
 				setEmail(data.email);
