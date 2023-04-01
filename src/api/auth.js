@@ -18,19 +18,11 @@ export const login = async ({ account, password }) => {
 		console.error('[Login Failed]:', error);
 		// 擋後臺帳號登入
 		const wrongAdminAccount = error.response.data.message;
-		if (wrongAdminAccount === 'Error: Account or password is wrong!') {
-			alert('帳號或密碼錯誤!');
-			return;
-		}
 
-		// 帳號不存在 考慮是否要改成 modal
+		// 帳號不存在
 		const wrongAccountPassword = error.response.data;
-		if (wrongAccountPassword === 'Unauthorized') {
-			alert('帳號或密碼錯誤!');
-			return;
-		}
 
-		return { success: false };
+		return { success: false, wrongAdminAccount, wrongAccountPassword };
 	}
 };
 

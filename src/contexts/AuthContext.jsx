@@ -11,6 +11,7 @@ export const AuthProvider = ({ children }) => {
 	const [userTweets, setUserTweets] = useState([]);
 	const [userReplyTweets, setUserReplyTweets] = useState([]);
 	const [userLikeTweets, setUserLikeTweets] = useState([]);
+	const [buttonStatus, setButtonStatus] = useState('推文');
 
 	const handleAccountChange = (e) => {
 		const inputValue = e.target.value;
@@ -45,6 +46,8 @@ export const AuthProvider = ({ children }) => {
 		setUserReplyTweets,
 		userLikeTweets,
 		setUserLikeTweets,
+		buttonStatus,
+		setButtonStatus,
 	};
 
 	return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

@@ -13,6 +13,7 @@ function LoginInput() {
 		account,
 		setAccount,
 		accountLength,
+		setAccountLength,
 		password,
 		setPassword,
 		handleAccountChange,
@@ -37,16 +38,39 @@ function LoginInput() {
 			return;
 		}
 
-		const { success, authToken, user } = await login({
+		const { success, authToken, user, wrongAdminAccount, wrongAccountPassword } = await login({
 			account,
 			password,
 		});
+
+		if (wrongAdminAccount === 'Error: Account or password is wrong!') {
+			Swal.fire({
+				position: 'top',
+				title: '帳號或密碼錯誤!',
+				timer: 1000,
+				icon: 'error',
+				showConfirmButton: false,
+			});
+			return;
+		}
+
+		if (wrongAccountPassword === 'Unauthorized') {
+			Swal.fire({
+				position: 'top',
+				title: '帳號或密碼錯誤!',
+				timer: 1000,
+				icon: 'error',
+				showConfirmButton: false,
+			});
+			return;
+		}
 
 		if (success) {
 			localStorage.setItem('authToken', authToken);
 			localStorage.setItem('userId', user.id);
 			setAccount('');
 			setPassword('');
+			setAccountLength(0);
 
 			// 登入成功訊息
 			Swal.fire({

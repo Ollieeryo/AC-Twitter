@@ -10,11 +10,19 @@ function RegisterInput() {
 	// useContext
 	const {
 		accountLength,
+		setAccountLength,
 		account,
+		setAccount,
 		name,
+		setUsername,
+		nameLength,
+		setNameLength,
 		email,
+		setEmail,
 		password,
+		setPassword,
 		checkPassword,
+		setCheckPassword,
 		handleAccountChange,
 		handleUserNameChange,
 		handleEmailChange,
@@ -33,6 +41,9 @@ function RegisterInput() {
 		} else if (accountLength > 50) {
 			alert('帳號字數不可超過 50 字!');
 			return;
+		} else if (nameLength > 50) {
+			alert('名稱字數不可超過 50 字!');
+			return;
 		} else if (name.length === 0) {
 			alert('請輸入名稱');
 			return;
@@ -46,7 +57,7 @@ function RegisterInput() {
 			alert('請輸入密碼確認');
 			return;
 		} else if (password !== checkPassword) {
-			alert('密碼與密碼確認輸入值不相同');
+			alert('密碼與密碼確認不相同');
 			return;
 		}
 
@@ -62,10 +73,17 @@ function RegisterInput() {
 			Swal.fire({
 				position: 'top',
 				title: '建立帳號成功！',
-				timer: 1500,
+				timer: 1000,
 				icon: 'success',
 				showConfirmButton: false,
 			});
+			setAccountLength(0);
+			setAccount('');
+			setUsername('');
+			setNameLength(0);
+			setEmail('');
+			setPassword('');
+			setCheckPassword('');
 
 			// 跳轉登入頁
 			navigate('/login');
@@ -77,7 +95,7 @@ function RegisterInput() {
 			Swal.fire({
 				position: 'top',
 				title: '帳號已被註冊！',
-				timer: 1500,
+				timer: 1000,
 				icon: 'error',
 				showConfirmButton: false,
 			});
@@ -88,7 +106,7 @@ function RegisterInput() {
 			Swal.fire({
 				position: 'top',
 				title: 'Email 已被註冊！',
-				timer: 1500,
+				timer: 1000,
 				icon: 'error',
 				showConfirmButton: false,
 			});
@@ -99,7 +117,7 @@ function RegisterInput() {
 		Swal.fire({
 			position: 'top',
 			title: '建立帳號失敗！',
-			timer: 1500,
+			timer: 1000,
 			icon: 'error',
 			showConfirmButton: false,
 		});
@@ -116,7 +134,6 @@ function RegisterInput() {
 					onChange={handleAccountChange}
 				/>
 				<div className={styled.countWrap}>
-					{/* 增加帳號已有被人註冊的判斷式 */}
 					<span className={styled.countTitle}>{accountLength > 50 ? '字數超出上限' : ''}</span>
 					<span className={styled.countNumber}>
 						{accountLength <= 0 ? '' : `字數: ${accountLength} / 50`}
@@ -125,7 +142,6 @@ function RegisterInput() {
 			</div>
 
 			<div className={styled.inputWrap}>
-				{/* 增加帳號已有被人註冊的判斷式 */}
 				<Input
 					inputTitle='名稱'
 					type='username'
@@ -133,11 +149,15 @@ function RegisterInput() {
 					placeholder='請輸入使用者名稱'
 					onChange={handleUserNameChange}
 				/>
+				<div className={styled.countWrap}>
+					<span className={styled.countTitle}>{nameLength > 50 ? '字數超出上限' : ''}</span>
+					<span className={styled.countNumber}>
+						{nameLength <= 0 ? '' : `字數: ${nameLength} / 50`}
+					</span>
+				</div>
 			</div>
 
-			{/* 數字改字體 */}
 			<div className={styled.inputWrap}>
-				{/* 增加email已有被人註冊的判斷式 */}
 				<Input
 					inputTitle='Email'
 					type='email'
@@ -148,7 +168,6 @@ function RegisterInput() {
 			</div>
 
 			<div className={styled.inputWrap}>
-				{/* 增加email已有被人註冊的判斷式 */}
 				<Input
 					inputTitle='密碼'
 					type='password'

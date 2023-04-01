@@ -20,8 +20,221 @@ import {
 import Swal from 'sweetalert2';
 import { useRef } from 'react';
 
-function ReactModal({ modalIsOpen, setModalIsOpen, userData }) {
-	const [name, setName] = useState(userData.name);
+export function StatusButton({ buttonStatus, setButtonStatus }) {
+	const handleTweetClick = (e) => {
+		e.preventDefault();
+		setButtonStatus('推文');
+	};
+
+	const handleReplyClick = (e) => {
+		e.preventDefault();
+		setButtonStatus('回覆');
+	};
+
+	const handleLikeClick = (e) => {
+		e.preventDefault();
+		setButtonStatus('喜歡的內容');
+	};
+
+	return (
+		<div className={styled.statusButtonWrap}>
+			<div className={buttonStatus === '推文' ? styled.buttonWrap : ''}>
+				<button
+					className={buttonStatus === '推文' ? styled.activeButton : styled.button}
+					onClick={handleTweetClick}
+				>
+					推文
+				</button>
+			</div>
+
+			<div className={buttonStatus === '回覆' ? styled.buttonWrap : ''}>
+				<button
+					className={buttonStatus === '回覆' ? styled.activeButton : styled.button}
+					onClick={handleReplyClick}
+				>
+					回覆
+				</button>
+			</div>
+
+			<div className={buttonStatus === '喜歡的內容' ? styled.buttonWrap : ''}>
+				<button
+					className={buttonStatus === '喜歡的內容' ? styled.activeButton : styled.button}
+					onClick={handleLikeClick}
+				>
+					喜歡的內容
+				</button>
+			</div>
+		</div>
+	);
+}
+
+export function UserContent({
+	activeSection,
+	userData,
+	modalIsOpen,
+	setModalIsOpen,
+	handleEditProfile,
+	handleFollowerClick,
+	handleFollowingClick,
+}) {
+	return (
+		<>
+			<div className={styled.imgWrap}>
+				<div>
+					<img src={userData.cover || fakeBack} alt='' className={styled.cover} />
+				</div>
+
+				<div className={styled.avatarCon}>
+					<img src={userData.avatar || fakePhoto} alt='' className={styled.avatar} />
+				</div>
+			</div>
+
+			<div className={styled.userInfoWrap}>
+				{activeSection === 'userProfile' && (
+					<>
+						<div className={styled.edit}>
+							<button className={styled.editButton} onClick={handleEditProfile}>
+								編輯個人資料
+							</button>
+						</div>
+
+						<ReactModal
+							modalIsOpen={modalIsOpen}
+							setModalIsOpen={setModalIsOpen}
+							userData={userData}
+						/>
+					</>
+				)}
+
+				<div className={styled.userInfo}>
+					<span className={styled.title}>{userData.name}</span>
+					<span className={styled.account}>@{userData.account}</span>
+
+					<span>{userData.introduction}</span>
+				</div>
+
+				<div className={styled.buttonWrap}>
+					<div>
+						<button className={styled.followButton} onClick={handleFollowingClick}>
+							<span>{userData.followingCounts} 個</span>
+							<span className={styled.followTitle}>跟隨中</span>
+						</button>
+					</div>
+
+					<div>
+						<button className={styled.followButton} onClick={handleFollowerClick}>
+							<span>{userData.followerCounts} 位</span>
+							<span className={styled.followTitle}>跟隨者</span>
+						</button>
+					</div>
+				</div>
+			</div>
+		</>
+	);
+}
+
+function UserProfile({ activeSection, setActiveSection }) {
+	const {
+		userData,
+		setUserData,
+		userTweets,
+		setUserTweets,
+		userReplyTweets,
+		setUserReplyTweets,
+		userLikeTweets,
+		setUserLikeTweets,
+		buttonStatus,
+		setButtonStatus,
+	} = useAuthLogin();
+	const navigate = useNavigate();
+	const [modalIsOpen, setModalIsOpen] = useState(false);
+
+	// Modal
+	const handleEditProfile = () => {
+		setModalIsOpen(true);
+	};
+
+	// 跟隨者按鈕
+	const handleFollowerClick = (e) => {
+		e.preventDefault();
+		setActiveSection('follower');
+	};
+
+	// 跟隨中按鈕
+	const handleFollowingClick = (e) => {
+		e.preventDefault();
+		setActiveSection('following');
+	};
+
+	// 獲取使用者個人資料
+	useEffect(() => {
+		const fetchUserData = async () => {
+			try {
+				const authToken = localStorage.getItem('authToken');
+				const userId = localStorage.getItem('userId');
+				if (!authToken) {
+					navigate('/login');
+					return;
+				}
+				// 個人資料
+				const data = await getUserData(userId, authToken);
+				setUserData(data);
+
+				// 個人推文
+				const tweets = await getUserTweets(userId, authToken);
+				setUserTweets(tweets);
+
+				// 個人回覆推文
+				const replyTweets = await getUserReplyTweets(userId, authToken);
+				setUserReplyTweets(replyTweets);
+
+				// 個人喜歡推文
+				const likeTweets = await getUserLikeTweets(userId, authToken);
+				setUserLikeTweets(likeTweets);
+			} catch (error) {
+				console.error(error);
+			}
+		};
+		fetchUserData();
+	}, []);
+
+	return (
+		<div className={styled.wrap}>
+			<UserContent
+				userData={userData}
+				modalIsOpen={modalIsOpen}
+				setModalIsOpen={setModalIsOpen}
+				handleEditProfile={handleEditProfile}
+				handleFollowerClick={handleFollowerClick}
+				handleFollowingClick={handleFollowingClick}
+				activeSection={activeSection}
+			/>
+
+			<StatusButton buttonStatus={buttonStatus} setButtonStatus={setButtonStatus} />
+
+			<ul className={styled.ul}>
+				{/* 判斷式:推文、回覆、喜歡的內容 */}
+				{buttonStatus === '推文' && (
+					<AdminTweets userTweets={userTweets} buttonStatus={buttonStatus} />
+				)}
+
+				{buttonStatus === '回覆' && (
+					<AdminTweets userTweets={userReplyTweets} buttonStatus={buttonStatus} />
+				)}
+
+				{buttonStatus === '喜歡的內容' && (
+					<AdminTweets userTweets={userLikeTweets} buttonStatus={buttonStatus} />
+				)}
+			</ul>
+		</div>
+	);
+}
+
+export default UserProfile;
+
+function ReactModal({ modalIsOpen, setModalIsOpen }) {
+	const { userData } = useAuthLogin();
+	const [name, setName] = useState(`${userData.name}`);
 	const [nameLength, setNameLength] = useState(0);
 	const [intro, setIntro] = useState('');
 	const [introLength, setIntroLength] = useState(0);
@@ -90,7 +303,7 @@ function ReactModal({ modalIsOpen, setModalIsOpen, userData }) {
 		const authToken = localStorage.getItem('authToken');
 		const userId = localStorage.getItem('userId');
 
-		// 背景圖檔
+		// 修改個人資料
 		const response = await getEditPersonal(userId, authToken, name, avatar, cover, intro);
 
 		if (response) {
@@ -254,214 +467,3 @@ function ReactModal({ modalIsOpen, setModalIsOpen, userData }) {
 		</Modal>
 	);
 }
-
-export function StatusButton({ buttonStatus, setButtonStatus }) {
-	const handleTweetClick = (e) => {
-		e.preventDefault();
-		setButtonStatus('推文');
-	};
-
-	const handleReplyClick = (e) => {
-		e.preventDefault();
-		setButtonStatus('回覆');
-	};
-
-	const handleLikeClick = (e) => {
-		e.preventDefault();
-		setButtonStatus('喜歡的內容');
-	};
-
-	return (
-		<div className={styled.statusButtonWrap}>
-			<div className={buttonStatus === '推文' ? styled.buttonWrap : ''}>
-				<button
-					className={buttonStatus === '推文' ? styled.activeButton : styled.button}
-					onClick={handleTweetClick}
-				>
-					推文
-				</button>
-			</div>
-
-			<div className={buttonStatus === '回覆' ? styled.buttonWrap : ''}>
-				<button
-					className={buttonStatus === '回覆' ? styled.activeButton : styled.button}
-					onClick={handleReplyClick}
-				>
-					回覆
-				</button>
-			</div>
-
-			<div className={buttonStatus === '喜歡的內容' ? styled.buttonWrap : ''}>
-				<button
-					className={buttonStatus === '喜歡的內容' ? styled.activeButton : styled.button}
-					onClick={handleLikeClick}
-				>
-					喜歡的內容
-				</button>
-			</div>
-		</div>
-	);
-}
-
-export function UserContent({
-	activeSection,
-	userData,
-	modalIsOpen,
-	setModalIsOpen,
-	handleEditProfile,
-	handleFollowerClick,
-	handleFollowingClick,
-}) {
-	return (
-		<>
-			<div className={styled.imgWrap}>
-				<div>
-					<img src={userData.cover || fakeBack} alt='' className={styled.cover} />
-				</div>
-
-				<div className={styled.avatarCon}>
-					<img src={userData.avatar || fakePhoto} alt='' className={styled.avatar} />
-				</div>
-			</div>
-
-			<div className={styled.userInfoWrap}>
-				{activeSection === 'userProfile' && (
-					<>
-						<div className={styled.edit}>
-							<button className={styled.editButton} onClick={handleEditProfile}>
-								編輯個人資料
-							</button>
-						</div>
-
-						<ReactModal
-							modalIsOpen={modalIsOpen}
-							setModalIsOpen={setModalIsOpen}
-							userData={userData}
-						/>
-					</>
-				)}
-
-				<div className={styled.userInfo}>
-					<span className={styled.title}>{userData.name}</span>
-					<span className={styled.account}>@{userData.account}</span>
-
-					<span>{userData.introduction}</span>
-				</div>
-
-				<div className={styled.buttonWrap}>
-					<div>
-						<button className={styled.followButton} onClick={handleFollowingClick}>
-							<span>{userData.followingCounts} 個</span>
-							<span className={styled.followTitle}>跟隨中</span>
-						</button>
-					</div>
-
-					<div>
-						<button className={styled.followButton} onClick={handleFollowerClick}>
-							<span>{userData.followerCounts} 位</span>
-							<span className={styled.followTitle}>跟隨者</span>
-						</button>
-					</div>
-				</div>
-			</div>
-		</>
-	);
-}
-
-function UserProfile({ activeSection, setActiveSection }) {
-	const {
-		userData,
-		setUserData,
-		userTweets,
-		setUserTweets,
-		userReplyTweets,
-		setUserReplyTweets,
-		userLikeTweets,
-		setUserLikeTweets,
-	} = useAuthLogin();
-	const [buttonStatus, setButtonStatus] = useState('推文');
-	const navigate = useNavigate();
-	const [modalIsOpen, setModalIsOpen] = useState(false);
-
-	// Modal
-	const handleEditProfile = () => {
-		setModalIsOpen(true);
-	};
-
-	// 跟隨者按鈕
-	const handleFollowerClick = (e) => {
-		e.preventDefault();
-		setActiveSection('follower');
-	};
-
-	// 跟隨中按鈕
-	const handleFollowingClick = (e) => {
-		e.preventDefault();
-		setActiveSection('following');
-	};
-
-	// 獲取使用者個人資料
-	useEffect(() => {
-		const fetchUserData = async () => {
-			try {
-				const authToken = localStorage.getItem('authToken');
-				const userId = localStorage.getItem('userId');
-				if (!authToken) {
-					navigate('/login');
-					return;
-				}
-				// 個人資料
-				const data = await getUserData(userId, authToken);
-				setUserData(data);
-
-				// 個人推文
-				const tweets = await getUserTweets(userId, authToken);
-				setUserTweets(tweets);
-
-				// 個人回覆推文
-				const replyTweets = await getUserReplyTweets(userId, authToken);
-				setUserReplyTweets(replyTweets);
-
-				// 個人喜歡推文
-				const likeTweets = await getUserLikeTweets(userId, authToken);
-				setUserLikeTweets(likeTweets);
-			} catch (error) {
-				console.error(error);
-			}
-		};
-		fetchUserData();
-	}, []);
-
-	return (
-		<div className={styled.wrap}>
-			<UserContent
-				userData={userData}
-				modalIsOpen={modalIsOpen}
-				setModalIsOpen={setModalIsOpen}
-				handleEditProfile={handleEditProfile}
-				handleFollowerClick={handleFollowerClick}
-				handleFollowingClick={handleFollowingClick}
-				activeSection={activeSection}
-			/>
-
-			<StatusButton buttonStatus={buttonStatus} setButtonStatus={setButtonStatus} />
-
-			<ul className={styled.ul}>
-				{/* 判斷式:推文、回覆、喜歡的內容 */}
-				{buttonStatus === '推文' && (
-					<AdminTweets userTweets={userTweets} buttonStatus={buttonStatus} />
-				)}
-
-				{buttonStatus === '回覆' && (
-					<AdminTweets userTweets={userReplyTweets} buttonStatus={buttonStatus} />
-				)}
-
-				{buttonStatus === '喜歡的內容' && (
-					<AdminTweets userTweets={userLikeTweets} buttonStatus={buttonStatus} />
-				)}
-			</ul>
-		</div>
-	);
-}
-
-export default UserProfile;
