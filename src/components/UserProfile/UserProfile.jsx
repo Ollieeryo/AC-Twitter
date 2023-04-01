@@ -21,7 +21,7 @@ import Swal from 'sweetalert2';
 import { useRef } from 'react';
 
 function ReactModal({ modalIsOpen, setModalIsOpen, userData }) {
-	const [name, setName] = useState(`${userData.name}`);
+	const [name, setName] = useState(userData.name);
 	const [nameLength, setNameLength] = useState(0);
 	const [intro, setIntro] = useState('');
 	const [introLength, setIntroLength] = useState(0);
@@ -30,6 +30,10 @@ function ReactModal({ modalIsOpen, setModalIsOpen, userData }) {
 	const coverInputRef = useRef(null);
 	const avatarInputRef = useRef(null);
 	const { setUserData } = useAuthLogin();
+
+	const handleResetName = () => {
+		setName('');
+	};
 
 	const handleNameChange = (e) => {
 		e.preventDefault();
@@ -70,16 +74,16 @@ function ReactModal({ modalIsOpen, setModalIsOpen, userData }) {
 	const handleSaveClick = async (e) => {
 		e.preventDefault();
 		if (nameLength > 50) {
-			alert('名稱字數超過上限!');
+			alert('名稱字數不可超過 50 字!');
 			return;
 		} else if (introLength > 160) {
-			alert('自我介紹數字超過上限!');
+			alert('自我介紹數字不可超過 160 字!');
 			return;
 		} else if (nameLength === 0) {
-			alert('名稱欄位不能為空!');
+			alert('請輸入名稱!');
 			return;
 		} else if (introLength === 0) {
-			alert('自我介紹欄位不能為空!');
+			alert('請輸入自我介紹!');
 			return;
 		}
 
@@ -210,7 +214,13 @@ function ReactModal({ modalIsOpen, setModalIsOpen, userData }) {
 				<div className={styled.inputWrap}>
 					<form className={styled.form}>
 						<label htmlFor=''>名稱</label>
-						<input type='text' value={name} className={styled.input} onChange={handleNameChange} />
+						<input
+							type='text'
+							value={name}
+							className={styled.input}
+							onChange={handleNameChange}
+							onClick={handleResetName}
+						/>
 
 						{/* 字數處理 */}
 						<div className={styled.countWrap}>
