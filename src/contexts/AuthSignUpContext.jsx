@@ -7,6 +7,7 @@ export const AuthSignUpProvider = ({ children }) => {
 	const [accountLength, setAccountLength] = useState(0);
 	const [account, setAccount] = useState('');
 	const [name, setUsername] = useState('');
+	const [nameLength, setNameLength] = useState(0);
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [checkPassword, setCheckPassword] = useState('');
@@ -24,9 +25,11 @@ export const AuthSignUpProvider = ({ children }) => {
 	const handleUserNameChange = (e) => {
 		e.preventDefault();
 		const inputValue = e.target.value;
-		// 使用 trim 刪除 string 前後空白
-		const inputWithoutSpaces = inputValue.trim();
-		setUsername(inputWithoutSpaces);
+		// 使用正規表達式去除空格
+		const inputWithoutSpaces = inputValue.replace(/\s+/g, '');
+		const inputLength = inputWithoutSpaces.length;
+		setUsername(inputValue);
+		setNameLength(inputLength);
 	};
 
 	const handleEmailChange = (e) => {
@@ -55,11 +58,19 @@ export const AuthSignUpProvider = ({ children }) => {
 
 	const value = {
 		accountLength,
+		setAccountLength,
 		account,
+		setAccount,
 		name,
+		setUsername,
+		nameLength,
+		setNameLength,
 		email,
+		setEmail,
 		password,
+		setPassword,
 		checkPassword,
+		setCheckPassword,
 		handleAccountChange,
 		handleUserNameChange,
 		handleEmailChange,
