@@ -4,9 +4,8 @@ import './App.scss';
 import Register from './pages/Register/Index';
 import Admin from './pages/Admin';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import TweetModal from './components/TweetModal/TweetModal';
-import ReplyModal from './components/ReplyModal/ReplyModal';
 import { useEffect } from 'react';
+
 import AdminMain from './pages/AdminMain/Index';
 import { AuthProvider } from './contexts/AuthContext';
 import { AuthSignUpProvider } from './contexts/AuthSignUpContext';
@@ -41,8 +40,6 @@ function App() {
 							<Route path='register' element={<Register />} />
 							<Route path='main' element={<Main />} />
 							<Route path='admin/main' element={<AdminMain />} />
-							<Route path='tweet' element={<TweetModal />} />
-							<Route path='replymodal' element={<ReplyModal />} />
 						</Routes>
 					</BrowserRouter>
 				</div>

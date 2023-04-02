@@ -1,4 +1,4 @@
-import styles from './ReplyList.module.scss';
+import styles from './OtherReplyList.module.scss';
 
 function ReplyList({ replies }) {
 	const listItems = replies.map((item) => (

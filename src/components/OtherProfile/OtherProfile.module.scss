@@ -1,0 +1,152 @@
+%status-button {
+	outline: none;
+	background: white;
+	cursor: pointer;
+	border: none;
+	margin: 0;
+	padding: 2.5rem;
+	font-size: 15px;
+	font-weight: 700;
+}
+
+.wrap {
+	.imgWrap {
+		position: relative;
+
+		.cover {
+			width: 100%;
+			height: 200px;
+			object-fit: fill;
+		}
+
+		.avatarCon {
+			position: absolute;
+			top: 100%;
+			left: 10%;
+			transform: translate(-50%, -50%);
+
+			.avatar {
+				width: 100px;
+				height: 100px;
+				object-fit: cover;
+				border-radius: 50%;
+				border: 4px solid #ffffff;
+			}
+		}
+	}
+
+	.userInfoWrap {
+		display: grid;
+		padding: 1rem;
+		position: relative;
+		margin-top: 5px;
+
+		.functions {
+			display: flex;
+			justify-content: end;
+			gap: 16px;
+
+			.followButton {
+				outline: none;
+				background: white;
+				cursor: pointer;
+				font-weight: 400;
+				font-size: 16px;
+				border: 1px solid #ff6600;
+				border-radius: 50px;
+				color: #ff6600;
+				width: 128px;
+				height: 40px;
+
+				&:hover {
+					background: #ff6600;
+					color: white;
+				}
+
+				&.following {
+					background: #ff6600;
+					color: #ffffff;
+					width: 96px;
+					height: 40px;
+					border: 0;
+					border-radius: 50px;
+				}
+				&.notFollowing {
+					width: 64px;
+					height: 40px;
+					border-radius: 50px;
+					background: #ffffff;
+					color: #ff6600;
+					border: 1px solid #ff6600;
+				}
+			}
+		}
+
+		.userInfo {
+			display: grid;
+			grid-gap: 10px;
+
+			.title {
+				font-weight: 700;
+				font-size: 18px;
+			}
+
+			.account {
+				color: #6c757d;
+				font-size: 14px;
+			}
+		}
+
+		.buttonWrap {
+			margin-top: 1rem;
+			display: grid;
+			grid-auto-flow: column;
+			width: 30%;
+
+			.followButton {
+				outline: none;
+				background: white;
+				cursor: pointer;
+				border: 0;
+				padding: 0;
+				font-weight: 400;
+				font-size: 14px;
+
+				.followTitle {
+					color: #6c757d;
+				}
+			}
+		}
+	}
+
+	.statusButtonWrap {
+		display: flex;
+		border-bottom: 1px solid #e6ecf0;
+		height: 100px;
+
+		.buttonWrap {
+			&::after {
+				content: '';
+				display: block;
+				height: 2px;
+				width: 100%;
+				background: #ff6600;
+				border-radius: 100px;
+			}
+		}
+
+		.button {
+			@extend %status-button;
+			color: #657786;
+
+			&:hover {
+				color: #ff6600;
+			}
+		}
+
+		.activeButton {
+			@extend %status-button;
+			color: #ff6600;
+		}
+	}
+}

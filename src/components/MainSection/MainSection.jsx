@@ -8,68 +8,61 @@ import FollowList from '../FollowList/FollowList';
 import TweetList from '../TweetList/TweetList';
 import ReplyPost from '../ReplyPost/ReplyPost';
 import ReplyList from '../ReplyList/ReplyList';
-import { useEffect, useState } from 'react';
-import { getAllReply } from '../../api/reply';
-import { getIdTweets } from '../../api/tweets';
+import OtherProfile from '../OtherProfile/OtherProfile';
 
-function MainSection({ activeSection, setActiveSection }) {
-	const [tweetId, setTweetId] = useState();
-
-	function handleArrowClick() {
-		window.location.href = '/home';
-	}
-
-	const handleTweetLink = (tweetID) => {
-		console.log(`Tweet ID: ${tweetID}`);
-		setTweetId(tweetID);
-		setActiveSection('reply');
-	};
-
+function MainSection({
+	activeSection,
+	setActiveSection,
+	ToTweetModalHandler,
+	onToReplyModal,
+	tweetAuth,
+	User,
+	replyList,
+	onTweetLink,
+	onLike,
+	onText,
+	tweets,
+	onOtherClick,
+	otherUserID,
+	userTweets,
+	userReplyTweets,
+	userLikeTweets,
+	otherUserData,
+	OtherUserTweets,
+	onFollowClick,
+	isFollowed,
+	onTweetLikeClick,
+}) {
 	function HomePage() {
 		return (
 			<>
-				<TweetInput />
-				<TweetList onTweetClick={handleTweetLink} />
+				<TweetInput
+					onToTweetClick={ToTweetModalHandler}
+					onTextChange={onText}
+					userData={User}
+					onOtherClick={onOtherClick}
+				/>
+				<TweetList
+					onTweetClick={onTweetLink}
+					onReplyClick={onToReplyModal}
+					onLikeClick={onLike}
+					tweetList={tweets}
+					onOtherClick={onOtherClick}
+				/>
 			</>
 		);
 	}
 
 	function ReplyPage() {
-		const [replies, setReplies] = useState([]);
-		const [getTweet, setGetTweet] = useState([]);
-
-		useEffect(() => {
-			const getTweetAsync = async () => {
-				try {
-					const authToken = localStorage.getItem('authToken');
-					const aTweet = await getIdTweets(authToken, tweetId);
-					console.log(aTweet);
-					setGetTweet(aTweet);
-				} catch (error) {
-					console.error(error);
-				}
-			};
-			getTweetAsync();
-		}, []);
-
-		useEffect(() => {
-			const getRepliesAsync = async () => {
-				try {
-					const authToken = localStorage.getItem('authToken');
-					const reply = await getAllReply(authToken, tweetId);
-
-					setReplies(reply.map((reply) => ({ ...reply })));
-				} catch (error) {
-					console.error(error);
-				}
-			};
-			getRepliesAsync();
-		}, []);
-
 		return (
 			<>
-				<ReplyPost tweet={getTweet} />
-				<ReplyList replies={replies} />
+				<ReplyPost
+					tweet={tweetAuth}
+					onReplyClick={onToReplyModal}
+					onLikeClick={onTweetLikeClick}
+					onOtherClick={onOtherClick}
+				/>
+				<ReplyList replies={replyList} onOtherClick={onOtherClick} />
 			</>
 		);
 	}
@@ -77,9 +70,9 @@ function MainSection({ activeSection, setActiveSection }) {
 		<div className={styles.container}>
 			<Header
 				activeSection={activeSection}
-				onArrowClick={() => {
-					handleArrowClick();
-				}}
+				setActiveSection={setActiveSection}
+				otherUserData={otherUserData}
+				OtherUserTweets={OtherUserTweets}
 			/>
 
 			{/* Main */}
@@ -99,6 +92,19 @@ function MainSection({ activeSection, setActiveSection }) {
 			{/* followList */}
 			{(activeSection === 'follower' || activeSection === 'following') && (
 				<FollowList activeSection={activeSection} setActiveSection={setActiveSection} />
+			)}
+
+			{/* OtherProfile */}
+			{activeSection === 'otherProfile' && (
+				<OtherProfile
+					activeSection={activeSection}
+					otherUserId={otherUserID}
+					userTweets={userTweets}
+					userReplyTweets={userReplyTweets}
+					userLikeTweets={userLikeTweets}
+					onFollowClick={onFollowClick}
+					isFollowed={isFollowed}
+				/>
 			)}
 		</div>
 	);

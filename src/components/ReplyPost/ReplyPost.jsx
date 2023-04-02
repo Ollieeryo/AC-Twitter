@@ -1,34 +1,27 @@
 import styles from './ReplyPost.module.scss';
 import reply from '../../assets/reply.svg';
 import like from '../../assets/like.svg';
-import { Link } from 'react-router-dom';
+import redLike from '../../assets/redLike.svg';
 
-function ReplyPost({ tweet }) {
-	function handleLikeClick() {
-		if (tweet.isLiked === false) {
-			return {
-				...tweet,
-				likeCounts: tweet.likeCounts + 1,
-				isLiked: !tweet.isLiked,
-			};
-		} else {
-			return {
-				...tweet,
-				likeCounts: tweet.likeCounts - 1,
-				isLiked: !tweet.isLiked,
-			};
-		}
-	}
+function ReplyPost({ tweet, onReplyClick, onOtherClick, onLikeClick }) {
+	// const handleLikeToggle = (data) => {
+	// 	const result = data.isLiked;
+	// 	return (data.isLiked = !result);
+	// };
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.avatarAndName}>
-				<Link className={styles.avatar} to={`/${tweet?.User?.account}`}>
+				<div className={styles.avatar} onClick={onOtherClick}>
 					<img src={tweet?.User?.avatar} />
-				</Link>
+				</div>
 				<div className={styles.nameSection}>
-					<div className={styles.nickname}>{tweet?.User?.name}</div>
-					<div className={styles.accountName}>@{tweet?.User?.account}</div>
+					<div className={styles.nickname} onClick={onOtherClick}>
+						{tweet?.User?.name}
+					</div>
+					<div className={styles.accountName} onClick={onOtherClick}>
+						@{tweet?.User?.account}
+					</div>
 				</div>
 			</div>
 
@@ -36,25 +29,30 @@ function ReplyPost({ tweet }) {
 				<div className={styles.contentSection}>{tweet?.description}</div>
 				<div className={styles.postTime}>{tweet?.createdAt}</div>
 				<div className={styles.ReplyAndLike}>
-					<Link className={styles.counter} to='replymodal'>
+					<div className={styles.counter}>
 						{tweet?.replyCounts} <span>&nbsp;回覆</span>
-					</Link>
-					<div
-						className={styles.counter}
-						onClick={() => {
-							handleLikeClick(tweet?.id);
-						}}
-					>
+					</div>
+					<div className={styles.counter}>
 						{tweet?.likeCounts}
 						<span>&nbsp;喜歡次數</span>
 					</div>
 				</div>
 				<div className={styles.Icons}>
-					<Link className={styles.icon} to='replymodal'>
+					<div
+						className={styles.icon}
+						onClick={() => {
+							onReplyClick(tweet?.id);
+						}}
+					>
 						<img src={reply} />
-					</Link>
-					<button className={styles.icon} onClick={handleLikeClick}>
-						<img src={like} />
+					</div>
+					<button
+						className={styles.icon}
+						onClick={() => {
+							onLikeClick(tweet?.id);
+						}}
+					>
+						{tweet.isLiked ? <img src={redLike} /> : <img src={like} />}
 					</button>
 				</div>
 			</div>

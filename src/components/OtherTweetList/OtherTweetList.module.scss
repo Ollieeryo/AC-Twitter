@@ -1,10 +1,10 @@
 .container {
+
 	.itemContainer {
 		display: flex;
 		margin-top: 16px;
 		border-bottom: 1px solid #e6ecf0;
 		text-decoration: none;
-		cursor: pointer;
 
 		.avatar {
 			margin-left: 24px;
@@ -60,7 +60,6 @@
 					text-decoration: none;
 					background: none;
 					border: none;
-					cursor: pointer;
 					img {
 						margin-right: 8px;
 					}

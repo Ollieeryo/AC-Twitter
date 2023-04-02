@@ -3,7 +3,7 @@ import leftArrow from '../../assets/left-arrow.svg';
 import { useAuthLogin } from '../../contexts/AuthContext';
 import { Link } from 'react-router-dom';
 
-function Header({ activeSection, onArrowClick }) {
+function Header({ activeSection, setActiveSection, otherUserData, OtherUserTweets }) {
 	let headerContent = '';
 	if (activeSection === 'main') {
 		headerContent = '首頁';
@@ -13,16 +13,20 @@ function Header({ activeSection, onArrowClick }) {
 		headerContent = '推文';
 	}
 
+	function handleArrowClick() {
+		setActiveSection('main');
+	}
 	const { userData, userTweets } = useAuthLogin();
 
 	return (
 		<div className={styles.container}>
 			{/* 箭頭 */}
 			{activeSection === 'userProfile' ||
+			activeSection === 'otherProfile' ||
 			activeSection === 'follower' ||
 			activeSection === 'following' ||
 			activeSection === 'reply' ? (
-				<div className={styles.arrow} onClick={onArrowClick}>
+				<div className={styles.arrow} onClick={handleArrowClick}>
 					<img src={leftArrow} alt='' />
 				</div>
 			) : (
@@ -47,12 +51,21 @@ function Header({ activeSection, onArrowClick }) {
 			activeSection === 'following' ? (
 				<Link className={styles.content} to=''>
 					<div className={styles.userTitleWrap}>
-						<span>{userData.name}</span>
-						<span className={styles.tweetText}>{userTweets.length} 推文</span>
+						<span>{userData?.name}</span>
+						<span className={styles.tweetText}>{userTweets?.length} 推文</span>
 					</div>
 				</Link>
 			) : (
 				''
+			)}
+
+			{activeSection === 'otherProfile' && (
+				<Link className={styles.content} to=''>
+					<div className={styles.userTitleWrap}>
+						<span>{otherUserData?.name}</span>
+						<span className={styles.tweetText}>{OtherUserTweets?.length} 推文</span>
+					</div>
+				</Link>
 			)}
 
 			{activeSection === 'setting' && (

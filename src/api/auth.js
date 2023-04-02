@@ -36,7 +36,6 @@ export const register = async ({ account, name, email, password, checkPassword }
 			password,
 			checkPassword,
 		});
-
 		const { status } = data;
 
 		if (status === 'success') {
@@ -67,7 +66,6 @@ export const adminLogin = async ({ account, password }) => {
 		return data;
 	} catch (error) {
 		console.error('[Login Failed]:', error);
-
 		const wrongAccountPassword = error.response.data;
 
 		const wrongAccountPassword2 = error.response.data.message;
