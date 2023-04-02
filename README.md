@@ -60,8 +60,7 @@ webpack compiled successfully
 7. 現在可以在瀏覽器中輸入[localhost:3000](http://localhost:3000)，並且開始瀏覽和使用此專案網站
 
 # 專案畫面-Screen Photo
-![login]()
-![home-page]()
+![home-page](https://github.com/Ollieeryo/AC-Twitter/blob/main/public/ACTwitterHomePage.png)
 
 # 專案開發人員-Contributor
 > [Oliver Liao](https://github.com/Ollieeryo)
