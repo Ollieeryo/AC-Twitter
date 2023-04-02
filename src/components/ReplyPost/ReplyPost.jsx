@@ -1,23 +1,13 @@
 import styles from './ReplyPost.module.scss';
 import reply from '../../assets/reply.svg';
 import like from '../../assets/like.svg';
+import redLike from '../../assets/redLike.svg';
 
-function ReplyPost({ tweet, onReplyClick, onOtherClick }) {
-	function handleLikeClick() {
-		if (tweet.isLiked === false) {
-			return {
-				...tweet,
-				likeCounts: tweet.likeCounts + 1,
-				isLiked: !tweet.isLiked,
-			};
-		} else {
-			return {
-				...tweet,
-				likeCounts: tweet.likeCounts - 1,
-				isLiked: !tweet.isLiked,
-			};
-		}
-	}
+function ReplyPost({ tweet, onReplyClick, onOtherClick, onLikeClick }) {
+	// const handleLikeToggle = (data) => {
+	// 	const result = data.isLiked;
+	// 	return (data.isLiked = !result);
+	// };
 
 	return (
 		<div className={styles.container}>
@@ -42,12 +32,7 @@ function ReplyPost({ tweet, onReplyClick, onOtherClick }) {
 					<div className={styles.counter}>
 						{tweet?.replyCounts} <span>&nbsp;回覆</span>
 					</div>
-					<div
-						className={styles.counter}
-						onClick={() => {
-							handleLikeClick(tweet?.id);
-						}}
-					>
+					<div className={styles.counter}>
 						{tweet?.likeCounts}
 						<span>&nbsp;喜歡次數</span>
 					</div>
@@ -61,8 +46,13 @@ function ReplyPost({ tweet, onReplyClick, onOtherClick }) {
 					>
 						<img src={reply} />
 					</div>
-					<button className={styles.icon} onClick={handleLikeClick}>
-						<img src={like} />
+					<button
+						className={styles.icon}
+						onClick={() => {
+							onLikeClick(tweet?.id);
+						}}
+					>
+						{tweet.isLiked ? <img src={redLike} /> : <img src={like} />}
 					</button>
 				</div>
 			</div>

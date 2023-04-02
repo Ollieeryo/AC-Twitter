@@ -4,7 +4,6 @@ const baseURL = 'https://morning-hamlet-47874.herokuapp.com/api';
 
 // 在推文底下新增回覆
 export const postReply = async (authToken, comment, tweetId) => {
-	console.log(tweetId);
 	try {
 		const res = await axios.post(
 			`${baseURL}/tweets/${tweetId}/replies`,

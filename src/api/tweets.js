@@ -14,7 +14,6 @@ export const postTweet = async (description, authToken) => {
 				},
 			},
 		);
-		console.log(res.data);
 		return res.data;
 	} catch (error) {
 		console.error('[Post Tweet failed]: ', error.response.data);
@@ -42,7 +41,6 @@ export const getIdTweets = async (authToken, tweetId) => {
 				Authorization: 'Bearer ' + authToken,
 			},
 		});
-		console.log(res);
 		return res.data;
 	} catch (error) {
 		console.error('[Get someone Tweet failed]: ', error.response.data);

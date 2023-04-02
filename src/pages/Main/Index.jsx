@@ -50,14 +50,9 @@ function Main() {
 			const followingList = await getFollowingList(userLoginID, authToken);
 			if (followingList.some((popular) => popular.id === otherUserId)) {
 				cancelFollow(otherUserId, authToken);
-				console.log('userLoginID, in cancelfollow', userLoginID);
 			} else {
 				addFollow(otherUserId, authToken);
-				console.log('userLoginID, in addlfollow', userLoginID);
 			}
-			// setOtherUserData(otherUserId);
-			// const variant = followingList?.filter((f) => f.id === otherUserId)[0].isFollowed;
-			// console.log(variant);
 		} catch (error) {
 			console.error(error);
 		}
@@ -74,7 +69,6 @@ function Main() {
 			// 個人資料
 			const data = await getUserData(otherUserId, authToken);
 			setOtherUserData(data);
-			console.log('otherUserData=', otherUserData);
 
 			// 個人推文
 			const tweets = await getUserTweets(otherUserId, authToken);
@@ -94,9 +88,6 @@ function Main() {
 
 	// 點擊他人頭像和名字之連結
 	function handleOtherClick(otherUserId) {
-		console.log('userData=', userData.id);
-		console.log('otherUserId=', otherUserId);
-
 		if (otherUserId === userData.id) {
 			setActiveSection('userProfile');
 		} else {
@@ -152,13 +143,18 @@ function Main() {
 			}).then(() => {
 				handleTweetModalClose();
 			});
+			setActiveSection('main');
 		}
+		const userId = localStorage.getItem('userId');
+		const authToken = localStorage.getItem('authToken');
+		const tweet = await getTweets(authToken);
+		const data = await getUserData(userId, authToken);
+		setUserData(data);
+		setTweets(tweet.map((tweet) => ({ ...tweet })));
 	};
 
 	// 點擊推文，取得推文id，連結至個別推文回覆畫面
 	const handleTweetLink = (tweetID) => {
-		console.log(`Tweet ID: ${tweetID}`);
-		// setTweetId(tweetID);
 		setActiveSection('reply');
 		handleGetIdTweet(tweetID);
 		handleGetAllReply(tweetID);
@@ -183,8 +179,29 @@ function Main() {
 			console.error(error);
 		}
 	};
+
+	// 在推文回覆畫面按上方推文喜歡
+	const handleReplyPageLikeClick = async () => {
+		try {
+			const authToken = localStorage.getItem('authToken');
+			const theTweet = await getIdTweets(authToken, getTweet?.id);
+			if (theTweet.isLiked === false) {
+				await postLike(authToken, theTweet?.id);
+				const aTweet = await getIdTweets(authToken, getTweet?.id);
+				setGetTweet(aTweet);
+			} else {
+				await postUnlike(authToken, theTweet?.id);
+				const aTweet = await getIdTweets(authToken, getTweet?.id);
+				setGetTweet(aTweet);
+			}
+			handleGetIdTweet(theTweet?.id);
+		} catch (error) {
+			console.log('Error:', error.message);
+		}
+	};
+
 	// 打開replymodal，取得個別推文內容
-	const handleToReplyModal = async (tweetID) => {
+	async function handleToReplyModal(tweetID) {
 		setReplyText('');
 		setPrompt('');
 		setShowReplyModal(true);
@@ -195,7 +212,7 @@ function Main() {
 		} catch (error) {
 			console.error(error);
 		}
-	};
+	}
 
 	function handleReplyModalClose() {
 		setShowReplyModal(false);
@@ -205,7 +222,6 @@ function Main() {
 	const handleTextChange = (e) => {
 		const texts = e.target.value;
 		setReplyText(texts);
-		console.log(prompt);
 		if (texts.length > 140) {
 			setPrompt('字數不可超過 140 字');
 		} else {
@@ -223,7 +239,6 @@ function Main() {
 			setPrompt('');
 			const authToken = localStorage.getItem('authToken');
 			await postReply(authToken, replyText, tweetID);
-			setReplyText('');
 			Swal.fire({
 				position: 'top',
 				title: '回覆發送成功',
@@ -234,14 +249,22 @@ function Main() {
 				handleReplyModalClose();
 			});
 		}
+		const userId = localStorage.getItem('userId');
+		const authToken = localStorage.getItem('authToken');
+		const tweet = await getTweets(authToken);
+		const data = await getUserData(userId, authToken);
+		setUserData(data);
+		const allReply = await getAllReply(authToken, tweetID);
+		setReplies(allReply);
+		const aTweet = await getIdTweets(authToken, tweetID);
+		setGetTweet(aTweet);
+		setTweets(tweet.map((tweet) => ({ ...tweet })));
 	};
 
 	// 在推文清單上按喜歡
 	const handleLikeClick = async (itemID) => {
 		try {
 			const authToken = localStorage.getItem('authToken');
-			// console.log('like', like);
-
 			setTweets(
 				tweets.map((item) => {
 					if (item.id === itemID) {
@@ -298,7 +321,11 @@ function Main() {
 			}`}
 		>
 			<div className={styles.sidebarSection}>
-				<Sidebar setActiveSection={setActiveSection} onToTweetClick={handleToTweetModal} />
+				<Sidebar
+					activeSection={activeSection}
+					setActiveSection={setActiveSection}
+					onToTweetClick={handleToTweetModal}
+				/>
 			</div>
 			<div className={styles.mainSection}>
 				<MainSection
@@ -321,6 +348,7 @@ function Main() {
 					OtherUserTweets={userTweets}
 					onFollowClick={handleFollowToggle}
 					isFollowed={isFollowed}
+					onTweetLikeClick={handleReplyPageLikeClick}
 				/>
 			</div>
 			<div className={styles.popularListSection}>
@@ -347,6 +375,7 @@ function Main() {
 					onReplyClick={handleReplyClick}
 					onCloseModal={handleReplyModalClose}
 					onTextChange={handleTextChange}
+					texts={replyText}
 					prompts={prompt}
 				/>
 			</div>

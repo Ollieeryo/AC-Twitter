@@ -6,6 +6,7 @@ import styled from './OtherProfile.module.scss';
 import { useState } from 'react';
 import OtherTweetList from '../OtherTweetList/OtherTweetList';
 import OtherReplyList from '../OtherReplyList/OtherReplyList';
+// import { createContext } from 'react';
 
 export function StatusButton({ buttonStatus, setButtonStatus }) {
 	const handleTweetClick = (e) => {
@@ -55,10 +56,11 @@ export function StatusButton({ buttonStatus, setButtonStatus }) {
 	);
 }
 
-function UserContent({ userData, onFollowClick, isFollowed }) {
-	const [isCheckFollowed, setIsCheckFollowed] = useState(userData?.isFollowed);
-	setIsCheckFollowed();
-
+function UserContent({ userData, onFollowClick }) {
+	const handleFollowStatus = (data) => {
+		const result = data.isFollowed;
+		return (data.isFollowed = !result);
+	};
 	return (
 		<>
 			<div className={styled.imgWrap}>
@@ -76,7 +78,10 @@ function UserContent({ userData, onFollowClick, isFollowed }) {
 					<div className={styled.functions}>
 						<img src={bell} /> <img src={email} />
 						<button
-							onClick={() => onFollowClick(userData.id)}
+							onClick={() => {
+								onFollowClick(userData.id);
+								handleFollowStatus(userData);
+							}}
 							className={`${styled.followButton} ${
 								userData?.isFollowed ? styled.following : styled.notFollowing
 							}`}

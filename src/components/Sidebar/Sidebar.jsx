@@ -1,12 +1,15 @@
 import styles from './Sidebar.module.scss';
 import alphacampLogo from '../../assets/alphacamp-logo.svg';
 import home from '../../assets/home.svg';
-import userProfile from '../../assets/user-profile-black.svg';
-import setting from '../../assets/setting.svg';
+import homeGrey from '../../assets/home-grey.svg';
+import userProfile from '../../assets/user-profile.svg';
+import userProfileBlack from '../../assets/user-profile-black.svg';
+import settingOrange from '../../assets/setting-orange.svg';
+import setting from '../../assets/setting-black.svg';
 import logout from '../../assets/logout.svg';
 import { Link, useNavigate } from 'react-router-dom';
 
-function Sidebar({ setActiveSection, onToTweetClick }) {
+function Sidebar({ activeSection, setActiveSection, onToTweetClick }) {
 	const navigate = useNavigate();
 
 	const handleChangeMain = (e) => {
@@ -38,16 +41,31 @@ function Sidebar({ setActiveSection, onToTweetClick }) {
 				<Link className={styles.logo} to='main' onClick={handleChangeMain}>
 					<img src={alphacampLogo} />
 				</Link>
-				<Link className={styles.home} to='main'>
-					<img src={home} />
+				<div
+					className={activeSection === 'main' ? styles.acitve : styles.notAcitve}
+					onClick={handleChangeMain}
+				>
+					{activeSection === 'main' ? <img src={home} /> : <img src={homeGrey} />}
 					首頁
-				</Link>
-				<Link className={styles.userProfile} to='userProfile' onClick={handleChangeUserProfile}>
-					<img src={userProfile} />
+				</div>
+				<Link
+					className={activeSection === 'userProfile' ? styles.acitve : styles.notAcitve}
+					to='userProfile'
+					onClick={handleChangeUserProfile}
+				>
+					{activeSection === 'userProfile' ? (
+						<img src={userProfile} />
+					) : (
+						<img src={userProfileBlack} />
+					)}
 					個人資料
 				</Link>
-				<Link className={styles.setting} to='setting' onClick={handleChangeSetting}>
-					<img src={setting} />
+				<Link
+					className={activeSection === 'setting' ? styles.acitve : styles.notAcitve}
+					to='setting'
+					onClick={handleChangeSetting}
+				>
+					{activeSection === 'setting' ? <img src={settingOrange} /> : <img src={setting} />}
 					設定
 				</Link>
 				<div className={styles.toTweet} onClick={onToTweetClick}>

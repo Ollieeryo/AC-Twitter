@@ -43,8 +43,6 @@ export const register = async ({ account, name, email, password, checkPassword }
 			checkPassword,
 		});
 
-		// console.log(data);
-
 		const { status } = data;
 
 		if (status === 'success') {
@@ -75,7 +73,6 @@ export const adminLogin = async ({ account, password }) => {
 		return data;
 	} catch (error) {
 		console.error('[Login Failed]:', error);
-		console.log(error.response.data);
 		// 帳號不存在 考慮是否要改成 modal
 		const wrongAccountPassword = error.response.data;
 		if (wrongAccountPassword === 'Unauthorized') {

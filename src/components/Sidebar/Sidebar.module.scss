@@ -3,72 +3,77 @@ $font-weight: 700;
 $font-color: #44444f;
 
 .container {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  background-color: #ffffff;
-  height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	background-color: #ffffff;
+	height: 100vh;
 
-  .navigationBar {
-    display: flex;
-    flex-direction: column;
+	.navigationBar {
+		display: flex;
+		flex-direction: column;
 
-    .logo {
-      width: 40px;
-      margin: 13px;
-    }
+		.logo {
+			width: 40px;
+			margin: 13px;
+		}
 
-    .home {
-      height: 58px;
-      display: flex;
-      align-items: center;
-      font-size: $font-size;
-      font-weight: $font-weight;
-      color: #FF6600;
-      text-decoration: none;
-      margin-bottom: 8px;
-      img {
-        margin: 0 17px;
-      }
-    }
+		.acitve {
+			height: 58px;
+			display: flex;
+			align-items: center;
+			font-size: $font-size;
+			font-weight: $font-weight;
+			color: #ff6600;
+			text-decoration: none;
+			margin-bottom: 8px;
+			cursor: pointer;
+			img {
+				margin: 0 17px;
+			}
+		}
+		.notAcitve {
+			height: 58px;
+			display: flex;
+			align-items: center;
+			font-size: $font-size;
+			font-weight: $font-weight;
+			color: #44444F;
+			text-decoration: none;
+			margin-bottom: 8px;
+			cursor: pointer;
+			img {
+				margin: 0 17px;
+			}
+		}
 
-    .userProfile {
-      @extend .home;
-      color: $font-color;
-    }
+		.toTweet {
+			height: 46px;
+			background-color: #ff6600;
+			border-radius: 50px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-weight: 400;
+			font-size: 20px;
+			color: #ffffff;
+			text-decoration: none;
+			cursor: pointer;
+		}
+	}
 
-    .setting {
-      @extend .home;
-      color: $font-color;
-    }
+	.logout {
+		height: 58px;
+		display: flex;
+		align-items: center;
+		font-size: $font-size;
+		font-weight: $font-weight;
+		color: $font-color;
+		text-decoration: none;
+		margin-bottom: 8px;
 
-    .toTweet {
-      height: 46px;
-      background-color: #ff6600;
-      border-radius: 50px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 400;
-      font-size: 20px;
-      color: #ffffff;
-      text-decoration: none;
-      cursor: pointer;
-    }
-  }
-
-  .logout {
-    height: 58px;
-    display: flex;
-    align-items: center;
-    font-size: $font-size;
-    font-weight: $font-weight;
-    color: $font-color;
-    text-decoration: none;
-    margin-bottom: 8px;
-
-    img {
-      margin: 0 17px;
-    }
-  }
+		img {
+			margin: 0 17px;
+		}
+	}
 }

@@ -131,7 +131,6 @@ export const addFollow = async (userId, authToken) => {
 		return response.data;
 	} catch (error) {
 		console.error(`Error fetching add follow user ${userId}: ${error}`);
-		console.log(error.response);
 	}
 };
 
