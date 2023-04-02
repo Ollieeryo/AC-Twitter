@@ -59,7 +59,6 @@ function AdminInput() {
 		}
 
 		if (wrongAccountPassword === 'Unauthorized') {
-			alert('帳號或密碼錯誤!');
 			Swal.fire({
 				position: 'top',
 				title: '帳號或密碼錯誤!',

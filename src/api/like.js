@@ -28,5 +28,6 @@ export const postUnlike = async (authToken, id) => {
 		return res.data;
 	} catch (error) {
 		console.error('[Post Unlike failed]: ', error.response.data);
+		console.log(error);
 	}
 };
