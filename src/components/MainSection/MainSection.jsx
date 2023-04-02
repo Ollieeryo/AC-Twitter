@@ -31,6 +31,7 @@ function MainSection({
 	OtherUserTweets,
 	onFollowClick,
 	isFollowed,
+	onTweetLikeClick,
 }) {
 	function HomePage() {
 		return (
@@ -55,7 +56,12 @@ function MainSection({
 	function ReplyPage() {
 		return (
 			<>
-				<ReplyPost tweet={tweetAuth} onReplyClick={onToReplyModal} onOtherClick={onOtherClick} />
+				<ReplyPost
+					tweet={tweetAuth}
+					onReplyClick={onToReplyModal}
+					onLikeClick={onTweetLikeClick}
+					onOtherClick={onOtherClick}
+				/>
 				<ReplyList replies={replyList} onOtherClick={onOtherClick} />
 			</>
 		);
@@ -64,6 +70,7 @@ function MainSection({
 		<div className={styles.container}>
 			<Header
 				activeSection={activeSection}
+				setActiveSection={setActiveSection}
 				otherUserData={otherUserData}
 				OtherUserTweets={OtherUserTweets}
 			/>

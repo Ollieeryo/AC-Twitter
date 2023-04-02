@@ -3,7 +3,7 @@ import leftArrow from '../../assets/left-arrow.svg';
 import { useAuthLogin } from '../../contexts/AuthContext';
 import { Link } from 'react-router-dom';
 
-function Header({ activeSection, otherUserData, OtherUserTweets }) {
+function Header({ activeSection, setActiveSection, otherUserData, OtherUserTweets }) {
 	let headerContent = '';
 	if (activeSection === 'main') {
 		headerContent = '首頁';
@@ -14,7 +14,7 @@ function Header({ activeSection, otherUserData, OtherUserTweets }) {
 	}
 
 	function handleArrowClick() {
-		window.location.href = '/home';
+		setActiveSection('main');
 	}
 	const { userData, userTweets } = useAuthLogin();
 
@@ -52,7 +52,7 @@ function Header({ activeSection, otherUserData, OtherUserTweets }) {
 				<Link className={styles.content} to=''>
 					<div className={styles.userTitleWrap}>
 						<span>{userData?.name}</span>
-						<span className={styles.tweetText}>{userTweets.length} 推文</span>
+						<span className={styles.tweetText}>{userTweets?.length} 推文</span>
 					</div>
 				</Link>
 			) : (
@@ -63,7 +63,7 @@ function Header({ activeSection, otherUserData, OtherUserTweets }) {
 				<Link className={styles.content} to=''>
 					<div className={styles.userTitleWrap}>
 						<span>{otherUserData?.name}</span>
-						<span className={styles.tweetText}>{OtherUserTweets.length} 推文</span>
+						<span className={styles.tweetText}>{OtherUserTweets?.length} 推文</span>
 					</div>
 				</Link>
 			)}

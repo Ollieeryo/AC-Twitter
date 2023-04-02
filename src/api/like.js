@@ -4,8 +4,6 @@ const baseURL = 'https://morning-hamlet-47874.herokuapp.com/api';
 
 // 將推文加入喜歡
 export const postLike = async (authToken, itemID) => {
-	console.log('authToken', authToken);
-	console.log('itemID', itemID);
 	try {
 		const res = await axios.post(`${baseURL}/tweets/${itemID}/like`, null, {
 			headers: {

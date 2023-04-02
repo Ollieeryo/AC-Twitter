@@ -40,7 +40,6 @@ export const getAllUsers = async (authToken) => {
 				Authorization: 'Bearer ' + authToken,
 			},
 		});
-		console.log(response.data);
 		return response.data;
 	} catch (error) {
 		console.error(`Error fetching delete tweets: ${error}`);

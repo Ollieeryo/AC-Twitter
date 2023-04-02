@@ -2,6 +2,7 @@ import styles from './TweetList.module.scss';
 
 import reply from '../../assets/reply.svg';
 import like from '../../assets/like.svg';
+import redLike from '../../assets/redLike.svg';
 
 function TweetList({ onTweetClick, onReplyClick, onLikeClick, tweetList, onOtherClick }) {
 	const listItems = tweetList?.map((item) => (
@@ -57,7 +58,7 @@ function TweetList({ onTweetClick, onReplyClick, onLikeClick, tweetList, onOther
 							onLikeClick(item?.id);
 						}}
 					>
-						<img src={like} />
+						{item?.isLiked ? <img src={redLike} /> : <img src={like} />}
 						{item?.likeCounts}
 					</button>
 				</div>

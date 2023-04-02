@@ -5,7 +5,15 @@ import IconX from '../../assets/X-icon.svg';
 import fakeAvatar from '../../assets/fake-avatar.svg';
 import { Link } from 'react-router-dom';
 
-function ReplyModal({ onCloseModal, author, userData, onReplyClick, onTextChange, prompts }) {
+function ReplyModal({
+	onCloseModal,
+	author,
+	userData,
+	onReplyClick,
+	onTextChange,
+	prompts,
+	texts,
+}) {
 	const account = userData?.User?.account;
 	return (
 		<div className={styles.container}>
@@ -41,6 +49,7 @@ function ReplyModal({ onCloseModal, author, userData, onReplyClick, onTextChange
 					<TextareaAutosize
 						className={styles.inputReply}
 						placeholder='推你的回覆'
+						value={texts}
 						onChange={onTextChange}
 						autoFocus
 					/>
