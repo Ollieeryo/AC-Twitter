@@ -1,11 +1,8 @@
 import styles from './ReplyPost.module.scss';
 import reply from '../../assets/reply.svg';
 import like from '../../assets/like.svg';
-import { Link } from 'react-router-dom';
 
-function ReplyPost({ tweet, onReplyClick }) {
-	const account = tweet?.User?.account;
-
+function ReplyPost({ tweet, onReplyClick, onOtherClick }) {
 	function handleLikeClick() {
 		if (tweet.isLiked === false) {
 			return {
@@ -25,12 +22,16 @@ function ReplyPost({ tweet, onReplyClick }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.avatarAndName}>
-				<Link className={styles.avatar} to={`/${account}`}>
+				<div className={styles.avatar} onClick={onOtherClick}>
 					<img src={tweet?.User?.avatar} />
-				</Link>
+				</div>
 				<div className={styles.nameSection}>
-					<div className={styles.nickname}>{tweet?.User?.name}</div>
-					<div className={styles.accountName}>@{tweet?.User?.account}</div>
+					<div className={styles.nickname} onClick={onOtherClick}>
+						{tweet?.User?.name}
+					</div>
+					<div className={styles.accountName} onClick={onOtherClick}>
+						@{tweet?.User?.account}
+					</div>
 				</div>
 			</div>
 

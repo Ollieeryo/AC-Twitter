@@ -8,6 +8,7 @@ import FollowList from '../FollowList/FollowList';
 import TweetList from '../TweetList/TweetList';
 import ReplyPost from '../ReplyPost/ReplyPost';
 import ReplyList from '../ReplyList/ReplyList';
+import OtherProfile from '../OtherProfile/OtherProfile';
 
 function MainSection({
 	activeSection,
@@ -21,16 +22,31 @@ function MainSection({
 	onLike,
 	onText,
 	tweets,
+	onOtherClick,
+	otherUserID,
+	userTweets,
+	userReplyTweets,
+	userLikeTweets,
+	otherUserData,
+	OtherUserTweets,
+	onFollowClick,
+	isFollowed,
 }) {
 	function HomePage() {
 		return (
 			<>
-				<TweetInput onToTweetClick={ToTweetModalHandler} onTextChange={onText} userData={User} />
+				<TweetInput
+					onToTweetClick={ToTweetModalHandler}
+					onTextChange={onText}
+					userData={User}
+					onOtherClick={onOtherClick}
+				/>
 				<TweetList
 					onTweetClick={onTweetLink}
 					onReplyClick={onToReplyModal}
 					onLikeClick={onLike}
 					tweetList={tweets}
+					onOtherClick={onOtherClick}
 				/>
 			</>
 		);
@@ -39,14 +55,18 @@ function MainSection({
 	function ReplyPage() {
 		return (
 			<>
-				<ReplyPost tweet={tweetAuth} onReplyClick={onToReplyModal} />
-				<ReplyList replies={replyList} />
+				<ReplyPost tweet={tweetAuth} onReplyClick={onToReplyModal} onOtherClick={onOtherClick} />
+				<ReplyList replies={replyList} onOtherClick={onOtherClick} />
 			</>
 		);
 	}
 	return (
 		<div className={styles.container}>
-			<Header activeSection={activeSection} />
+			<Header
+				activeSection={activeSection}
+				otherUserData={otherUserData}
+				OtherUserTweets={OtherUserTweets}
+			/>
 
 			{/* Main */}
 			{activeSection === 'main' && <HomePage />}
@@ -65,6 +85,19 @@ function MainSection({
 			{/* followList */}
 			{(activeSection === 'follower' || activeSection === 'following') && (
 				<FollowList activeSection={activeSection} setActiveSection={setActiveSection} />
+			)}
+
+			{/* OtherProfile */}
+			{activeSection === 'otherProfile' && (
+				<OtherProfile
+					activeSection={activeSection}
+					otherUserId={otherUserID}
+					userTweets={userTweets}
+					userReplyTweets={userReplyTweets}
+					userLikeTweets={userLikeTweets}
+					onFollowClick={onFollowClick}
+					isFollowed={isFollowed}
+				/>
 			)}
 		</div>
 	);

@@ -6,7 +6,14 @@ import fakeAvatar from '../../assets/fake-avatar.svg';
 
 import { Link } from 'react-router-dom';
 
-export function TweetModal({ onCloseModal, onPostTweetClick, userData, onTextChange, texts }) {
+export function TweetModal({
+	onCloseModal,
+	onPostTweetClick,
+	userData,
+	onTextChange,
+	texts,
+	prompts,
+}) {
 	const account = userData?.User?.account;
 
 	return (
@@ -32,7 +39,7 @@ export function TweetModal({ onCloseModal, onPostTweetClick, userData, onTextCha
 						/>
 					</div>
 					<div className={styles.modalBottom}>
-						<span>{prompt}</span>
+						<span>{prompts}</span>
 						<button className={styles.tweetButton} onClick={onPostTweetClick}>
 							推文
 						</button>

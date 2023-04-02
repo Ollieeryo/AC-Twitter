@@ -1,11 +1,10 @@
 import styles from './Sidebar.module.scss';
 import alphacampLogo from '../../assets/alphacamp-logo.svg';
 import home from '../../assets/home.svg';
-import userProfile from '../../assets/user-profile.svg';
+import userProfile from '../../assets/user-profile-black.svg';
 import setting from '../../assets/setting.svg';
 import logout from '../../assets/logout.svg';
-import { useNavigate } from 'react-router-dom';
-// import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Sidebar({ setActiveSection, onToTweetClick }) {
 	const navigate = useNavigate();
@@ -36,29 +35,29 @@ function Sidebar({ setActiveSection, onToTweetClick }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.navigationBar}>
-				<a className={styles.logo} href='main' onClick={handleChangeMain}>
+				<Link className={styles.logo} to='main' onClick={handleChangeMain}>
 					<img src={alphacampLogo} />
-				</a>
-				<a className={styles.home} href='main'>
+				</Link>
+				<Link className={styles.home} to='main'>
 					<img src={home} />
 					首頁
-				</a>
-				<a className={styles.userProfile} href='userProfile' onClick={handleChangeUserProfile}>
+				</Link>
+				<Link className={styles.userProfile} to='userProfile' onClick={handleChangeUserProfile}>
 					<img src={userProfile} />
 					個人資料
-				</a>
-				<a className={styles.setting} href='setting' onClick={handleChangeSetting}>
+				</Link>
+				<Link className={styles.setting} to='setting' onClick={handleChangeSetting}>
 					<img src={setting} />
 					設定
-				</a>
+				</Link>
 				<div className={styles.toTweet} onClick={onToTweetClick}>
 					推文
 				</div>
 			</div>
-			<a className={styles.logout} href='login' onClick={handleLogout}>
+			<Link className={styles.logout} to='login' onClick={handleLogout}>
 				<img src={logout} />
 				登出
-			</a>
+			</Link>
 		</div>
 	);
 }

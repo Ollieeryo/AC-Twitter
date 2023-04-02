@@ -1,11 +1,11 @@
 import styles from './PopularList.module.scss';
 
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { recommendedFollowList } from '../../api/followship';
 import { addFollow, cancelFollow } from '../../api/userprofile';
 
-function PopularList() {
+function PopularList({ onOtherClick }) {
 	const [populars, setPopulars] = useState([]);
 	const navigate = useNavigate();
 
@@ -44,16 +44,31 @@ function PopularList() {
 
 	const listItems = populars.map((popular) => (
 		<div className={styles.otherCard} key={popular.id}>
-			<Link className={styles.avatar} to={popular.account}>
+			<div
+				className={styles.avatar}
+				onClick={() => {
+					onOtherClick(popular?.id);
+				}}
+			>
 				<img src={popular.avatar} />
-			</Link>
+			</div>
 			<div className={styles.other}>
-				<Link className={styles.nickname} to={popular.account}>
+				<div
+					className={styles.nickname}
+					onClick={() => {
+						onOtherClick(popular?.id);
+					}}
+				>
 					{popular.name}
-				</Link>
-				<Link className={styles.accountName} to={popular.account}>
+				</div>
+				<div
+					className={styles.accountName}
+					onClick={() => {
+						onOtherClick(popular?.id);
+					}}
+				>
 					{popular.account}
-				</Link>
+				</div>
 			</div>
 			<button
 				onClick={() => handleFollowToggle(popular.id)}

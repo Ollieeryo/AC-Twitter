@@ -5,7 +5,7 @@ import IconX from '../../assets/X-icon.svg';
 import fakeAvatar from '../../assets/fake-avatar.svg';
 import { Link } from 'react-router-dom';
 
-function ReplyModal({ onCloseModal, author, userData, onReplyClick, onTextChange }) {
+function ReplyModal({ onCloseModal, author, userData, onReplyClick, onTextChange, prompts }) {
 	const account = userData?.User?.account;
 	return (
 		<div className={styles.container}>
@@ -39,16 +39,16 @@ function ReplyModal({ onCloseModal, author, userData, onReplyClick, onTextChange
 						<img src={userData?.avatar} />
 					</div>
 					<TextareaAutosize
-						className={styles.inputTweet}
+						className={styles.inputReply}
 						placeholder='推你的回覆'
 						onChange={onTextChange}
 						autoFocus
 					/>
 				</div>
 				<div className={styles.modalBottom}>
-					<span>{prompt}</span>
+					<span>{prompts}</span>
 					<button
-						className={styles.tweetButton}
+						className={styles.replyButton}
 						onClick={() => {
 							onReplyClick(author?.id);
 						}}
