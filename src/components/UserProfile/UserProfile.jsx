@@ -115,14 +115,20 @@ export function UserContent({
 
 				<div className={styled.buttonWrap}>
 					<div>
-						<button className={styled.followButton} onClick={handleFollowingClick}>
+						<button
+							className={styled.followButton}
+							onClick={activeSection === 'userProfile' && handleFollowingClick}
+						>
 							<span>{userData.followingCounts} 個</span>
 							<span className={styled.followTitle}>跟隨中</span>
 						</button>
 					</div>
 
 					<div>
-						<button className={styled.followButton} onClick={handleFollowerClick}>
+						<button
+							className={styled.followButton}
+							onClick={activeSection === 'userProfile' && handleFollowerClick}
+						>
 							<span>{userData.followerCounts} 位</span>
 							<span className={styled.followTitle}>跟隨者</span>
 						</button>
