@@ -3,7 +3,7 @@ import leftArrow from '../../assets/left-arrow.svg';
 import { useAuthLogin } from '../../contexts/AuthContext';
 import { Link } from 'react-router-dom';
 
-function Header({ activeSection }) {
+function Header({ activeSection, otherUserData, OtherUserTweets }) {
 	let headerContent = '';
 	if (activeSection === 'main') {
 		headerContent = '首頁';
@@ -22,6 +22,7 @@ function Header({ activeSection }) {
 		<div className={styles.container}>
 			{/* 箭頭 */}
 			{activeSection === 'userProfile' ||
+			activeSection === 'otherProfile' ||
 			activeSection === 'follower' ||
 			activeSection === 'following' ||
 			activeSection === 'reply' ? (
@@ -50,12 +51,21 @@ function Header({ activeSection }) {
 			activeSection === 'following' ? (
 				<Link className={styles.content} to=''>
 					<div className={styles.userTitleWrap}>
-						<span>{userData.name}</span>
+						<span>{userData?.name}</span>
 						<span className={styles.tweetText}>{userTweets.length} 推文</span>
 					</div>
 				</Link>
 			) : (
 				''
+			)}
+
+			{activeSection === 'otherProfile' && (
+				<Link className={styles.content} to=''>
+					<div className={styles.userTitleWrap}>
+						<span>{otherUserData?.name}</span>
+						<span className={styles.tweetText}>{OtherUserTweets.length} 推文</span>
+					</div>
+				</Link>
 			)}
 
 			{activeSection === 'setting' && (

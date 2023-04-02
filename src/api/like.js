@@ -7,8 +7,9 @@ export const postLike = async (authToken, itemID) => {
 	console.log('authToken', authToken);
 	console.log('itemID', itemID);
 	try {
-		const res = await axios.post(`${baseURL}/tweets/${itemID}/like`, {
+		const res = await axios.post(`${baseURL}/tweets/${itemID}/like`, null, {
 			headers: {
+				ContentType: 'application/json',
 				Authorization: 'Bearer ' + authToken,
 			},
 		});
@@ -17,24 +18,11 @@ export const postLike = async (authToken, itemID) => {
 		console.error('[Post Like failed]: ', error.response.data);
 	}
 };
-// export const postLike = async (itemID, authToken) => {
-// 	try {
-// 		const response = await axios.post(`${baseURL}/tweets/${itemID}/like`, {
-// 			headers: {
-// 				Authorization: 'Bearer ' + authToken,
-// 			},
-// 		});
-
-// 		return response.data;
-// 	} catch (error) {
-// 		console.error('[Get User Data Failed]: ', error.response.data);
-// 	}
-// };
 
 // 將推文移除喜歡
 export const postUnlike = async (authToken, id) => {
 	try {
-		const res = await axios.get(`${baseURL}/tweets/${id}/unlike`, {
+		const res = await axios.post(`${baseURL}/tweets/${id}/unlike`, null, {
 			headers: {
 				Authorization: 'Bearer ' + authToken,
 			},

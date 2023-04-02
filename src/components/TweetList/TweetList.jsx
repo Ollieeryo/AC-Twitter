@@ -2,23 +2,34 @@ import styles from './TweetList.module.scss';
 
 import reply from '../../assets/reply.svg';
 import like from '../../assets/like.svg';
-import { Link } from 'react-router-dom';
 
-function TweetList({ onTweetClick, onReplyClick, onLikeClick, tweetList }) {
-	const account = tweetList?.User?.account;
-
-	const listItems = tweetList.map((item) => (
-		<div className={styles.itemContainer} key={item.id}>
-			<Link className={styles.avatar} to={`/${account}`}>
+function TweetList({ onTweetClick, onReplyClick, onLikeClick, tweetList, onOtherClick }) {
+	const listItems = tweetList?.map((item) => (
+		<div className={styles.itemContainer} key={item?.id}>
+			<div
+				className={styles.avatar}
+				onClick={() => {
+					onOtherClick(item?.User?.id);
+				}}
+			>
 				<img src={item?.User?.avatar} />
-			</Link>
+			</div>
 			<div className={styles.infoSection}>
 				<div className={styles.nameSection}>
-					<Link className={styles.name} to={`/${account}`}>
+					<div
+						className={styles.name}
+						onClick={() => {
+							onOtherClick(item?.User?.id);
+						}}
+					>
 						{item?.User?.name}
-					</Link>
+					</div>
 					<div className={styles.accountAndPeriod}>
-						<Link to={`/${account}`}>{`@${item?.User?.account}．`}</Link>
+						<div
+							onClick={() => {
+								onOtherClick(item?.User?.id);
+							}}
+						>{`@${item?.User?.account}．`}</div>
 						{`${item?.period}`}
 					</div>
 				</div>
@@ -28,17 +39,17 @@ function TweetList({ onTweetClick, onReplyClick, onLikeClick, tweetList }) {
 						onTweetClick(item?.id);
 					}}
 				>
-					{item.description}
+					{item?.description}
 				</div>
 				<div className={styles.ReplyAndLike}>
 					<div
 						className={styles.counter}
 						onClick={() => {
-							onReplyClick(item.id);
+							onReplyClick(item?.id);
 						}}
 					>
 						<img src={reply} />
-						{item.replyCounts}
+						{item?.replyCounts}
 					</div>
 					<button
 						className={styles.counter}
