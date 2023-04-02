@@ -1,70 +1,65 @@
-# Getting Started with Create React App
+# 推特功能網站-Simple_Twitter
+此專案使用 React 開發，目的功能為實現推特(Twitter)主要功能重現
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
 
-In the project directory, you can run:
+# 專案功能-Features
 
-### `npm start`
+### 登入、註冊、後台登入頁面
+* 可以註冊並且登入帳號進入到首頁
+* 不可註冊相同帳號或 Email
+* 不存在的帳號不可登入
+* 後台只有管理帳號可登入
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 首頁
+* 可以點擊輸入框或推文按鈕新增推文
+* 查看網站所有的推文，排列順序由新到舊
+* 查看某特定一篇的推文，其回覆排列順序由新到舊
+* 在首頁或查看某特定推文可以對推文進行回覆
+* 可以對右側推薦跟隨欄位中的不同使用者進行跟隨\
+* 可以點擊不同使用者頭像查看他人相關資訊
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 個人資料
+* 可以瀏覽使用者個人資訊
+* 編輯個人資料包含名稱、自我介紹、背景圖、大頭照
+* 瀏覽使用者推文相關資訊包含推文、回覆、喜歡的內容
+* 查看追隨者和正在追隨，並且可以進行追隨或取消追隨
 
-### `npm test`
+### 設定
+* 可以瀏覽所有推文，並且有刪除推文的權限
+* 查看所有使用者相關資訊
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# 環境建置-Environment SetUp
+* [Visual Studio Code](https://code.visualstudio.com/)
+* [Node.js](https://nodejs.org/en/)
+* [React.js](https://reactjs.org/)
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# 安裝-Install
+1. 開啟終端機 (Terminal)，複製 (Clone) 此專案至本地電腦
+```
+git clone https://github.com/Ollieeryo/AC-Twitter.git
+```
+2. 進入此專案資料夾中
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+3. 安裝 npm 套件
+```
+在 Terminal 輸入 npm install
+```
+5. 使用指令執行專案，啟動伺服器
+```
+在 Terminal 輸入 npm run start
+```
+6. 當終端機 (Terminal) 顯示以下字串，代表已成功啟動此伺服器
+```
+webpack compiled successfully
+```
+7. 現在可以在瀏覽器中輸入[localhost:3000](http://localhost:3000)，並且開始瀏覽和使用此專案網站
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# 專案畫面-Screen Photo
+![login]()
+![home-page]()
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+# 專案開發人員-Contributor
+> [Oliver Liao](https://github.com/Ollieeryo)
+> [Feliz Lin](https://github.com/Felizlin94)
